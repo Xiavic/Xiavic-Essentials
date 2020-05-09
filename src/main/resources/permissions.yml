@@ -1,0 +1,89 @@
+###________________########
+##/////////\\\\\\\\\########
+#//////////\\\\\\\\\\#######
+#//// Xiavic Core \\\\######
+#\\\\\ Plugin 2.0 ////######
+#\\\\\\\\\\//////////#######
+##\\\\\\\\\/////////########
+###\\\\\\\\////////#########
+####\\\\\\\///////##########
+#####\\\\\\//////###########
+######\\\\\/////############
+#######\\\\////#############
+#######\\_|_//##############
+
+
+##############################
+##### !! PERMISSIONS !! ######
+##############################
+
+# Player Commands
+Afk: "Xiavic.player.afk"
+Back: "Xiavic.player.back"
+Cartography: "Xiavic.player.cartography"
+Dispose: "Xiavic.player.dispose"
+EnderChest: "Xiavic.player.ec"
+EnderChestOthers: "Xiavic.player.ec.others"
+Extinguish: "Xiavic.player.extinguish"
+Grindstone: "Xiavic.player.grindstone"
+ItemInfo: "Xiavic.player.info"
+Loom: "Xiavic.player.loom"
+Near: "Xiavic.player.near"
+RandomTP: "Xiavic.player.rtp"
+Repair: "Xiavic.player.repair"
+Spawn: "Xiavic.player.spawn"
+Stonecutter: "Xiavic.player.stonecutter"
+Suicide: "Xiavic.player.suicide"
+Tpa: "Xiavic.player.tpa"
+TpAccept: "Xiavic.player.tpaccept"
+TpDeny: "Xiavic.player.tpdeny"
+Top: "Xiavic.player.top"
+Workbench: "Xiavic.player.workbench"
+World: "Xiavic.player.world"
+
+# Staff Commands
+Clear: "Xiavic.clear"
+ClearOthers: "Xiavic.clear.others"
+ConfigUpdate: "Xiavic.config.update"
+ExtinguishOthers: "Xiavic.extinguishothers"
+Feed: "Xiavic.feed"
+FeedOthers: "Xiavic.feed.others"
+Fly: "Xiavic.fly"
+FlyOthers: "Xiavic.fly.others"
+FlySpeed: "Xiavic.staff.flyspeed"
+Gamemode: "Xiavic.staff.gamemode"
+GamemodeOthers: "Xiavic.staff.gamemode.others"
+God: "Xiavic.god"
+GodOthers: "Xiavic.godothers"
+Heal: "Xiavic.heal"
+HealOthers: "Xiavic.heal.others"
+More: "Xiavic.staff.more"
+ServerInfo: "Xiavic.staff.serverinfo"
+SetFirstSpawn: "Xiavic.staff.setfirstspawn"
+SetSpawn: "Xiavic.staff.setspawn"
+SpawnOthers: "Xiavic.staff.spawnothers"
+Sudo: "Xiavic.staff.sudo"
+Version: "Xiavic.staff.version"
+TP: "Xiavic.staff.tp"
+Tpall: "Xiavic.staff.tpall"
+Tphere: "Xiavic.staff.tphere"
+Tppos: "Xiavic.staff.tppos"
+Walkspeed: "Xiavic.staff.walkspeed"
+Weather: "Xiavic.weather"
+WeatherClear: "Xiavic.weather.clear"
+WeatherRain: "Xiavic.weather.rain"
+WeatherStorm: "Xiavic.weather.storm"
+Whois: "Xiavic.staff.whois"
+
+# Fun
+Argh: "Xiavic.fun.argh"
+Pony: "Xiavic.fun.pony"
+Website: "Xiavic.links.website"
+Forums: "Xiavic.links.forums"
+Discord: "Xiavic.links.discord"
+Twitter: "Xiavic.links.twitter"
+Youtube: "Xiavic.links.youtube"
+
+# Cheats
+CheatExp: "Xiavic.cheat.exp"
+CheatArmor: "Xiavic.cheat.armor"

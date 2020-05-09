@@ -1,0 +1,175 @@
+name: XiavicCore
+version: 1.0.0
+main: com.github.xiavic.essentials.Main
+api-version: 1.13
+prefix: XiavicCore
+authors: [Imhandmade, Kerlab, Andrewandy, NightPotato]
+depend: [XiavicLib]
+description: Yes
+commands:
+  afk:
+    usage: A
+    description: A
+  clear:
+    usage: A
+    description: A
+  clearall:
+    usage: A
+    description: A
+  ec:
+    usage: A
+    description: A
+  feed:
+    usage: A
+    description: A
+  heal:
+    usage: A
+    description: A
+  gamemode:
+    usage: A
+    description: A
+    aliases: gm
+  setspawn:
+    usage: A
+    description: A
+  spawn:
+    usage: A
+    description: A
+  signedit:
+    usage: A
+    description: A
+  tpa:
+    usage: A
+    description: A
+  tpaccept:
+    usage: A
+    description: A
+  tpdeny:
+    usage: A
+    description: A
+  rtp:
+    usage: A
+    description: A
+  argh:
+    usage: A
+    description: A
+  cheatexp:
+    usage: A
+    description: A
+  walkspeed:
+    usage: A
+    description: A
+  flyspeed:
+    usage: A
+    description: A
+  dispose:
+    usage: A
+    description: A
+    aliases: trash
+  whois:
+    usage: A
+    description: A
+  cheatarmor:
+    usage: A
+    description: A
+  coreconfigupdate:
+    usage: A
+    description: A
+    aliases: ccu
+  tp:
+    usage: A
+    description: A
+  tphere:
+    usage: A
+    description: A
+  ext:
+    usage: A
+    description: A
+    aliases: extinguish
+  info:
+    usage: aA
+    description: a
+    aliases: iteminfo
+  sudo:
+    usage: a
+    description: a
+  serverinfo:
+    usage: a
+    description: a
+  coreversion:
+    usage: a
+    description: a
+    aliases: cv
+  fly:
+    usage: a
+    description: a
+  top:
+    usage: a
+    description: a
+  pony:
+    usage: a
+    description: a
+  near:
+    usage: a
+    description: a
+  forums:
+    usage: a
+    description: a
+  twitter:
+    usage: a
+    description: a
+  website:
+    usage: a
+    description: a
+  youtube:
+    usage: a
+    description: a
+  discord:
+    usage: a
+    description: a
+  god:
+    usage: a
+    description: a
+  back:
+    usage: a
+    description: a
+  suicide:
+    usage: a
+    description: a
+  tppos:
+    usage: a
+    description: a
+  setfirstspawn:
+    usage: a
+    description: a
+  tpall:
+    usage: a
+    description: a
+  more:
+    usage: a
+    description: a
+  workbench:
+    usage: a
+    description: a
+    aliases: [wb, craftingtable]
+  world:
+    usage: a
+    description: a
+  loom:
+    usage: a
+    description: a
+  cartography:
+    usage: a
+    description: a
+  stonecutter:
+    usage: a
+    description: a
+  grindstone:
+    usage: a
+    description: a
+  head:
+    usage: a
+    description: a
+  repair:
+    usage: a
+    description: a
