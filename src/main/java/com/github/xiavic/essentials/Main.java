@@ -118,6 +118,7 @@ public final class Main extends JavaPlugin {
         getCommand("more").setExecutor(new MoreCommand());
         getCommand("near").setExecutor(new NearCommand());
         getCommand("pony").setExecutor(new PonyCommand());
+        getCommand("privatewarp").setExecutor(new PrivateWarpCommand());
         getCommand("rtp").setExecutor(new RandomTPCommand());
         getCommand("repair").setExecutor(new RepairCommand());
         getCommand("setfirstspawn").setExecutor(new FirstSpawnSetCommand());
@@ -137,6 +138,7 @@ public final class Main extends JavaPlugin {
         getCommand("tppos").setExecutor(new TPPosCommand());
         getCommand("twitter").setExecutor(new TwitterCommand());
         getCommand("walkspeed").setExecutor(new WalkSpeedCommand());
+        getCommand("warp").setExecutor(new WarpCommand());
         getCommand("website").setExecutor(new WebsiteCommand());
         getCommand("whois").setExecutor(new WhoIsCommand());
         getCommand("world").setExecutor(new WorldCommand());

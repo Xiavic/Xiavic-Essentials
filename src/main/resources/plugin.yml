@@ -69,6 +69,13 @@ commands:
   whois:
     usage: A
     description: A
+  warp:
+    usage: A
+    description: A
+  privatewarp:
+    usage: A
+    description: A
+    aliases: pw
   cheatarmor:
     usage: A
     description: A
