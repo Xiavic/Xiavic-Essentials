@@ -1,10 +1,12 @@
 package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Warp {
@@ -12,6 +14,7 @@ public class Warp {
     private final UUID uniqueID = UUID.randomUUID();
 
     private String name;
+    private String permission;
     private UUID owner;
     private Location location;
 
@@ -21,16 +24,24 @@ public class Warp {
         this.location = location.clone();
     }
 
-    public void setLocation(@NotNull final Location location) {
+    public Warp setPermission(@Nullable final String permission) {
+        this.permission = permission;
+        return this;
+    }
+
+    public Warp setLocation(@NotNull final Location location) {
         this.location = location;
+        return this;
     }
 
-    public void setName(@NotNull final String name) {
+    public Warp setName(@NotNull final String name) {
         this.name = name;
+        return this;
     }
 
-    public void setOwner(@Nullable final UUID owner) {
+    public Warp setOwner(@Nullable final UUID owner) {
         this.owner = owner;
+        return this;
     }
 
     @NotNull public String getName() {
@@ -43,6 +54,14 @@ public class Warp {
 
     @NotNull public UUID getUniqueID() {
         return uniqueID;
+    }
+
+    public boolean hasPermission() {
+        return permission != null && !permission.isEmpty();
+    }
+
+    public boolean canAccess(final Player player) {
+        return !hasPermission() || player.hasPermission(permission);
     }
 
     public @NotNull Location getLocation() {
@@ -61,6 +80,8 @@ public class Warp {
             return false;
         if (!Objects.equals(name, warp.name))
             return false;
+        if (!Objects.equals(permission, warp.permission))
+            return false;
         if (!Objects.equals(owner, warp.owner))
             return false;
         return Objects.equals(location, warp.location);
@@ -69,6 +90,7 @@ public class Warp {
     @Override public int hashCode() {
         int result = uniqueID.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (permission != null ? permission.hashCode() : 0);
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;

@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PrivateWarpCommand implements TabExecutor {
 
+    //SYNTAX: /privatewarp <warpName/create/delete/whitelist/blacklist/info> <playerName | on/off/add/remove | warpName> <player>
     @Override
     public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command,
         @NotNull final String label, @NotNull final String[] args) {

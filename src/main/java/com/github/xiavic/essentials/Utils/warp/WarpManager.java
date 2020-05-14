@@ -2,6 +2,7 @@ package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -46,6 +47,10 @@ public enum WarpManager {
 
     @NotNull public Collection<Warp> getWarpsOwnedByPlayer(@NotNull final UUID player) {
         return getWarps(warp -> warp.getOwner() != null && warp.getOwner().equals(player));
+    }
+
+    @NotNull public Collection<Warp> getAccessibleToPlayer(@NotNull final Player player) {
+        return getWarps(warp -> warp.canAccess(player));
     }
 
     public void registerWarp(@NotNull final Warp warp) {

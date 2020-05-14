@@ -13,6 +13,8 @@ public class WarpCommand implements TabExecutor {
 
     private static final WarpManager warpManager = WarpManager.INSTANCE;
 
+
+    //SYNTAX: /warp <warpName/create/delete/whitelist/blacklist/info> <player | on/off/add/remove | warpName> <player>
     @Override
     public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command,
         @NotNull final String label, @NotNull final String[] args) {
