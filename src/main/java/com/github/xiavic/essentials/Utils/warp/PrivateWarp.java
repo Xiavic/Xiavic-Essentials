@@ -14,16 +14,20 @@ import java.util.UUID;
  */
 public class PrivateWarp extends Warp {
 
+    private UUID owner;
     private Collection<UUID> whitelisted = new HashSet<>();
     private Collection<UUID> blacklisted = new HashSet<>();
 
-    public PrivateWarp(@NotNull final String name,@NotNull final UUID owner, @NotNull Location location) {
-        super(name, owner, location);
+    public PrivateWarp(@NotNull final String name, @NotNull Location location,
+        @NotNull final UUID owner) {
+        super(name, location);
+        this.owner = owner;
     }
 
-    public PrivateWarp(@NotNull final String name, @NotNull final UUID owner, @NotNull Location location,
-        @Nullable final Collection<UUID> whitelisted, @Nullable final Collection<UUID> blacklisted) {
-        this(name, owner, location);
+    public PrivateWarp(@NotNull final String name, @NotNull Location location,
+        @NotNull final UUID owner, @Nullable final Collection<UUID> whitelisted,
+        @Nullable final Collection<UUID> blacklisted) {
+        this(name, location, owner);
         if (whitelisted != null) {
             this.whitelisted = new HashSet<>(whitelisted);
         }
@@ -32,10 +36,12 @@ public class PrivateWarp extends Warp {
         }
     }
 
+    @NotNull
     public Collection<UUID> getWhitelisted() {
         return new HashSet<>(whitelisted);
     }
 
+    @NotNull
     public Collection<UUID> getBlacklisted() {
         return new HashSet<>(blacklisted);
     }
@@ -48,9 +54,21 @@ public class PrivateWarp extends Warp {
         return blacklisted.contains(uuid);
     }
 
+    @NotNull
+    public PrivateWarp setOwner(final UUID owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    @NotNull
+    public UUID getOwner() {
+        return this.owner;
+    }
+
     /**
      * Adds a player to the whitelist and if the player is
      * blacklisted, they are removed from the blacklist.
+     *
      * @param player The UniqueID of the player.
      */
     public void addToWhitelist(final UUID player) {
@@ -62,6 +80,7 @@ public class PrivateWarp extends Warp {
     /**
      * Adds a player to the blacklist and if the player is
      * blacklisted, they are removed from the whitelist.
+     *
      * @param player The UniqueID of the player.
      */
     public void addToBlacklist(final UUID player) {
@@ -90,6 +109,9 @@ public class PrivateWarp extends Warp {
 
         if (!Objects.equals(whitelisted, that.whitelisted))
             return false;
+        if (!Objects.equals(owner, that.owner)) {
+            return false;
+        }
         return Objects.equals(blacklisted, that.blacklisted);
     }
 
@@ -97,6 +119,7 @@ public class PrivateWarp extends Warp {
         int result = super.hashCode();
         result = 31 * result + (whitelisted != null ? whitelisted.hashCode() : 0);
         result = 31 * result + (blacklisted != null ? blacklisted.hashCode() : 0);
+        result = 31 * result + owner.hashCode();
         return result;
     }
 }

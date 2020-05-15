@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 public class Warp {
@@ -15,12 +14,10 @@ public class Warp {
 
     private String name;
     private String permission;
-    private UUID owner;
     private Location location;
 
-    public Warp(@NotNull final String name, @Nullable final UUID owner, final Location location) {
+    public Warp(@NotNull final String name, final Location location) {
         this.name = name;
-        this.owner = owner;
         this.location = location.clone();
     }
 
@@ -39,17 +36,8 @@ public class Warp {
         return this;
     }
 
-    public Warp setOwner(@Nullable final UUID owner) {
-        this.owner = owner;
-        return this;
-    }
-
     @NotNull public String getName() {
         return name;
-    }
-
-    @Nullable public UUID getOwner() {
-        return owner;
     }
 
     @NotNull public UUID getUniqueID() {
@@ -82,8 +70,6 @@ public class Warp {
             return false;
         if (!Objects.equals(permission, warp.permission))
             return false;
-        if (!Objects.equals(owner, warp.owner))
-            return false;
         return Objects.equals(location, warp.location);
     }
 
@@ -91,7 +77,6 @@ public class Warp {
         int result = uniqueID.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (permission != null ? permission.hashCode() : 0);
-        result = 31 * result + (owner != null ? owner.hashCode() : 0);
         result = 31 * result + (location != null ? location.hashCode() : 0);
         return result;
     }

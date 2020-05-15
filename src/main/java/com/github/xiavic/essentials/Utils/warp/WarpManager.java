@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum WarpManager {
 
@@ -37,20 +38,27 @@ public enum WarpManager {
         return new HashSet<>(warps);
     }
 
-    @NotNull public Collection<Warp> getWarps(Predicate<Warp> filter) {
-        return warps.stream().filter(filter).collect(Collectors.toSet());
+    @NotNull public Stream<Warp> getWarps(@NotNull final Predicate<Warp> filter) {
+        return warps.stream().filter(filter);
+    }
+
+    @NotNull public Collection<Warp> getFilteredWarps(@NotNull final Predicate<Warp> filter) {
+        return getWarps(filter).collect(Collectors.toSet());
     }
 
     @NotNull public Collection<Warp> getWarps(World world) {
-        return getWarps((warp -> warp.getLocation().getWorld() == world));
+        return getFilteredWarps(warp -> warp.getLocation().getWorld() == world);
     }
 
-    @NotNull public Collection<Warp> getWarpsOwnedByPlayer(@NotNull final UUID player) {
-        return getWarps(warp -> warp.getOwner() != null && warp.getOwner().equals(player));
+    @NotNull
+    public Collection<PrivateWarp> getPrivateWarpsOwnedByPlayer(@NotNull final UUID player) {
+        return getWarps(PrivateWarp.class::isInstance).map(PrivateWarp.class::cast)
+            .filter(privateWarp -> privateWarp.getOwner().equals(player))
+            .collect(Collectors.toSet());
     }
 
     @NotNull public Collection<Warp> getAccessibleToPlayer(@NotNull final Player player) {
-        return getWarps(warp -> warp.canAccess(player));
+        return getFilteredWarps(warp -> warp.canAccess(player));
     }
 
     public void registerWarp(@NotNull final Warp warp) {
