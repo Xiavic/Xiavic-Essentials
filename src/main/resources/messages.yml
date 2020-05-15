@@ -113,6 +113,17 @@ Hat: "You have equipped %item% to your head area"
 Extinguish: "&cYour inner demon has calmed down"
 ExtinguishTarget: "You have been extinguished by, %sender%"
 
+#Warp
+WarpCreated: "Warp \"%name%\" has been created."
+WarpDeleted: "Warp deleted."
+WarpWhitelist: "Warp whitelist has been %enabled%."
+WarpBlacklist: "Warp blacklist has been %enabled%."
+WarpDenied: "You may not access this warp!"
+WarpDisabled: "This warp is disabled."
+WarpWhitelistOperation: "%player% has been %operation% to the whitelist."
+WarpBlacklistOperation: "%player% has been %operation% to the blacklist."
+WarpUnsafe: "That warp is not safe!"
+
 # Links
 Discord: "&bCome &3join &bour &3discord &bat &3https://discordapp.com/invite/nY5yFhs"
 Forums: "&aVisit our forums at: &bhttps://forums.xiav.icu"

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -34,6 +35,10 @@ public enum WarpManager {
 
     }
 
+    public Optional<Warp> getWarp(final String name) {
+        return getWarps(warp -> warp.getName().equalsIgnoreCase(name)).findAny();
+    }
+
     @NotNull public Collection<Warp> getWarps() {
         return new HashSet<>(warps);
     }
@@ -58,7 +63,7 @@ public enum WarpManager {
     }
 
     @NotNull public Collection<Warp> getAccessibleToPlayer(@NotNull final Player player) {
-        return getFilteredWarps(warp -> warp.canAccess(player));
+        return getFilteredWarps(warp -> warp.canBeAccessedBy(player));
     }
 
     public void registerWarp(@NotNull final Warp warp) {
@@ -66,7 +71,7 @@ public enum WarpManager {
         warps.add(warp);
     }
 
-    public void removeWarp(@NotNull final Warp warp) {
+    public void unregisterWarp(@NotNull final Warp warp) {
         warps.remove(warp);
     }
 }

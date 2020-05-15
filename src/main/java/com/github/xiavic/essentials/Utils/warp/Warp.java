@@ -1,7 +1,7 @@
 package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,6 +11,7 @@ import java.util.UUID;
 public class Warp {
 
     private final UUID uniqueID = UUID.randomUUID();
+    private boolean enabled;
 
     private String name;
     private String permission;
@@ -36,6 +37,11 @@ public class Warp {
         return this;
     }
 
+    public Warp setEnabled(final boolean enabled) {
+        this.enabled = enabled;
+        return this;
+    }
+
     @NotNull public String getName() {
         return name;
     }
@@ -48,13 +54,22 @@ public class Warp {
         return permission != null && !permission.isEmpty();
     }
 
-    public boolean canAccess(final Player player) {
-        return !hasPermission() || player.hasPermission(permission);
-    }
-
     public @NotNull Location getLocation() {
         return location.clone();
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public boolean canBeAccessedBy(final Entity entity) {
+        return !hasPermission() || entity.hasPermission(permission);
+    }
+
+    public boolean teleport(final Entity entity) {
+        return canBeAccessedBy(entity) && isEnabled() && entity.teleport(location);
+    }
+
 
     @Override public boolean equals(final Object o) {
         if (this == o)
