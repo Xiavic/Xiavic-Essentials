@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.github.xiavic.essentials.Main.messages;
+import static com.github.xiavic.essentials.Main.permissions;
 
 public class WarpCommand implements TabExecutor {
 
@@ -49,7 +50,7 @@ public class WarpCommand implements TabExecutor {
                     }
                 case "delete":
                 case "remove":
-                    if (sender.hasPermission(messages.getString("WarpDeletion"))) {
+                    if (sender.hasPermission(permissions.getString("WarpDeletion"))) {
                         if (args.length < 2) {
                             Utils.chat(sender, messages.getString("InvalidArgs")
                                 .replace("%reason", "Please specify a warpName"));
@@ -84,6 +85,18 @@ public class WarpCommand implements TabExecutor {
                         Utils.chat(sender, messages.getString("NoPerms"));
                     }
                     return true;
+                case "whitelist":
+                    if (sender.hasPermission(permissions.getString("WarpWhitelist"))) {
+                        if (args.length >= 3) {
+                            final String targetWarp = args[1];
+                            final String toggle = args[2];
+
+                        } else {
+                            Utils.chat(sender, messages.getString("SpecifyTarget"));
+                        }
+                    } else {
+                        Utils.chat(sender, messages.getString("NoPerms"));
+                    }
             }
         }
         return true;
