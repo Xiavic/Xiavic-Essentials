@@ -139,7 +139,7 @@ public final class Main extends JavaPlugin {
         getCommand("twitter").setExecutor(new TwitterCommand());
         getCommand("walkspeed").setExecutor(new WalkSpeedCommand());
         getCommand("warp").setExecutor(new WarpCommand());
-        getCommand("warpedit").setExecutor(new WarpEditComand());
+        getCommand("warpedit").setExecutor(new WarpEditCommand());
         getCommand("website").setExecutor(new WebsiteCommand());
         getCommand("whois").setExecutor(new WhoIsCommand());
         getCommand("world").setExecutor(new WorldCommand());

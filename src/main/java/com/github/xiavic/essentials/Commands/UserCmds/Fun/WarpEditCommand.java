@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static com.github.xiavic.essentials.Main.messages;
 import static com.github.xiavic.essentials.Main.permissions;
 
-public class WarpEditComand implements TabExecutor {
+public class WarpEditCommand implements TabExecutor {
 
     private static final WarpManager warpManager = WarpManager.INSTANCE;
 
