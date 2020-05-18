@@ -2,6 +2,7 @@ package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.permissions.Permissible;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,6 +55,10 @@ public class Warp {
         return permission != null && !permission.isEmpty();
     }
 
+    public String getPermission() {
+        return permission;
+    }
+
     public @NotNull Location getLocation() {
         return location.clone();
     }
@@ -62,8 +67,10 @@ public class Warp {
         return enabled;
     }
 
-    public boolean canBeAccessedBy(final Entity entity) {
-        return !hasPermission() || entity.hasPermission(permission);
+    public boolean canBeAccessedBy(final Permissible permissible) {
+        if (hasPermission())
+            System.out.println(permissible.hasPermission(permission));
+        return !hasPermission() || permissible.hasPermission(permission);
     }
 
     public boolean teleport(final Entity entity) {

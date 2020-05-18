@@ -72,6 +72,9 @@ commands:
   warp:
     usage: A
     description: A
+  warpedit:
+    usage: A
+    description: A
   privatewarp:
     usage: A
     description: A

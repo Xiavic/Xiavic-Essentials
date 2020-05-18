@@ -2,7 +2,9 @@ package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permissible;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -62,8 +64,8 @@ public enum WarpManager {
             .collect(Collectors.toSet());
     }
 
-    @NotNull public Collection<Warp> getAccessibleToPlayer(@NotNull final Player player) {
-        return getFilteredWarps(warp -> warp.canBeAccessedBy(player));
+    @NotNull public Collection<Warp> getAccessibleToPermissible(@NotNull final Permissible permissible) {
+        return getFilteredWarps(warp -> warp.canBeAccessedBy(permissible));
     }
 
     public void registerWarp(@NotNull final Warp warp) {
