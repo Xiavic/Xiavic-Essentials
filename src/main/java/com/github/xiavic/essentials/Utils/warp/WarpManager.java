@@ -2,8 +2,6 @@ package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permissible;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,6 +39,23 @@ public enum WarpManager {
         return getWarps(warp -> warp.getName().equalsIgnoreCase(name)).findAny();
     }
 
+    public <T extends Warp> Optional<T> getWarp(final String name, final Class<T> clazz, Predicate<T> filter) {
+        return getWarps(clazz).filter(warp -> warp.getName().equalsIgnoreCase(name) && filter.test(warp)).findAny();
+    }
+
+    public <T extends Warp> Optional<T> getWarp(final String name, final Class<T> clazz) {
+        return getWarps(clazz).filter(warp -> warp.getName().equalsIgnoreCase(name)).findAny();
+    }
+
+    public Optional<Warp> getBaseWarp(final String name) {
+        return getWarps(Warp::isBaseWarp).filter(warp -> warp.getName().equalsIgnoreCase(name))
+            .findAny();
+    }
+
+    public <T extends Warp> Stream<T> getWarps(@NotNull final Class<T> clazz) {
+        return getWarps(clazz::isInstance).map(clazz::cast);
+    }
+
     @NotNull public Collection<Warp> getWarps() {
         return new HashSet<>(warps);
     }
@@ -64,8 +79,14 @@ public enum WarpManager {
             .collect(Collectors.toSet());
     }
 
-    @NotNull public Collection<Warp> getAccessibleToPermissible(@NotNull final Permissible permissible) {
+    @NotNull
+    public Collection<Warp> getAccessibleToPermissible(@NotNull final Permissible permissible) {
         return getFilteredWarps(warp -> warp.canBeAccessedBy(permissible));
+    }
+
+    public <T> Collection<T> getAccessibleToPermissible(@NotNull final Permissible permissible, Class<T> clazz) {
+        return getWarps(clazz::isInstance).map(clazz::cast).filter(warp -> ((Warp) warp).canBeAccessedBy(permissible)).collect(
+            Collectors.toList());
     }
 
     public void registerWarp(@NotNull final Warp warp) {

@@ -1,6 +1,9 @@
 package com.github.xiavic.essentials.Utils.warp;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permissible;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,7 +16,6 @@ import java.util.UUID;
  * Represents a warp which would be used in /pw, /privatewarp
  */
 public class PrivateWarp extends Warp {
-
     private UUID owner;
     private Collection<UUID> whitelisted = new HashSet<>();
     private Collection<UUID> blacklisted = new HashSet<>();
@@ -36,13 +38,11 @@ public class PrivateWarp extends Warp {
         }
     }
 
-    @NotNull
-    public Collection<UUID> getWhitelisted() {
+    @NotNull public Collection<UUID> getWhitelisted() {
         return new HashSet<>(whitelisted);
     }
 
-    @NotNull
-    public Collection<UUID> getBlacklisted() {
+    @NotNull public Collection<UUID> getBlacklisted() {
         return new HashSet<>(blacklisted);
     }
 
@@ -54,14 +54,12 @@ public class PrivateWarp extends Warp {
         return blacklisted.contains(uuid);
     }
 
-    @NotNull
-    public PrivateWarp setOwner(final UUID owner) {
+    @NotNull public PrivateWarp setOwner(final UUID owner) {
         this.owner = owner;
         return this;
     }
 
-    @NotNull
-    public UUID getOwner() {
+    @NotNull public UUID getOwner() {
         return this.owner;
     }
 
@@ -75,6 +73,28 @@ public class PrivateWarp extends Warp {
         whitelisted.remove(player);
         whitelisted.add(player);
         blacklisted.remove(player);
+    }
+
+    @Override public boolean canBeAccessedBy(final Permissible permissible) {
+        if (permissible instanceof Entity) {
+            Entity entity = (Entity) permissible;
+            final UUID uuid = entity.getUniqueId();
+            boolean bool = !isBlacklisted(uuid);
+            return isEnabled() && whitelisted.isEmpty() ? bool : isWhitelisted(uuid);
+        }
+        return false;
+    }
+
+    @Override public String getPermission() {
+        return null;
+    }
+
+    @Override public boolean hasPermission() {
+        return false;
+    }
+
+    @Override public Warp setPermission(final @Nullable String permission) {
+        return this;
     }
 
     /**

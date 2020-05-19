@@ -43,6 +43,10 @@ public class Warp {
         return this;
     }
 
+    public final boolean isBaseWarp() {
+        return this.getClass() == Warp.class;
+    }
+
     @NotNull public String getName() {
         return name;
     }
@@ -68,8 +72,6 @@ public class Warp {
     }
 
     public boolean canBeAccessedBy(final Permissible permissible) {
-        if (hasPermission())
-            System.out.println(permissible.hasPermission(permission));
         return !hasPermission() || permissible.hasPermission(permission);
     }
 

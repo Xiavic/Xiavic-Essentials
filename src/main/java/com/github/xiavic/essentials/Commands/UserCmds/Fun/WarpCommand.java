@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.xiavic.essentials.Main.messages;
 import static com.github.xiavic.essentials.Main.permissions;
@@ -28,7 +28,7 @@ public class WarpCommand implements TabExecutor {
         if (args.length <= 1) {
             if (args.length == 1) {
                 final String targetWarp = args[0];
-                final Optional<Warp> optionalWarp = warpManager.getWarp(targetWarp);
+                final Optional<Warp> optionalWarp = warpManager.getBaseWarp(targetWarp);
                 if (sender instanceof Player) {
                     if (optionalWarp.isPresent()) {
                         final Warp warp = optionalWarp.get();
@@ -56,7 +56,7 @@ public class WarpCommand implements TabExecutor {
             }
         } else {
             final String targetWarp = args[0];
-            final Optional<Warp> optionalWarp = warpManager.getWarp(targetWarp);
+            final Optional<Warp> optionalWarp = warpManager.getBaseWarp(targetWarp);
             if (optionalWarp.isPresent()) {
                 final Warp warp = optionalWarp.get();
                 if (sender.hasPermission(permissions.getString("WarpOthers"))) {
@@ -95,6 +95,29 @@ public class WarpCommand implements TabExecutor {
 
     @Nullable @Override public List<String> onTabComplete(@NotNull final CommandSender sender,
         @NotNull final Command command, @NotNull final String alias, @NotNull final String[] args) {
+        if (args.length <= 1) {
+            if (sender instanceof Player) {
+                Stream<Warp> warps =
+                    warpManager.getAccessibleToPermissible(sender).stream().filter(Warp::isBaseWarp)
+                        .filter(Warp::isEnabled);
+                Stream<String> strings = warps.map(Warp::getName).sorted(Comparator.naturalOrder());
+                return args.length == 0 ?
+                    strings.collect(Collectors.toList()) :
+                    strings.filter(s -> s.startsWith(args[0])).collect(Collectors.toList());
+            }
+        } else {
+            //Args length >= 2
+            List<String> strings = new ArrayList<>(Arrays.asList(args));
+            strings.remove(0);
+            Stream<String> stringStream = Bukkit.getOnlinePlayers().stream().map(Player::getName)
+                .filter(s -> !strings.contains(s)).sorted(Comparator.naturalOrder());
+            if (args.length > 2) {
+                return stringStream.filter(s -> s.startsWith(args[args.length - 1]))
+                    .collect(Collectors.toList());
+            } else {
+                return stringStream.collect(Collectors.toList());
+            }
+        }
         return Collections.emptyList();
     }
 }
