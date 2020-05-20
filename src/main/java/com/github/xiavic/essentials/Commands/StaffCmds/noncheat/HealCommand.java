@@ -20,7 +20,7 @@ public class HealCommand implements CommandExecutor {
                     if (who.equalsIgnoreCase("all")) {
                         for (Player target : Bukkit.getOnlinePlayers()) {
                             Utils.chat(target, Main.messages.getString("Heal"));
-                            target.setHealth(20.0);
+                            target.setHealth(target.getMaxHealth());
                             target.getActivePotionEffects().clear();
                         }
                         player.sendMessage(Utils.chat(Main.messages.getString("HealAll")));
@@ -29,7 +29,7 @@ public class HealCommand implements CommandExecutor {
                         try {
                             Player target = Bukkit.getPlayer(who);
                             Utils.chat(target, Main.messages.getString("Heal"));
-                            target.setHealth(20.0);
+                            target.setHealth(target.getMaxHealth());
                             target.getActivePotionEffects().clear();
                             Utils.chat(player, Main.messages.getString("HealOther").replace("%target%", target.getDisplayName()));
                             return true;
@@ -45,7 +45,7 @@ public class HealCommand implements CommandExecutor {
             } else {
                 if (player.hasPermission(Main.permissions.getString("Heal")) || player.isOp()) {
                     Utils.chat(player, Main.messages.getString("Heal"));
-                    player.setHealth(20.0);
+                    player.setHealth(player.getMaxHealth());
                     player.getActivePotionEffects().clear();
                 } else {
                     Utils.chat(player, Main.messages.getString("NoPerms"));
@@ -58,7 +58,7 @@ public class HealCommand implements CommandExecutor {
                 if (who.equalsIgnoreCase("all")) {
                     for (Player target : Bukkit.getOnlinePlayers()) {
                         Utils.chat(target, Main.messages.getString("Heal"));
-                        target.setHealth(20.0);
+                        target.setHealth(target.getMaxHealth());
                         target.getActivePotionEffects().clear();
                     }
                     commandSender.sendMessage(Utils.chat(Main.messages.getString("HealAll")));
@@ -67,7 +67,7 @@ public class HealCommand implements CommandExecutor {
                     try {
                         Player target = Bukkit.getPlayer(who);
                         Utils.chat(target, Main.messages.getString("Heal"));
-                        target.setHealth(20.0);
+                        target.setHealth(target.getMaxHealth());
                         target.getActivePotionEffects().clear();
                         Utils.chat(commandSender, Main.messages.getString("HealOther").replace("%target%", target.getDisplayName()));
                         return true;

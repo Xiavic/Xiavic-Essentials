@@ -12,7 +12,6 @@ public class FlySpeedCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (label.equalsIgnoreCase("flyspeed")) {
                 if (args.length == 1) {
                     if (player.hasPermission(Main.permissions.getString("FlySpeed")) || player.isOp()) {
                         // TODO: Refactor For Less If Statements - Add Checks for  speed < 1 & speed > 10
@@ -46,7 +45,6 @@ public class FlySpeedCommand implements CommandExecutor {
                     }
                     return true;
                 }
-            }
         } else {
             Utils.chat(sender, Main.messages.getString("SenderNotPlayer"));
         }

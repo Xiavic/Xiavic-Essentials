@@ -1,4 +1,5 @@
 package com.github.xiavic.essentials.Commands.UserCmds.Fun;
+
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.Utils;
 import org.bukkit.command.Command;
@@ -6,7 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import static com.github.xiavic.essentials.Main.*;
+
+import static com.github.xiavic.essentials.Main.messages;
 
 public class HatCommand implements CommandExecutor {
     @Override
@@ -15,11 +17,13 @@ public class HatCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (player.hasPermission(Main.permissions.getString("Hat")) || player.isOp()) {
                 ItemStack hand = player.getInventory().getItemInMainHand();
-                if (player.getInventory().getHelmet().getAmount() == 0) {
+                ItemStack head = player.getInventory().getHelmet();
+                if (!(player.getInventory().firstEmpty() == -1)) {
+                    player.getInventory().addItem(head);
                     player.getInventory().setHelmet(hand);
                     return true;
                 } else
-                    Utils.chat(player, messages.getString("EmptyHeadSlot"));
+                    Utils.chat(player, messages.getString("FullInventory"));
             } else {
                 Utils.chat(player, messages.getString("NoPerms"));
             }
