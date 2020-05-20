@@ -1,33 +1,22 @@
 package com.github.xiavic.essentials;
 
-import com.github.xiavic.essentials.Commands.StaffCmds.cheats.CheatArmor;
-import com.github.xiavic.essentials.Commands.StaffCmds.cheats.CheatEXP;
+import com.github.xiavic.essentials.Commands.StaffCmds.cheats.*;
 import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.*;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TPPosCommand;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TPhereCommand;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TeleportCommand;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TpallCommand;
+import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.*;
 import com.github.xiavic.essentials.Commands.UserCmds.Essential.*;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.BackCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.RandomTPCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.SpawnCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.TpaCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.TpacceptCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.TpdenyCommand;
+import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.*;
+import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.*;
 import com.github.xiavic.essentials.Commands.UserCmds.Fun.*;
 import com.github.xiavic.essentials.Commands.UserCmds.Fun.Links.*;
 import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
 import com.github.xiavic.essentials.Utils.Files.Messages;
 import com.github.xiavic.essentials.Utils.Files.Permissions;
-import com.github.xiavic.essentials.Utils.Listeners.AFKHandler;
-import com.github.xiavic.essentials.Utils.Listeners.JoinQuit;
-import com.github.xiavic.essentials.Utils.Listeners.RespawnEvent;
-import com.github.xiavic.essentials.Utils.Listeners.TeleportHandler;
+import com.github.xiavic.essentials.Utils.Listeners.*;
 import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;
 import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.lib.NMSHandler.NMS;
 import com.github.xiavic.lib.inventory.InventorySerializer;
-import com.github.xiavic.lib.signedit.ISignEditor;
+import com.github.xiavic.lib.signedit.*;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
 import com.github.xiavic.lib.teleport.ITeleportRequestHandler;
 import de.leonhard.storage.LightningBuilder;
@@ -145,7 +134,7 @@ public final class Main extends JavaPlugin {
         getCommand("world").setExecutor(new WorldCommand());
         getCommand("workbench").setExecutor(new WorkbenchCommand());
         getCommand("youtube").setExecutor(new YoutubeCommand());
-        //getCommand("hat").setExecutor(new HatCommand());
+        getCommand("hat").setExecutor(new HatCommand());
     }
 
     private void registerListeners() {

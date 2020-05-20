@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import static com.github.xiavic.essentials.Main.*;
 
 public class ArghCommand implements CommandExecutor {
     @Override
@@ -17,7 +18,11 @@ public class ArghCommand implements CommandExecutor {
                     Utils.chat(player, Main.messages.getString("Argh"));
                 }
                 return true;
+            } else {
+                Utils.chat(player, messages.getString("NoPerms"));
             }
+        } else {
+            Utils.chat(sender, messages.getString("SenderNotPlayer"));
         }
         return false;
     }

@@ -105,8 +105,9 @@ WhoIsHelp: "/whois <player>"
 # Fun
 Annoy: "&4&l&oANNOYANCE"
 Argh: "&bArghhh, Piratey treasure awaits at yee spawn!"
+EmptyHeadSlot: "&cYou already have something on your head!"
 Pony: "%PonyPerson% &rsays: %Random_Pony%" #Sorry not sorry pickle, but i'm bringing it back, just for you, <3
-PonyPerson: "PickleGodLord"
+PonyPerson: "PickleGodLordOmegaLul"
 WalkSpeed: "Your walkspeed has been set to, %amount%"
 FlySpeed: "Your flyspeed has been set to, %amount%"
 Hat: "You have equipped %item% to your head area"

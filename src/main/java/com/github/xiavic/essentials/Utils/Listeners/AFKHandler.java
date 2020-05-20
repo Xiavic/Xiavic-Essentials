@@ -59,7 +59,7 @@ public enum AFKHandler implements Listener {
 
     public void tick() {
         tickCount.entrySet().removeIf(entry -> {
-            entry.setValue(entry.getValue() - 1);
+            entry.setValue(entry.getValue() - 20);
             if (entry.getValue() < 0) {
                 notAFK.remove(entry.getKey());
                 return true;
@@ -92,8 +92,7 @@ public enum AFKHandler implements Listener {
             messageKey = null;
         }
         if (playerObj != null && messageKey != null) {
-            Utils.chat(playerObj,
-                messages.getString(messageKey).replace("%player%", playerObj.getDisplayName()));
+            Utils.chat(playerObj, messages.getString(messageKey).replace("%player%", playerObj.getDisplayName()));
         }
     }
 
