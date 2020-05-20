@@ -3,6 +3,6 @@ Here you will see the worst code that FIVE idiots can come up with in their free
 
 Current Goal: Keep the core at around 0.0 ms -> 0.1ms / hour
 
-Xiavic NMS Handling: https://github.com/PryPurity/Xiavic-Parent
+XiavicParent:https://github.com/Xiavic/XiavicParent
 
-NBT & SignEditing Handling: https://github.com/PryPurity/Xiavic-Bukkit-v1.15
+XiavicLib: https://github.com/Xiavic/XiavicLib
