@@ -28,7 +28,7 @@ public class WarpCommand implements TabExecutor {
         if (args.length <= 1) {
             if (args.length == 1) {
                 final String targetWarp = args[0];
-                final Optional<Warp> optionalWarp = warpManager.getBaseWarp(targetWarp);
+                final Optional<Warp> optionalWarp = warpManager.getWarp(targetWarp);
                 if (sender instanceof Player) {
                     if (optionalWarp.isPresent()) {
                         final Warp warp = optionalWarp.get();
@@ -56,7 +56,7 @@ public class WarpCommand implements TabExecutor {
             }
         } else {
             final String targetWarp = args[0];
-            final Optional<Warp> optionalWarp = warpManager.getBaseWarp(targetWarp);
+            final Optional<Warp> optionalWarp = warpManager.getWarp(targetWarp);
             if (optionalWarp.isPresent()) {
                 final Warp warp = optionalWarp.get();
                 if (sender.hasPermission(permissions.getString("WarpOthers"))) {

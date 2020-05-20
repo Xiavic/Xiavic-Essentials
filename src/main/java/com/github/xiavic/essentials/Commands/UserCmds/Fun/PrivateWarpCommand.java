@@ -2,8 +2,8 @@ package com.github.xiavic.essentials.Commands.UserCmds.Fun;
 
 import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.essentials.Utils.warp.PrivateWarp;
+import com.github.xiavic.essentials.Utils.warp.PrivateWarpManager;
 import com.github.xiavic.essentials.Utils.warp.Warp;
-import com.github.xiavic.essentials.Utils.warp.WarpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -22,7 +22,7 @@ import static com.github.xiavic.essentials.Main.permissions;
 
 public class PrivateWarpCommand implements TabExecutor {
 
-    private static final WarpManager warpManager = WarpManager.INSTANCE;
+    private static final PrivateWarpManager warpManager = PrivateWarpManager.INSTANCE;
 
     //SYNTAX: /privatewarp <warpName/info> <playerName | warpName> <player>
     //SYNTAX /privatewarp andrewandy:test OR /pw info andrewandy:test
@@ -36,11 +36,10 @@ public class PrivateWarpCommand implements TabExecutor {
                     return false;
                 }
                 final String owner = split[0], targetName = split[1];
+                final OfflinePlayer player = Bukkit.getOfflinePlayer(owner);
                 //Filter private warp
-                final Optional<PrivateWarp> optionalWarp = warpManager
-                    .getWarp(targetName, PrivateWarp.class,
-                        (privateWarp -> Bukkit.getOfflinePlayer(owner).getUniqueId()
-                            .equals(privateWarp.getOwner())));
+                final Optional<PrivateWarp> optionalWarp =
+                    warpManager.getWarp(player.getUniqueId(), targetName);
                 if (sender instanceof Player) {
                     if (optionalWarp.isPresent()) {
                         final PrivateWarp warp = optionalWarp.get();
@@ -74,9 +73,9 @@ public class PrivateWarpCommand implements TabExecutor {
             }
             final String owner = split[0], targetName = split[1];
             final OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(owner);
-            final Optional<PrivateWarp> optionalWarp = warpManager
-                .getWarp(targetName, PrivateWarp.class,
-                    (privateWarp -> offlinePlayer.getUniqueId().equals(privateWarp.getOwner())));
+            //Filter private warp
+            final Optional<PrivateWarp> optionalWarp =
+                warpManager.getWarp(offlinePlayer.getUniqueId(), targetName);
             if (optionalWarp.isPresent()) {
                 final PrivateWarp warp = optionalWarp.get();
                 if (sender.hasPermission(permissions.getString("WarpOthers"))) {
@@ -128,7 +127,7 @@ public class PrivateWarpCommand implements TabExecutor {
                 final String targetOwner = split[0];
                 final String targetName = split[1];
                 final OfflinePlayer player = Bukkit.getOfflinePlayer(targetOwner);
-                return warpManager.getWarps(PrivateWarp.class).filter(
+                return warpManager.getWarps(
                     privateWarp -> privateWarp.getOwner().equals(player.getUniqueId())
                         && privateWarp.getName().equalsIgnoreCase(targetName)).map(Warp::getName)
                     .collect(Collectors.toList());
