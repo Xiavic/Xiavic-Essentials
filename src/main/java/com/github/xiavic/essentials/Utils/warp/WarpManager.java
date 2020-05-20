@@ -16,7 +16,7 @@ public enum WarpManager implements IWarpManager<Warp> {
 
     INSTANCE;
 
-    private Collection<Warp> warps = new HashSet<>();
+    private @NotNull Collection<Warp> warps = new HashSet<>();
 
     @Override public boolean isWarp(@NotNull final Location location, boolean useBlockloc) {
         for (final Warp warp : warps) {
@@ -29,7 +29,7 @@ public enum WarpManager implements IWarpManager<Warp> {
         return false;
     }
 
-    @Override public Optional<Warp> getWarp(final String name) {
+    @Override @NotNull public Optional<Warp> getWarp(@NotNull final String name) {
         return getWarps(warp -> warp.getName().equalsIgnoreCase(name)).findAny();
     }
 
@@ -46,10 +46,11 @@ public enum WarpManager implements IWarpManager<Warp> {
         return getWarps(filter).collect(Collectors.toSet());
     }
 
-    @Override @NotNull public Collection<Warp> getWarps(World world) {
+    @Override @NotNull public Collection<Warp> getWarps(@NotNull final World world) {
         return getFilteredWarps(warp -> warp.getLocation().getWorld() == world);
     }
 
+    @NotNull
     public Collection<Warp> getAccessibleToPermissible(@NotNull final Permissible permissible) {
         return getFilteredWarps(warp -> warp.canBeAccessedBy(permissible));
     }

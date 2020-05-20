@@ -17,7 +17,7 @@ public enum PrivateWarpManager implements IWarpManager<PrivateWarp> {
 
     INSTANCE;
 
-    private Collection<PrivateWarp> warps = new HashSet<>();
+    private @NotNull Collection<PrivateWarp> warps = new HashSet<>();
 
     @Override public boolean isWarp(@NotNull final Location location, final boolean useBlockloc) {
         return warps.stream()
@@ -29,13 +29,14 @@ public enum PrivateWarpManager implements IWarpManager<PrivateWarp> {
             .findAny();
     }
 
+    @NotNull
     public Optional<PrivateWarp> getWarp(@NotNull final UUID owner, @NotNull final String name) {
         return warps.stream().filter(
             (PrivateWarp warp) -> warp.getOwner().equals(owner) && warp.getName()
                 .equalsIgnoreCase(name)).findAny();
     }
 
-    @Override public @NotNull Collection<PrivateWarp> getWarps() {
+    @Override @NotNull public Collection<PrivateWarp> getWarps() {
         return new HashSet<>(warps);
     }
 
@@ -44,16 +45,16 @@ public enum PrivateWarpManager implements IWarpManager<PrivateWarp> {
         return warps.stream().filter(filter);
     }
 
-    @Override public @NotNull Collection<PrivateWarp> getFilteredWarps(
-        @NotNull final Predicate<PrivateWarp> filter) {
+    @Override @NotNull
+    public Collection<PrivateWarp> getFilteredWarps(@NotNull final Predicate<PrivateWarp> filter) {
         return getWarps(filter).collect(Collectors.toSet());
     }
 
-    @Override public @NotNull Collection<PrivateWarp> getWarps(final World world) {
+    @Override @NotNull public Collection<PrivateWarp> getWarps(final World world) {
         return getWarps(warp -> warp.getLocation().getWorld() == world).collect(Collectors.toSet());
     }
 
-    @Override public @NotNull Collection<PrivateWarp> getAccessibleToPermissible(
+    @Override @NotNull public Collection<PrivateWarp> getAccessibleToPermissible(
         @NotNull final Permissible permissible) {
         return getWarps(warp -> warp.canBeAccessedBy(permissible)).collect(Collectors.toSet());
     }
