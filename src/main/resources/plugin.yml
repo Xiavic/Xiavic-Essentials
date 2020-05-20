@@ -1,8 +1,8 @@
-name: XiavicCore
+name: XiavicEssentials
 version: 1.0.0
 main: com.github.xiavic.essentials.Main
 api-version: 1.13
-prefix: XiavicCore
+prefix: XiavicEssentials
 authors: [Imhandmade, Kerlab, Andrewandy, NightPotato]
 depend: [XiavicLib]
 description: Yes

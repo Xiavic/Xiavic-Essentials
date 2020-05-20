@@ -1,7 +1,6 @@
 package com.github.xiavic.essentials.Utils;
 
 import com.github.xiavic.essentials.Main;
-import com.github.xiavic.essentials.Utils.Listeners.TeleportHandler;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -93,4 +92,6 @@ public class Utils {
     }
 
 
+    public static void chat(Player player, String s, String s1, String s2, String s3, String s4, String s5, String s6) {
+    }
 }

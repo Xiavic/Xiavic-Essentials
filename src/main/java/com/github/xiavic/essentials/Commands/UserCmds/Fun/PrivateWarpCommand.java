@@ -24,6 +24,7 @@ public class PrivateWarpCommand implements TabExecutor {
 
     private static final PrivateWarpManager warpManager = PrivateWarpManager.INSTANCE;
 
+
     //SYNTAX: /privatewarp <warpName/info> <playerName | warpName> <player>
     //SYNTAX /privatewarp andrewandy:test OR /pw info andrewandy:test
     @Override public boolean onCommand(@NotNull final CommandSender sender,

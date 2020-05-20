@@ -71,9 +71,9 @@ public final class Main extends JavaPlugin {
         // loadshit();
 
         Bukkit.getConsoleSender().sendMessage(" ");
-        Bukkit.getConsoleSender().sendMessage(" XIAVIC CORE IS ACTIVATED... ");
+        Bukkit.getConsoleSender().sendMessage(" XIAVIC ESSENTIALS IS ACTIVATED... ");
         Bukkit.getConsoleSender().sendMessage(" ");
-        Bukkit.getConsoleSender().sendMessage("Xiavic Network's Amazing Core");
+        Bukkit.getConsoleSender().sendMessage("Xiavic Network's Amazing Essentials");
         Bukkit.getConsoleSender().sendMessage("     In Development by the Xiavic Dev Team ");
         Bukkit.getConsoleSender().sendMessage(" ");
         registerShit();
@@ -145,7 +145,7 @@ public final class Main extends JavaPlugin {
         getCommand("world").setExecutor(new WorldCommand());
         getCommand("workbench").setExecutor(new WorkbenchCommand());
         getCommand("youtube").setExecutor(new YoutubeCommand());
-        //getCommand("hat").setExecutor(new HatCommand());
+        getCommand("hat").setExecutor(new HatCommand());
     }
 
     private void registerListeners() {
