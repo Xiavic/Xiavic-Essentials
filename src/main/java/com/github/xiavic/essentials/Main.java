@@ -19,10 +19,7 @@ import com.github.xiavic.essentials.Commands.UserCmds.Fun.Links.*;
 import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
 import com.github.xiavic.essentials.Utils.Files.Messages;
 import com.github.xiavic.essentials.Utils.Files.Permissions;
-import com.github.xiavic.essentials.Utils.Listeners.AFKHandler;
-import com.github.xiavic.essentials.Utils.Listeners.JoinQuit;
-import com.github.xiavic.essentials.Utils.Listeners.RespawnEvent;
-import com.github.xiavic.essentials.Utils.Listeners.TeleportHandler;
+import com.github.xiavic.essentials.Utils.Listeners.*;
 import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;
 import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.lib.NMSHandler.NMS;
@@ -155,6 +152,7 @@ public final class Main extends JavaPlugin {
         pm.registerEvents(new RespawnEvent(), this);
         pm.registerEvents(teleportHandler, this);
         AFKHandler.INSTANCE.registerTicker();
+        pm.registerEvents(new MiscHandler(), this);
         pm.registerEvents(nmsImpl.getSignEditor(), this);
     }
 
