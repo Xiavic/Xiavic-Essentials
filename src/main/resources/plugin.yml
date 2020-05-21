@@ -183,3 +183,10 @@ commands:
   repair:
     usage: a
     description: a
+  freeze:
+    usage: a
+    description: a
+  hat:
+    usage: a
+    description: a
+

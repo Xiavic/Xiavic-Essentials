@@ -2,6 +2,7 @@ package com.github.xiavic.essentials.Utils.Listeners;
 
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.LocationUtils;
+import com.github.xiavic.essentials.Utils.Misc.everythingElse;
 import com.github.xiavic.essentials.Utils.Utils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,6 +27,9 @@ public class JoinQuit implements Listener {
             }
         } else {
             event.setJoinMessage(Utils.chat(Main.messages.getString("ReJoin_Message").replace("%player%", name)));
+            if (everythingElse.isFrozen(p)) {
+                Utils.chat(p, Main.messages.getString("FrozenLogin"));
+            }
         }
 
     }
