@@ -13,7 +13,8 @@ public class MoreCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission(Main.permissions.getString("More")) || player.isOp()) {
-                player.getInventory().getItemInMainHand().setAmount(64);
+                int maxstacks = player.getInventory().getItemInMainHand().getMaxStackSize();
+                player.getInventory().getItemInMainHand().setAmount(maxstacks);
                 return true;
             } else {
                 Utils.chat(player, Main.messages.getString("NoPerms"));

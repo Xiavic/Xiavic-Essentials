@@ -16,26 +16,23 @@ public class ConfigReloadCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission(Main.permissions.getString("ConfigUpdate")) || player.isOp()) {
-                // plugin.updateShit(); // TODO: Replace and Make Lightning File
 
                 Main.mainConfig.forceReload();
                 Main.messages.forceReload();
                 Main.permissions.forceReload();
 
-                player.sendMessage(Utils.chat(Main.messages.getString("ConfigUpdate")));
+                Utils.chat(player, Main.messages.getString("ConfigUpdate"));
                 return true;
             } else {
-                player.sendMessage(Utils.chat(Main.messages.getString("NoPerms")));
+                Utils.chat(player, Main.messages.getString("NoPerms"));
             }
         } else {
-            // plugin.updateShit();
             Main.mainConfig.forceReload();
             Main.messages.forceReload();
             Main.permissions.forceReload();
-            sender.sendMessage(Utils.chat(Main.messages.getString("ConfigUpdate")));
+            Utils.chat(sender, Main.messages.getString("ConfigUpdate"));
             return true;
         }
         return false;
-
     }
 }

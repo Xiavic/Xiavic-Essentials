@@ -27,14 +27,11 @@ public class FlySpeedCommand implements CommandExecutor {
                     } else {
                         Utils.chat(player, "Invalid Number");
                     }
-                    Utils.chat(player,
-                        Main.messages.getString("FlySpeed").replace("%amount%", playerspeed));
+                    Utils.chat(player, Main.messages.getString("FlySpeed").replace("%amount%", playerspeed));
                     return true;
                 } else {
                     Utils.chat(player, Main.messages.getString("NoPerms"));
                 }
-            } else {
-                Utils.chat(sender, Main.messages.getString("SenderNotPlayer"));
             }
             return true;
         }

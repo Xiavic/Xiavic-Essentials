@@ -19,6 +19,12 @@
 
 # Economy
 Account: "&2Your account balance is currently &e%money%."
+EcoAdd: "&2You have had %amount% added to your account."
+EcoPay: "&2You have paid %amount% to %target%"
+EcoRemove: " "
+EcoReset: " "
+EcoSet: " "
+EcoTop: " "
 
 # Common
 InvalidArgs: "&cInvalid Arguments: %reason%"
