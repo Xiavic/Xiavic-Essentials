@@ -20,7 +20,7 @@ public class NearCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (player.hasPermission("Near") || player.isOp()) {
+            if (player.hasPermission(Main.permissions.getString("Near")) || player.isOp()) {
                 boolean found = false;
                 ArrayList<String> nearbyPlayers = new ArrayList<>();
                 for (Player target : Bukkit.getOnlinePlayers()) {

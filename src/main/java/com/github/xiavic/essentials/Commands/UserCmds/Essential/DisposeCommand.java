@@ -1,6 +1,7 @@
 package com.github.xiavic.essentials.Commands.UserCmds.Essential;
 
 import com.github.xiavic.essentials.Main;
+import com.github.xiavic.essentials.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,13 +13,15 @@ public class DisposeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            if (label.equalsIgnoreCase("dispose") || label.equalsIgnoreCase("trash")) {
-                Player player = (Player) sender;
-                Inventory inventory = Bukkit.createInventory(null, 54, "Chest");
-                if (player.hasPermission(Main.permissions.getString("Dispose")) || player.isOp()) {
-                    player.openInventory(inventory);
-                }
+            Player player = (Player) sender;
+            Inventory inventory = Bukkit.createInventory(null, 54, "Chest");
+            if (player.hasPermission(Main.permissions.getString("Dispose")) || player.isOp()) {
+                player.openInventory(inventory);
+            } else {
+                Utils.chat(player, Main.messages.getString("NoPerms"));
             }
+        } else {
+            Utils.chat(sender, Main.messages.getString("SenderNotPlayer"));
         }
         return false;
     }

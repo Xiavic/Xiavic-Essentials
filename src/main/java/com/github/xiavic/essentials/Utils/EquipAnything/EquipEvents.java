@@ -24,16 +24,16 @@ public class EquipEvents implements Listener {
         for (final String lore : meta.getLore()) {
             final ItemStack temp;
             final int slot;
-            if ((lore.contains("helm")) && (event.getSlot() == 39)) {
+            if ((lore.contains("helm") || lore.contains("helmet") || lore.contains("hat")) && (event.getSlot() == 39)) {
                 temp = player.getInventory().getItem(39);
                 slot = 39;
             } else if ((lore.contains("chest")) && (event.getSlot() == 38)) {
                 temp = player.getInventory().getItem(38);
                 slot = 38;
-            } else if ((lore.contains("legs")) && (event.getSlot() == 37)) {
+            } else if ((lore.contains("legs") || lore.contains("pants")) && (event.getSlot() == 37)) {
                 temp = player.getInventory().getItem(37);
                 slot = 37;
-            } else if ((lore.contains("feet")) && (event.getSlot() == 36)) {
+            } else if ((lore.contains("feet") || lore.contains("boots")) && (event.getSlot() == 36)) {
                 temp = player.getInventory().getItem(36);
                 slot = 36;
             } else {
