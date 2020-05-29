@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 public interface IWarpManager<W extends Warp> {
 
 
-    boolean isWarp(@NotNull Location location, boolean useBlockloc);
-
     static boolean areCoordinatesEquals(Location primary, Location secondary) {
         return primary.getWorld() == secondary.getWorld() && primary.getX() == secondary.getX()
-            && primary.getY() == secondary.getY() && primary.getZ() == secondary.getZ();
+                && primary.getY() == secondary.getY() && primary.getZ() == secondary.getZ();
     }
+
+    boolean isWarp(@NotNull Location location, boolean useBlockloc);
 
     Optional<W> getWarp(String name);
 

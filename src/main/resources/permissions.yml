@@ -17,7 +17,7 @@
 ##### !! PERMISSIONS !! ######
 ##############################
 
-# Player Commands
+# Player commands
 Afk: "Xiavic.player.afk"
 Argh: "Xiavic.player.argh"
 Back: "Xiavic.player.back"
@@ -57,7 +57,7 @@ WarpPermissionEdit: "Xiavic.player.warp.permission.edit"
 Workbench: "Xiavic.player.workbench"
 World: "Xiavic.player.world"
 
-# Staff Commands
+# Staff commands
 Clear: "Xiavic.staff.clear"
 ClearOthers: "Xiavic.staff.clearothers"
 ConfigUpdate: "Xiavic.staff.config.update"

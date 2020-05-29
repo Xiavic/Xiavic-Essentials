@@ -18,35 +18,44 @@ public enum WarpManager implements IWarpManager<Warp> {
 
     private @NotNull Collection<Warp> warps = new HashSet<>();
 
-    @Override public boolean isWarp(@NotNull final Location location, boolean useBlockloc) {
+    @Override
+    public boolean isWarp(@NotNull final Location location, boolean useBlockloc) {
         for (final Warp warp : warps) {
             final Location loc = warp.getLocation();
             if (useBlockloc && IWarpManager.areCoordinatesEquals(loc, location) || loc
-                .equals(location)) {
+                    .equals(location)) {
                 return true;
             }
         }
         return false;
     }
 
-    @Override @NotNull public Optional<Warp> getWarp(@NotNull final String name) {
+    @Override
+    @NotNull
+    public Optional<Warp> getWarp(@NotNull final String name) {
         return getWarps(warp -> warp.getName().equalsIgnoreCase(name)).findAny();
     }
 
-    @NotNull public Collection<Warp> getWarps() {
+    @NotNull
+    public Collection<Warp> getWarps() {
         return new HashSet<>(warps);
     }
 
-    @Override @NotNull public Stream<Warp> getWarps(@NotNull final Predicate<Warp> filter) {
+    @Override
+    @NotNull
+    public Stream<Warp> getWarps(@NotNull final Predicate<Warp> filter) {
         return warps.stream().filter(filter);
     }
 
-    @Override @NotNull
+    @Override
+    @NotNull
     public Collection<Warp> getFilteredWarps(@NotNull final Predicate<Warp> filter) {
         return getWarps(filter).collect(Collectors.toSet());
     }
 
-    @Override @NotNull public Collection<Warp> getWarps(@NotNull final World world) {
+    @Override
+    @NotNull
+    public Collection<Warp> getWarps(@NotNull final World world) {
         return getFilteredWarps(warp -> warp.getLocation().getWorld() == world);
     }
 
@@ -60,7 +69,8 @@ public enum WarpManager implements IWarpManager<Warp> {
         warps.add(warp);
     }
 
-    @Override public void unregisterWarp(@NotNull final Warp warp) {
+    @Override
+    public void unregisterWarp(@NotNull final Warp warp) {
         warps.remove(warp);
     }
 }

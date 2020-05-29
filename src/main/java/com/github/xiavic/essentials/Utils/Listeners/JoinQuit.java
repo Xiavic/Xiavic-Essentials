@@ -19,7 +19,7 @@ public class JoinQuit implements Listener {
         String name = p.getDisplayName();
         if (!p.hasPlayedBefore()) {
             event.setJoinMessage(
-                Utils.chat(Main.messages.getString("FirstJoin_Message").replace("%player%", name)));
+                    Utils.chat(Main.messages.getString("FirstJoin_Message").replace("%player%", name)));
             Utils.chat(p, "&6Welcome " + p.getName());
             if (!p.isOp()) {
                 p.teleport(LocationUtils.getLocation("FirstSpawn"));

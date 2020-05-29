@@ -20,14 +20,14 @@ public class PrivateWarp extends Warp {
     private Collection<UUID> blacklisted = new HashSet<>();
 
     public PrivateWarp(@NotNull final String name, @NotNull Location location,
-        @NotNull final UUID owner) {
+                       @NotNull final UUID owner) {
         super(name, location);
         this.owner = owner;
     }
 
     public PrivateWarp(@NotNull final String name, @NotNull Location location,
-        @NotNull final UUID owner, @Nullable final Collection<UUID> whitelisted,
-        @Nullable final Collection<UUID> blacklisted) {
+                       @NotNull final UUID owner, @Nullable final Collection<UUID> whitelisted,
+                       @Nullable final Collection<UUID> blacklisted) {
         this(name, location, owner);
         if (whitelisted != null) {
             this.whitelisted = new HashSet<>(whitelisted);
@@ -37,11 +37,13 @@ public class PrivateWarp extends Warp {
         }
     }
 
-    @NotNull public Collection<UUID> getWhitelisted() {
+    @NotNull
+    public Collection<UUID> getWhitelisted() {
         return new HashSet<>(whitelisted);
     }
 
-    @NotNull public Collection<UUID> getBlacklisted() {
+    @NotNull
+    public Collection<UUID> getBlacklisted() {
         return new HashSet<>(blacklisted);
     }
 
@@ -53,13 +55,15 @@ public class PrivateWarp extends Warp {
         return blacklisted.contains(uuid);
     }
 
-    @NotNull public PrivateWarp setOwner(final UUID owner) {
-        this.owner = owner;
-        return this;
+    @NotNull
+    public UUID getOwner() {
+        return this.owner;
     }
 
-    @NotNull public UUID getOwner() {
-        return this.owner;
+    @NotNull
+    public PrivateWarp setOwner(final UUID owner) {
+        this.owner = owner;
+        return this;
     }
 
     /**
@@ -74,7 +78,8 @@ public class PrivateWarp extends Warp {
         blacklisted.remove(player);
     }
 
-    @Override public boolean canBeAccessedBy(final Permissible permissible) {
+    @Override
+    public boolean canBeAccessedBy(final Permissible permissible) {
         if (permissible instanceof Entity) {
             Entity entity = (Entity) permissible;
             final UUID uuid = entity.getUniqueId();
@@ -84,15 +89,18 @@ public class PrivateWarp extends Warp {
         return false;
     }
 
-    @Override public String getPermission() {
+    @Override
+    public String getPermission() {
         return null;
     }
 
-    @Override public boolean hasPermission() {
+    @Override
+    public boolean hasPermission() {
         return false;
     }
 
-    @Override public Warp setPermission(final @Nullable String permission) {
+    @Override
+    public Warp setPermission(final @Nullable String permission) {
         return this;
     }
 
@@ -116,7 +124,8 @@ public class PrivateWarp extends Warp {
         blacklisted.remove(player);
     }
 
-    @Override public boolean equals(final Object o) {
+    @Override
+    public boolean equals(final Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -134,7 +143,8 @@ public class PrivateWarp extends Warp {
         return Objects.equals(blacklisted, that.blacklisted);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (whitelisted != null ? whitelisted.hashCode() : 0);
         result = 31 * result + (blacklisted != null ? blacklisted.hashCode() : 0);

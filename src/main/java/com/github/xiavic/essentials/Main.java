@@ -1,29 +1,27 @@
 package com.github.xiavic.essentials;
 
-import com.github.xiavic.essentials.Commands.StaffCmds.cheats.CheatArmor;
-import com.github.xiavic.essentials.Commands.StaffCmds.cheats.CheatEXP;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.*;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TPPosCommand;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TPhereCommand;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TeleportCommand;
-import com.github.xiavic.essentials.Commands.StaffCmds.noncheat.teleport.TpallCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.*;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.BackCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.RandomTPCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.SpawnCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.TpaCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.TpacceptCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Essential.Teleport.Tpa.TpdenyCommand;
-import com.github.xiavic.essentials.Commands.UserCmds.Fun.*;
-import com.github.xiavic.essentials.Commands.UserCmds.Fun.Links.*;
+// import com.github.xiavic.essentials.Utils.Misc.Databases;
+
 import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
 import com.github.xiavic.essentials.Utils.Listeners.*;
-import com.github.xiavic.essentials.Utils.Listeners.AFKHandler;
-import com.github.xiavic.essentials.Utils.Listeners.JoinQuit;
-import com.github.xiavic.essentials.Utils.Listeners.RespawnEvent;
-import com.github.xiavic.essentials.Utils.Listeners.TeleportHandler;
 import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;
 import com.github.xiavic.essentials.Utils.Utils;
+import com.github.xiavic.essentials.commands.player.Essential.*;
+import com.github.xiavic.essentials.commands.player.Essential.Teleport.BackCommand;
+import com.github.xiavic.essentials.commands.player.Essential.Teleport.RandomTPCommand;
+import com.github.xiavic.essentials.commands.player.Essential.Teleport.SpawnCommand;
+import com.github.xiavic.essentials.commands.player.Essential.Teleport.Tpa.TpaCommand;
+import com.github.xiavic.essentials.commands.player.Essential.Teleport.Tpa.TpacceptCommand;
+import com.github.xiavic.essentials.commands.player.Essential.Teleport.Tpa.TpdenyCommand;
+import com.github.xiavic.essentials.commands.player.Fun.*;
+import com.github.xiavic.essentials.commands.player.Fun.Links.*;
+import com.github.xiavic.essentials.commands.staff.cheats.CheatArmor;
+import com.github.xiavic.essentials.commands.staff.cheats.CheatEXP;
+import com.github.xiavic.essentials.commands.staff.noncheat.*;
+import com.github.xiavic.essentials.commands.staff.noncheat.teleport.TPPosCommand;
+import com.github.xiavic.essentials.commands.staff.noncheat.teleport.TPhereCommand;
+import com.github.xiavic.essentials.commands.staff.noncheat.teleport.TeleportCommand;
+import com.github.xiavic.essentials.commands.staff.noncheat.teleport.TpallCommand;
 import com.github.xiavic.lib.NMSHandler.NMS;
 import com.github.xiavic.lib.inventory.InventorySerializer;
 import com.github.xiavic.lib.signedit.ISignEditor;
@@ -50,6 +48,7 @@ public final class Main extends JavaPlugin {
     public static Yaml messages;
     public static Yaml mainConfig;
     public static Yaml commands;
+    public static Yaml database;
     public static TpaHandler tpaHandler;
     public static TeleportHandler teleportHandler;
     public static NMS nmsImpl; //Should never be null after plugin init has completed.
@@ -88,64 +87,64 @@ public final class Main extends JavaPlugin {
     // TODO: Check if Object is not Null so we can catch exceptions!
     private void registerCommands() {
         //getCommand("fireball").setExecutor(new FireBallCommand());
-        getCommand("argh").setExecutor(new ArghCommand());
-        getCommand("afk").setExecutor(new AFKCommand());
-        getCommand("back").setExecutor(new BackCommand());
-        getCommand("cartography").setExecutor(new CartographyCommand());
-        getCommand("cheatarmor").setExecutor(new CheatArmor());
-        getCommand("cheatexp").setExecutor(new CheatEXP());
-        getCommand("clear").setExecutor(new ClearCommand());
-        getCommand("clearall").setExecutor(new ClearAllCommand());
+        getCommand(Main.commands.getString("Argh")).setExecutor(new ArghCommand());
+        getCommand(Main.commands.getString("Afk")).setExecutor(new AFKCommand());
+        getCommand(Main.commands.getString("Back")).setExecutor(new BackCommand());
+        getCommand(Main.commands.getString("Cartography")).setExecutor(new CartographyCommand());
+        getCommand(Main.commands.getString("CheatArmor")).setExecutor(new CheatArmor());
+        getCommand(Main.commands.getString("CheatEXP")).setExecutor(new CheatEXP());
+        getCommand(Main.commands.getString("Clear")).setExecutor(new ClearCommand());
+        getCommand(Main.commands.getString("ClearAll")).setExecutor(new ClearAllCommand());
         //getCommand("coinflip").setExecutor(new CoinFlipCommand());
-        getCommand("coreconfigupdate").setExecutor(new ConfigReloadCommand());
-        getCommand("coreversion").setExecutor(new CoreVersionCommand());
-        getCommand("discord").setExecutor(new DiscordCommand());
-        getCommand("dispose").setExecutor(new DisposeCommand());
-        getCommand("ec").setExecutor(new EnderChestCommand());
-        getCommand("ext").setExecutor(new ExtinguishCommand());
-        getCommand("feed").setExecutor(new FeedCommand());
-        getCommand("fly").setExecutor(new FlyCommand());
-        getCommand("flyspeed").setExecutor(new FlySpeedCommand());
-        getCommand("forums").setExecutor(new ForumsCommand());
-        getCommand("freeze").setExecutor(new FreezeCommand());
-        getCommand("gamemode").setExecutor(new GamemodeCommand());
-        getCommand("god").setExecutor(new GodCommand());
-        getCommand("grindstone").setExecutor(new GrindstoneCommand());
-        getCommand("heal").setExecutor(new HealCommand());
-        getCommand("head").setExecutor(new HeadCommand());
-        getCommand("info").setExecutor(new ItemInfoCommand());
-        getCommand("loom").setExecutor(new LoomCommand());
-        getCommand("more").setExecutor(new MoreCommand());
-        getCommand("near").setExecutor(new NearCommand());
-        getCommand("pony").setExecutor(new PonyCommand());
-        getCommand("privatewarp").setExecutor(new PrivateWarpCommand());
-        getCommand("rtp").setExecutor(new RandomTPCommand());
-        getCommand("repair").setExecutor(new RepairCommand());
-        getCommand("setfirstspawn").setExecutor(new FirstSpawnSetCommand());
-        getCommand("setspawn").setExecutor(new SpawnSetCommand());
-        getCommand("signedit").setExecutor(new SignEditorCommand());
-        getCommand("spawn").setExecutor(new SpawnCommand());
-        getCommand("stonecutter").setExecutor(new StonecutterCommand());
-        getCommand("sudo").setExecutor(new SudoCommand());
-        getCommand("suicide").setExecutor(new SuicideCommand());
-        getCommand("top").setExecutor(new TopCommand());
-        getCommand("tp").setExecutor(new TeleportCommand());
-        getCommand("tpa").setExecutor(new TpaCommand());
-        getCommand("tpaccept").setExecutor(new TpacceptCommand());
-        getCommand("tpall").setExecutor(new TpallCommand());
-        getCommand("tpdeny").setExecutor(new TpdenyCommand());
-        getCommand("tphere").setExecutor(new TPhereCommand());
-        getCommand("tppos").setExecutor(new TPPosCommand());
-        getCommand("twitter").setExecutor(new TwitterCommand());
-        getCommand("walkspeed").setExecutor(new WalkSpeedCommand());
-        getCommand("warp").setExecutor(new WarpCommand());
-        getCommand("warpedit").setExecutor(new WarpEditCommand());
-        getCommand("website").setExecutor(new WebsiteCommand());
-        getCommand("whois").setExecutor(new WhoIsCommand());
-        getCommand("world").setExecutor(new WorldCommand());
-        getCommand("workbench").setExecutor(new WorkbenchCommand());
-        getCommand("youtube").setExecutor(new YoutubeCommand());
-        getCommand("hat").setExecutor(new HatCommand());
+        getCommand(Main.commands.getString("Coreconfigupdate")).setExecutor(new ConfigReloadCommand());
+        getCommand(Main.commands.getString("Coreversion")).setExecutor(new CoreVersionCommand());
+        getCommand(Main.commands.getString("Discord")).setExecutor(new DiscordCommand());
+        getCommand(Main.commands.getString("Dispose")).setExecutor(new DisposeCommand());
+        getCommand(Main.commands.getString("Enderchest")).setExecutor(new EnderChestCommand());
+        getCommand(Main.commands.getString("Extinguish")).setExecutor(new ExtinguishCommand());
+        getCommand(Main.commands.getString("Feed")).setExecutor(new FeedCommand());
+        getCommand(Main.commands.getString("Fly")).setExecutor(new FlyCommand());
+        getCommand(Main.commands.getString("FlySpeed")).setExecutor(new FlySpeedCommand());
+        getCommand(Main.commands.getString("Forums")).setExecutor(new ForumsCommand());
+        getCommand(Main.commands.getString("Freeze")).setExecutor(new FreezeCommand());
+        getCommand(Main.commands.getString("Gamemode")).setExecutor(new GamemodeCommand());
+        getCommand(Main.commands.getString("God")).setExecutor(new GodCommand());
+        getCommand(Main.commands.getString("Grindstone")).setExecutor(new GrindstoneCommand());
+        getCommand(Main.commands.getString("Hat")).setExecutor(new HatCommand());
+        getCommand(Main.commands.getString("Heal")).setExecutor(new HealCommand());
+        getCommand(Main.commands.getString("Head")).setExecutor(new HeadCommand());
+        getCommand(Main.commands.getString("Info")).setExecutor(new ItemInfoCommand());
+        getCommand(Main.commands.getString("Loom")).setExecutor(new LoomCommand());
+        getCommand(Main.commands.getString("More")).setExecutor(new MoreCommand());
+        getCommand(Main.commands.getString("Near")).setExecutor(new NearCommand());
+        getCommand(Main.commands.getString("Pony")).setExecutor(new PonyCommand());
+        getCommand(Main.commands.getString("PrivateWarp")).setExecutor(new PrivateWarpCommand());
+        getCommand(Main.commands.getString("RTP")).setExecutor(new RandomTPCommand());
+        getCommand(Main.commands.getString("Repair")).setExecutor(new RepairCommand());
+        getCommand(Main.commands.getString("SetFirstSpawn")).setExecutor(new FirstSpawnSetCommand());
+        getCommand(Main.commands.getString("SetSpawn")).setExecutor(new SpawnSetCommand());
+        getCommand(Main.commands.getString("Signedit")).setExecutor(new SignEditorCommand());
+        getCommand(Main.commands.getString("Spawn")).setExecutor(new SpawnCommand());
+        getCommand(Main.commands.getString("StoneCutter")).setExecutor(new StonecutterCommand());
+        getCommand(Main.commands.getString("Sudo")).setExecutor(new SudoCommand());
+        getCommand(Main.commands.getString("Suicide")).setExecutor(new SuicideCommand());
+        getCommand(Main.commands.getString("Top")).setExecutor(new TopCommand());
+        getCommand(Main.commands.getString("Tp")).setExecutor(new TeleportCommand());
+        getCommand(Main.commands.getString("Tpa")).setExecutor(new TpaCommand());
+        getCommand(Main.commands.getString("TpAccept")).setExecutor(new TpacceptCommand());
+        getCommand(Main.commands.getString("TpAll")).setExecutor(new TpallCommand());
+        getCommand(Main.commands.getString("TpDeny")).setExecutor(new TpdenyCommand());
+        getCommand(Main.commands.getString("TpHere")).setExecutor(new TPhereCommand());
+        getCommand(Main.commands.getString("Tppos")).setExecutor(new TPPosCommand());
+        getCommand(Main.commands.getString("Twitter")).setExecutor(new TwitterCommand());
+        getCommand(Main.commands.getString("WalkSpeed")).setExecutor(new WalkSpeedCommand());
+        getCommand(Main.commands.getString("Warp")).setExecutor(new WarpCommand());
+        getCommand(Main.commands.getString("WarpEdit")).setExecutor(new WarpEditCommand());
+        getCommand(Main.commands.getString("Website")).setExecutor(new WebsiteCommand());
+        getCommand(Main.commands.getString("Whois")).setExecutor(new WhoIsCommand());
+        getCommand(Main.commands.getString("World")).setExecutor(new WorldCommand());
+        getCommand(Main.commands.getString("Workbench")).setExecutor(new WorkbenchCommand());
+        getCommand(Main.commands.getString("Youtube")).setExecutor(new YoutubeCommand());
     }
 
     private void registerListeners() {
@@ -157,6 +156,8 @@ public final class Main extends JavaPlugin {
         AFKHandler.INSTANCE.registerTicker();
         pm.registerEvents(new MiscHandler(), this);
         pm.registerEvents(nmsImpl.getSignEditor(), this);
+        pm.registerEvents(new MotdListener(), this);
+        //pm.registerEvents(new Databases(), this);
     }
 
     // Use this function for creating new shit
@@ -169,14 +170,14 @@ public final class Main extends JavaPlugin {
         if (Main.nmsImpl == null) {
             try {
                 final Class<?> clazz = Class
-                    .forName("com.github.xiavic.essentials" + Utils.parseNMSVersion() + ".NMSImpl");
+                        .forName("com.github.xiavic.essentials" + Utils.parseNMSVersion() + ".NMSImpl");
                 final Class<? extends NMS> nmsImplClass = clazz.asSubclass(NMS.class);
                 Main.nmsImpl = nmsImplClass.getDeclaredConstructor().newInstance();
             } catch (final ReflectiveOperationException ex) {
                 ex.printStackTrace();
                 final String message = messages.getString("ServerVersionUnsupported");
                 getLogger().log(Level.SEVERE,
-                    Utils.chat(message.replace("%version%", Bukkit.getVersion())));
+                        Utils.chat(message.replace("%version%", Bukkit.getVersion())));
                 return false;
             }
         }
@@ -187,14 +188,14 @@ public final class Main extends JavaPlugin {
         final ServicesManager serviceManager = Bukkit.getServicesManager();
         //Register NMS implementations
         serviceManager
-            .register(ISignEditor.class, nmsImpl.getSignEditor(), this, ServicePriority.Low);
+                .register(ISignEditor.class, nmsImpl.getSignEditor(), this, ServicePriority.Low);
         serviceManager.register(InventorySerializer.class, nmsImpl.getInventorySerializer(), this,
-            ServicePriority.Low);
+                ServicePriority.Low);
         //Register Teleport handlers
         serviceManager
-            .register(ITeleportHandler.class, new TeleportHandler(), this, ServicePriority.Low);
+                .register(ITeleportHandler.class, new TeleportHandler(), this, ServicePriority.Low);
         serviceManager
-            .register(ITeleportRequestHandler.class, new TpaHandler(), this, ServicePriority.Low);
+                .register(ITeleportRequestHandler.class, new TpaHandler(), this, ServicePriority.Low);
         //
     }
 
@@ -205,40 +206,43 @@ public final class Main extends JavaPlugin {
         // permissions.yml
         ////////////////
         permissions =
-            LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/permissions"))
-                .addInputStreamFromResource("permissions.yml")
-                .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
-                .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED)
-                .createConfig();
+                LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/permissions"))
+                        .addInputStreamFromResource("permissions.yml")
+                        .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
+                        .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED)
+                        .createConfig();
 
         ////////////////
         // messages.yml
         ////////////////
         messages = LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/messages"))
-            .addInputStreamFromResource("messages.yml")
-            .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
-            .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED)
-            .createConfig();
+                .addInputStreamFromResource("messages.yml")
+                .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
+                .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED).createConfig();
 
         ////////////////
         // config.yml
         ////////////////
         mainConfig = LightningBuilder.fromFile(new File("plugins/XiavicCore/config"))
-            .addInputStreamFromResource("config.yml")
-            .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
-            .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED)
-            .createConfig();
+                .addInputStreamFromResource("config.yml")
+                .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
+                .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED).createConfig();
 
-        //     ////////////////
-        //     // commands.yml
-        //     ////////////////
-        //     commands = LightningBuilder
-        //             .fromFile(new File("plugins/XiavicCore/Resources/commands"))
-        //             .addInputStreamFromResource("commands.yml")
-        //             .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
-        //             .setReloadSettings(ReloadSettings.AUTOMATICALLY)
-        ///             .setDataType(DataType.SORTED)
-        //             .createConfig();
+        ////////////////
+        // commands.yml
+        ////////////////
+        commands = LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/commands"))
+                .addInputStreamFromResource("commands.yml")
+                .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
+                .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED).createConfig();
+
+        ////////////////
+        // database.yml
+        ////////////////
+        database = LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/database.yml"))
+                .addInputStreamFromResource("database.yml.yml")
+                .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
+                .setReloadSettings(ReloadSettings.AUTOMATICALLY).setDataType(DataType.SORTED).createConfig();
 
         //     ////////////////
         //     // players.json
@@ -252,7 +256,7 @@ public final class Main extends JavaPlugin {
     private void loadshit() {
         saveResource("Resources/permissions.yml", false);
         saveResource("Resources/messages.yml", false);
-        //saveResource("Resources/commands.yml", false);
+        saveResource("Resources/commands.yml", false);
         saveResource("config.yml", false);
     }
 
@@ -263,7 +267,7 @@ public final class Main extends JavaPlugin {
         String spawnLocation = mainConfig.getString("Spawn");
         saveResource("Resources/permissions.yml", true);
         saveResource("Resources/messages.yml", true);
-        //saveResource("Resources/commands.yml", true);
+        saveResource("Resources/commands.yml", true);
         saveResource("config.yml", true);
         mainConfig.set("FirstSpawn", firstspawnLocation);
         mainConfig.set("Spawn", spawnLocation);

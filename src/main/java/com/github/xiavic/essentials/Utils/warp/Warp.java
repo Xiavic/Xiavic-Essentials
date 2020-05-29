@@ -23,14 +23,13 @@ public class Warp {
         this.location = location.clone();
     }
 
-    public Warp setPermission(@Nullable final String permission) {
-        this.permission = permission;
-        return this;
+    public final boolean isBaseWarp() {
+        return this.getClass() == Warp.class;
     }
 
-    public Warp setLocation(@NotNull final Location location) {
-        this.location = location;
-        return this;
+    @NotNull
+    public String getName() {
+        return name;
     }
 
     public Warp setName(@NotNull final String name) {
@@ -38,20 +37,8 @@ public class Warp {
         return this;
     }
 
-    public Warp setEnabled(final boolean enabled) {
-        this.enabled = enabled;
-        return this;
-    }
-
-    public final boolean isBaseWarp() {
-        return this.getClass() == Warp.class;
-    }
-
-    @NotNull public String getName() {
-        return name;
-    }
-
-    @NotNull public UUID getUniqueID() {
+    @NotNull
+    public UUID getUniqueID() {
         return uniqueID;
     }
 
@@ -63,12 +50,27 @@ public class Warp {
         return permission;
     }
 
+    public Warp setPermission(@Nullable final String permission) {
+        this.permission = permission;
+        return this;
+    }
+
     public @NotNull Location getLocation() {
         return location.clone();
     }
 
+    public Warp setLocation(@NotNull final Location location) {
+        this.location = location;
+        return this;
+    }
+
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Warp setEnabled(final boolean enabled) {
+        this.enabled = enabled;
+        return this;
     }
 
     public boolean canBeAccessedBy(final Permissible permissible) {
@@ -80,7 +82,8 @@ public class Warp {
     }
 
 
-    @Override public boolean equals(final Object o) {
+    @Override
+    public boolean equals(final Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -97,7 +100,8 @@ public class Warp {
         return Objects.equals(location, warp.location);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = uniqueID.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (permission != null ? permission.hashCode() : 0);

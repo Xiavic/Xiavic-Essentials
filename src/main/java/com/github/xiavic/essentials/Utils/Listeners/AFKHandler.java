@@ -135,7 +135,7 @@ public enum AFKHandler implements Listener {
     //False because it shows the player attempted to do something.
     public void onCommandSender(final PlayerCommandPreprocessEvent event) {
         if (event.getMessage().toLowerCase()
-            .startsWith("afk")) { //If it is the afk command - ignore.
+                .startsWith("afk")) { //If it is the afk command - ignore.
             return;
         }
         reset(event.getPlayer().getUniqueId());

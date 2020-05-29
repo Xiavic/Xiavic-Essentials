@@ -1,0 +1,15 @@
+# SQLITE / MYSQL / YML / JSON / MONGODB
+DatabaseType: YML
+#Use Database only for MYSQL Connections!
+Database:
+  Host: "localhost"
+  Port: "3306"
+  Database: "DatabaseName"
+  Username: "root"
+  Password: "Password"
+MongoDB:
+  Host:
+  Port:
+  Database:
+  Username:
+  Password:
