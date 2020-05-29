@@ -26,7 +26,7 @@ public class TopCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (player.hasPermission(Main.permissions.getString("Top"))) {
-                teleportHandler.teleport(player, player.getWorld().getHighestBlockAt(player.getLocation()).getLocation().add(0, 1.5, 0));
+                teleportHandler.teleport(player, player.getWorld().getHighestBlockAt(player.getLocation().setDirection(player.getLocation().getDirection())).getLocation().add(0, 1.5, 0));
                 return true;
             } else {
                 Utils.chat(player, Main.messages.getString("NoPerms"));
