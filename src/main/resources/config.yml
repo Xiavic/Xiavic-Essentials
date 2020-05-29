@@ -19,11 +19,13 @@
 Version: 1
 
 #Spawn | world name, X, Y, Z, Yaw, Pitch
-FirstSpawn: world,100,100,100,100
-Spawn: world,100,100,100,100,100
+FirstSpawn: #Null
+Spawn: #Null
 
 #Economy
 Balance_Check: 60
+Currency: "$"
+Starting_Balance: 100
 
 #Private Warps
 PWCooldown: 300

@@ -8,185 +8,181 @@ depend: [XiavicLib]
 description: Yes
 commands:
   afk:
-    usage: A
-    description: A
+    usage: /afk
+    description: Set yourself to afk!
   clear:
-    usage: A
-    description: A
+    usage: /clear | (player)
+    description: Clear everything BUT the equipped armor!
   clearall:
-    usage: A
-    description: A
+    usage: /clearall | (player)
+    description: Clear the whole inventory.
   ec:
-    usage: A
-    description: A
+    usage: /ec | (player)
+    description: Open the enderchest.
   feed:
-    usage: A
-    description: A
+    usage: /feed | (player/all)
+    description: Feed yourself, or another player.
   heal:
-    usage: A
-    description: A
+    usage: /heal | (player/all)
+    description: Heal back to full health, and remove harmful effects.
   gamemode:
-    usage: A
-    description: A
+    usage: /gamemode | <Survival[s,0]/Creative[c,1]/Adventure[a,2]/Spectator[sp,3]> (player)
+    description: Change the gamemode of yourself or another player.
     aliases: gm
   setspawn:
-    usage: A
-    description: A
+    usage: /setspawn
+    description: Set the default world spawn.
   spawn:
-    usage: A
-    description: A
+    usage: /spawn (player)
+    description: Teleport back to spawn.
   signedit:
-    usage: A
-    description: A
+    usage: /signedit <1/2/3/4/on/off> (Text)
+    description: Toggle signedit, or select a line.
   tpa:
-    usage: A
-    description: A
+    usage: /tpa <player>
+    description: Send a teleport Request.
   tpaccept:
-    usage: A
-    description: A
+    usage: /tpaccept
+    description: Accept a pending teleport request.
   tpdeny:
-    usage: A
-    description: A
+    usage: /tpdeny
+    description: Deny a pending teleport request.
   rtp:
-    usage: A
-    description: A
+    usage: /rtp
+    description: Randomly teleports you within a defined area.
   argh:
-    usage: A
-    description: A
+    usage: /argh
+    description: Piratey Treasure.
   cheatexp:
-    usage: A
-    description: A
+    usage: /cheatexp
+    description: Cheater Cheater, pumpkin eater!
   walkspeed:
-    usage: A
-    description: A
+    usage: /walkspeed <0-10>
+    description: Adjust your walkspeed.
   flyspeed:
-    usage: A
-    description: A
+    usage: /flyspeed <0-10>
+    description: Adjust your flyspeed.
   dispose:
-    usage: A
-    description: A
+    usage: /dispose
+    description: Throw away your useless junk.
     aliases: trash
   whois:
-    usage: A
-    description: A
+    usage: /whois <player>
+    description: Depending on perms, you will only see the name & nickname.
   warp:
-    usage: A
-    description: A
+    usage: /warp <warpName/info> (player | <warpName>)
+    description: Teleport to a desired warp location.
   warpedit:
-    usage: A
-    description: A
+    usage: /warpedit <create/delete/toggle/permission> <name> <null | null | set/reset> <permission>
+    description: Create, edit, toggle, or change premissions to a warp.
   privatewarp:
-    usage: A
-    description: A
+    usage: /privatewarp <warpName/info> <playerName | warpName> <player>
+    description: Create, remove, edit, toggle or whitelist private warps.
     aliases: pw
   cheatarmor:
-    usage: A
-    description: A
+    usage: /cheatarmor
+    description: Give yourself maxed out vanilla enchanted armor.
   coreconfigupdate:
-    usage: A
-    description: A
+    usage: /ccu
+    description: Update all configs to latest versions.
     aliases: ccu
   tp:
-    usage: A
-    description: A
+    usage: /tp <player> (player)
+    description: Teleport a player to another.
   tphere:
-    usage: A
-    description: A
+    usage: /tphere <player>
+    description: Force a player to teleport to you.
   ext:
-    usage: A
-    description: A
+    usage: /ext (player)
+    description: Remove active fire ticks.
     aliases: extinguish
   info:
-    usage: aA
-    description: a
+    usage: /iteminfo
+    description: Check an item's info.
     aliases: iteminfo
   sudo:
-    usage: a
-    description: a
-  serverinfo:
-    usage: a
-    description: a
+    usage: /sudo <player> <"s:" | "c:">
+    description: Sudo another player to say something or use a command.
   coreversion:
-    usage: a
-    description: a
+    usage: /cv
+    description: Get the version of the Xiavic Essentials running.
     aliases: cv
   fly:
-    usage: a
-    description: a
+    usage: /fly (player)
+    description: Toggle fly mode.
   top:
-    usage: a
-    description: a
+    usage: /top
+    description: Teleport to the highest Y-block of your location.
   pony:
-    usage: a
-    description: a
+    usage: /pony
+    description: Do not ask.
   near:
-    usage: a
-    description: a
+    usage: /near
+    description: Find the players near you.
   forums:
-    usage: a
-    description: a
+    usage: /forums
+    description: Grab the forums link.
   twitter:
-    usage: a
-    description: a
+    usage: /twitter
+    description: Grab the twitter link.
   website:
-    usage: a
-    description: a
+    usage: /website
+    description: Grab the website link.
   youtube:
-    usage: a
-    description: a
+    usage: /youtube
+    description: Grab the youtube link.
   discord:
-    usage: a
-    description: a
+    usage: /discord
+    description: Grab the discord link.
   god:
-    usage: a
-    description: a
+    usage: /god (player)
+    description: Toggle god mode.
   back:
-    usage: a
-    description: a
+    usage: /back
+    description: Teleport to your last location.
   suicide:
-    usage: a
-    description: a
+    usage: /suicide
+    description: Allow yourself to be reborn
   tppos:
-    usage: a
-    description: a
+    usage: /tppos <X,Y,Z>
+    description: Teleport to specific coordinates
   setfirstspawn:
-    usage: a
-    description: a
+    usage: /setfirstspawn
+    description: Set the first spawn for new players that join will first be located.
   tpall:
-    usage: a
-    description: a
+    usage: /tpall
+    description: Teleport all online players to your location.
   more:
-    usage: a
-    description: a
+    usage: /more
+    description: Change the item in your hand to a max of that stack.
   workbench:
-    usage: a
-    description: a
+    usage: /wb
+    description: Open a craftingbench.
     aliases: [wb, craftingtable]
   world:
-    usage: a
-    description: a
+    usage: /world <world>
+    description: Easily change between worlds.
   loom:
-    usage: a
-    description: a
+    usage: /loom
+    description: Open a loom.
   cartography:
-    usage: a
-    description: a
+    usage: /cartography
+    description: Open a cartography table.
   stonecutter:
-    usage: a
-    description: a
+    usage: /stonecutter
+    description: Open a stonecutter.
   grindstone:
-    usage: a
-    description: a
+    usage: /grindstone
+    description: Open a grindstone.
   head:
-    usage: a
-    description: a
+    usage: /head <OnlinePlayer>
+    description: Grab the head of an online player.
   repair:
-    usage: a
-    description: a
+    usage: /repair
+    description: Repair the item you are holding.
   freeze:
-    usage: a
-    description: a
+    usage: /freeze <player>
+    description: Freeze a player in place.
   hat:
-    usage: a
-    description: a
-
+    usage: /hat
+    description: Make the item you are holding in your hand to be your new hat.

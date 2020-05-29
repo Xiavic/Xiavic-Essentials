@@ -20,11 +20,13 @@ public class TeleportHandler implements Listener, ITeleportHandler {
     private List<Player> disabledPlayers = new ArrayList<>();
     private Map<Player, Location> lastLocations = new HashMap<>();
 
-    @Override public void processPlayerTeleport(Player player) {
+    @Override
+    public void processPlayerTeleport(Player player) {
         lastLocations.put(player, player.getLocation());
     }
 
-    @Override public void processPlayerToggle(Player player) {
+    @Override
+    public void processPlayerToggle(Player player) {
         if (disabledPlayers.contains(player)) {
             disabledPlayers.remove(player);
             Utils.chat(player, Main.messages.getString("TpToggleOff"));
@@ -34,13 +36,15 @@ public class TeleportHandler implements Listener, ITeleportHandler {
         }
     }
 
-    @Override public void teleport(Player player, Location location) {
+    @Override
+    public void teleport(Player player, Location location) {
         processPlayerTeleport(player);
         player.teleport(location);
     }
 
     // change - if true: teleport player2 to player1 else teleport player1 to player2
-    @Override public boolean teleport(Player p1, Player p2, boolean change) {
+    @Override
+    public boolean teleport(Player p1, Player p2, boolean change) {
         if (change) {
             if (!disabledPlayers.contains(p1)) {
                 teleport(p2, p1.getLocation());
@@ -54,7 +58,8 @@ public class TeleportHandler implements Listener, ITeleportHandler {
         return false;
     }
 
-    @Override public boolean remoteTp(Player player, Location location) {
+    @Override
+    public boolean remoteTp(Player player, Location location) {
         if (!disabledPlayers.contains(player)) {
             teleport(player, location);
             return true;
@@ -65,7 +70,8 @@ public class TeleportHandler implements Listener, ITeleportHandler {
     // 0 - teleport successful
     // 1 - player1 disabled
     // 2 - player2 disabled
-    @Override public int remoteTp(Player p1, Player p2) {
+    @Override
+    public int remoteTp(Player p1, Player p2) {
         if (disabledPlayers.contains(p1))
             return 1;
         if (disabledPlayers.contains(p2))
@@ -74,17 +80,20 @@ public class TeleportHandler implements Listener, ITeleportHandler {
         return 0;
     }
 
-    @Override public Location getLastLocation(Player player) throws Exception {
+    @Override
+    public Location getLastLocation(Player player) throws Exception {
         if (!lastLocations.containsKey(player))
             throw new Exception();
         return lastLocations.get(player);
     }
 
-    @Override public boolean isDisabled(Player player) {
+    @Override
+    public boolean isDisabled(Player player) {
         return disabledPlayers.contains(player);
     }
 
-    @EventHandler public void onDeath(PlayerDeathEvent e) {
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
         lastLocations.put(e.getEntity(), e.getEntity().getLocation());
     }
 
