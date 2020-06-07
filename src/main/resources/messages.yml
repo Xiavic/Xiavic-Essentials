@@ -16,6 +16,7 @@
 ##############################
 ####### !! MESSAGES !! #######
 ##############################
+Version: 1
 
 # Economy
 Account: "&2Your account balance is currently &e%money%."
@@ -158,3 +159,4 @@ CheatArmor: "&8[&cDebug&8] &7You have been given the CheatArmor set!"
 # High Staff
 ConfigUpdate: "&8[&cDebug&8] &7The config files have been updated!"
 Version: "&8[&cDebug&8] &7The current running version is %version%..."
+DatabaseError: "Connection was NOT set-up properly. Please double check your database settings. :("

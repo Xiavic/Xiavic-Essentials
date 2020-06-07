@@ -21,8 +21,8 @@ public class TpaRequest {
     }
 
     public void sendRequest() {
-        this.origin.sendMessage(Utils.chat(Main.messages.getString("Tpa").replace("%target%", target.getDisplayName())));
-        this.target.sendMessage(Utils.chat(Main.messages.getString("Tpa_Request").replace("%sender%", origin.getDisplayName())));
+        Utils.chat(this.origin, Main.messages.getString("Tpa").replace("%target%", target.getDisplayName()));
+        Utils.chat(this.target, Main.messages.getString("Tpa_Request").replace("%sender%", origin.getDisplayName()));
     }
 
     @NotNull

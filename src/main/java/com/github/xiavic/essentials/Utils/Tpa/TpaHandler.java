@@ -58,8 +58,8 @@ public class TpaHandler implements ITeleportRequestHandler {
         if (cooldowns.containsKey(player)) {
             int remaining =
                     (int) (tpaCooldown - ((System.currentTimeMillis() - cooldowns.get(player)) / 1000));
-            player.sendMessage(Utils.chat(Main.messages.getString("TpaCooldown")
-                    .replace("%time%", String.valueOf(remaining))));
+            Utils.chat(player, Main.messages.getString("TpaCooldown")
+                    .replace("%time%", String.valueOf(remaining)));
             return false;
         }
         return true;
@@ -70,25 +70,24 @@ public class TpaHandler implements ITeleportRequestHandler {
         for (final TpaRequest request : requests) {
             if (request.getTarget() == player) {
                 if (accepted) {
-                    request.getOrigin().sendMessage(Utils.chat(Main.messages.getString("Tpa_Accept")
+                    Utils.chat(request.getOrigin(), Main.messages.getString("Tpa_Accept")
                             .replace("%target%", request.getTarget().getDisplayName())
-                            .replace("%time%", String.valueOf(teleportTime))));
-                    request.getTarget().sendMessage(Utils.chat(
-                            Main.messages.getString("Tpa_Accept1")
-                                    .replace("%sender%", request.getOrigin().getDisplayName())));
+                            .replace("%time%", String.valueOf(teleportTime)));
+                    Utils.chat(request.getTarget(), Main.messages.getString("Tpa_Accept1")
+                            .replace("%sender%", request.getOrigin().getDisplayName()));
                     teleports.put(request, System.currentTimeMillis());
                 } else {
-                    request.getOrigin().sendMessage(Utils.chat(Main.messages.getString("Tpa_Deny")
+                    Utils.chat(request.getOrigin(), Main.messages.getString("Tpa_Deny")
                             .replace("%target%", request.getTarget().getDisplayName())
-                            .replace("%time%", String.valueOf(teleportTime))));
-                    request.getTarget().sendMessage(Utils.chat(Main.messages.getString("Tpa_Deny1")
-                            .replace("%sender%", request.getOrigin().getDisplayName())));
+                            .replace("%time%", String.valueOf(teleportTime)));
+                    Utils.chat(request.getTarget(), Main.messages.getString("Tpa_Deny1")
+                            .replace("%sender%", request.getOrigin().getDisplayName()));
                 }
                 requests.remove(request);
                 return;
             }
         }
-        player.sendMessage(Utils.chat(Main.messages.getString("NoRequest")));
+        Utils.chat(player, Main.messages.getString("NoRequest"));
     }
 
     // 0 - success
@@ -98,7 +97,7 @@ public class TpaHandler implements ITeleportRequestHandler {
     public int addRequest(Player origin, Player target) {
         for (TpaRequest tpr : requests) {
             if (tpr.getOrigin() == origin) {
-                origin.sendMessage(Utils.chat(Main.messages.getString("TpaPending")));
+                Utils.chat(origin, Main.messages.getString("TpaPending"));
                 return 1;
             }
         }

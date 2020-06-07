@@ -10,8 +10,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-// TODO: Refactor Required
-
 public class NearCommand implements CommandExecutor {
 
     private double radius = Main.mainConfig.getDouble("NearRadius");

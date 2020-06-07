@@ -16,6 +16,7 @@
 ##############################
 ##### !! PERMISSIONS !! ######
 ##############################
+Version: 1
 
 # Player commands
 Afk: "Xiavic.player.afk"
