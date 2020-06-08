@@ -47,6 +47,8 @@ Enabled: "Enabled... bitch"
 Disabled: "Disabled... bitch"
 True: "Skeet skeet mudafuka"
 False: "False... usuk"
+VanishOn: "Vanished"
+VanishOff: "Visible"
 
 # TP
 TpRemote: "%target1% has been teleported to %target2%"
@@ -113,6 +115,8 @@ SignEdited: "&bThe sign has been edited."
 SignTooManyLines: "&eYou have provided too many lines: %lines%"
 SignLineCharOverflow: "&eToo many characters Max = 15, Provided: %length%"
 SignEditFailed: "&eFailed to edit this sign!"
+VanishedPlayer: "You are now %mode%"
+VanishedTarget: "%target% is now %mode%"
 
 # How 2 Use Messages a.k.a. Help Text
 WhoIsHelp: "/whois <player>"

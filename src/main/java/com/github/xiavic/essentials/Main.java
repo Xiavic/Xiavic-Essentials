@@ -2,14 +2,6 @@ package com.github.xiavic.essentials;
 
 // import com.github.xiavic.essentials.Utils.Misc.Databases;
 
-import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
-import com.github.xiavic.essentials.Utils.Listeners.*;
-import com.github.xiavic.essentials.Utils.Listeners.AFKHandler;
-import com.github.xiavic.essentials.Utils.Listeners.JoinQuit;
-import com.github.xiavic.essentials.Utils.Listeners.RespawnEvent;
-import com.github.xiavic.essentials.Utils.Listeners.TeleportHandler;
-import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;
-import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.essentials.Commands.player.Essential.*;
 import com.github.xiavic.essentials.Commands.player.Essential.Teleport.BackCommand;
 import com.github.xiavic.essentials.Commands.player.Essential.Teleport.RandomTPCommand;
@@ -26,6 +18,10 @@ import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TPPosComman
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TPhereCommand;
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TeleportCommand;
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TpallCommand;
+import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
+import com.github.xiavic.essentials.Utils.Listeners.*;
+import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;
+import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.lib.NMSHandler.NMS;
 import com.github.xiavic.lib.inventory.InventorySerializer;
 import com.github.xiavic.lib.signedit.ISignEditor;
@@ -141,6 +137,7 @@ public final class Main extends JavaPlugin {
         getCommand(Main.commands.getString("TpHere")).setExecutor(new TPhereCommand());
         getCommand(Main.commands.getString("Tppos")).setExecutor(new TPPosCommand());
         getCommand(Main.commands.getString("Twitter")).setExecutor(new TwitterCommand());
+        getCommand(Main.commands.getString("Vanish")).setExecutor(new VanishCommand());
         getCommand(Main.commands.getString("WalkSpeed")).setExecutor(new WalkSpeedCommand());
         getCommand(Main.commands.getString("Warp")).setExecutor(new WarpCommand());
         getCommand(Main.commands.getString("WarpEdit")).setExecutor(new WarpEditCommand());
