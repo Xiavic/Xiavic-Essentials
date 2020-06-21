@@ -7,8 +7,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class AbstractInventoryManager {
 
-    @NotNull private final DataAccessObject database;
-    @NotNull private final InventorySerializer serializer;
+    @NotNull
+    private final DataAccessObject database;
+    @NotNull
+    private final InventorySerializer serializer;
 
     public AbstractInventoryManager(@NotNull final DataAccessObject database, @NotNull final InventorySerializer serializer) {
         this.database = database;

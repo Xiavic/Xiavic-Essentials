@@ -157,7 +157,6 @@ public final class Main extends JavaPlugin {
         AFKHandler.INSTANCE.registerTicker();
         pm.registerEvents(new MiscHandler(), this);
         pm.registerEvents(nmsImpl.getSignEditor(), this);
-        pm.registerEvents(new MotdListener(), this);
         //pm.registerEvents(new Databases(), this);
     }
 
