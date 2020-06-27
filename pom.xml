@@ -88,7 +88,7 @@
         <dependency>
             <groupId>com.github.JavaFactoryDev</groupId>
             <artifactId>LightningStorage</artifactId>
-            <version>3.1.0</version>
+            <version>3.1.4</version>
         </dependency>
         <dependency>
             <groupId>com.github.xiavic</groupId>
