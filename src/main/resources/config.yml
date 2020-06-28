@@ -19,8 +19,9 @@
 Version: 1
 
 #Spawn | world name, X, Y, Z, Yaw, Pitch
-FirstSpawn: #Null
-Spawn: #Null
+SpawnSystem:
+  FirstSpawn: #Null
+  Spawn: #Null
 
 #Economy
 Balance_Check: 60

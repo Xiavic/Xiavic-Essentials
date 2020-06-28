@@ -28,7 +28,7 @@ public class SpawnSetCommand implements CommandExecutor {
 
                 String output = world.getName() + "," + x + "," + y + "," + z + "," + yaw + "," + pitch;
 
-                Main.mainConfig.set("Spawn", output);
+                Main.mainConfig.set("SpawnSystem.Spawn", output);
                 player.getWorld().setSpawnLocation(new Location(loc.getWorld(), loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch()));
                 player.sendMessage(Utils.chat(Main.messages.getString("SetSpawn")));
                 return true;

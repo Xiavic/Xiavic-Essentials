@@ -28,7 +28,7 @@ public class FirstSpawnSetCommand implements CommandExecutor {
                 float pitch = loc.getPitch();
                 String output = world.getName() + "," + x + "," + y + "," + z + "," + yaw + "," + pitch;
 
-                Main.mainConfig.set("FirstSpawn", output);
+                Main.mainConfig.set("SpawnSystem.FirstSpawn", output);
                 player.sendMessage(Utils.chat(Main.messages.getString("SetFirstSpawn")));
                 return true;
 
