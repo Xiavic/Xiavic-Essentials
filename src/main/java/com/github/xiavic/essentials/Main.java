@@ -96,7 +96,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatEXP"))).setExecutor(new CheatEXP());
         Objects.requireNonNull(getCommand(Main.commands.getString("Clear"))).setExecutor(new ClearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("ClearAll"))).setExecutor(new ClearAllCommand());
-        //getCommand("coinflip").setExecutor(new CoinFlipCommand());
+        Objects.requireNonNull(getCommand(Main.commands.getString("Coinflip"))).setExecutor(new CoinFlipCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Coreconfigupdate"))).setExecutor(new ConfigReloadCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Coreversion"))).setExecutor(new CoreVersionCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Discord"))).setExecutor(new DiscordCommand());

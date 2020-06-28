@@ -133,6 +133,8 @@ FlySpeed: "Your flyspeed has been set to, %amount%"
 Hat: "You have equipped %item% to your head area"
 Extinguish: "&cYour inner demon has calmed down"
 ExtinguishTarget: "You have been extinguished by, %sender%"
+Heads: "Heads"
+Tails: "Tails"
 
 #Warp
 WarpCreated: "Warp \"%name%\" has been created."
