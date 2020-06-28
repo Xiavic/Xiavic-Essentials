@@ -27,7 +27,7 @@ public enum everythingElse {
             if (!Main.mainConfig.getBoolean("IronGolems.IGIron")) {
                 de.getDrops().remove(Material.IRON_INGOT);
             }
-            if (Main.mainConfig.getBoolean("IronGolems.CustomIron")) {
+            if (Main.mainConfig.getBoolean("IronGolems.CustomIron") && !Main.mainConfig.getBoolean("IronGolems.IGIron")) {
                 Random r = new Random();
                 int min = Main.mainConfig.getInt("IronGolems.CustomIron.amountMin");
                 int max = Main.mainConfig.getInt("IronGolems.CustomIron.amountMax");
