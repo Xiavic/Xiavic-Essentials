@@ -11,6 +11,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.jetbrains.annotations.NotNull;
 
 public class SpawnCommand implements CommandExecutor {
 
@@ -24,10 +25,10 @@ public class SpawnCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, String[] args) {
 
         Player player = (Player) sender;
-        Location l = LocationUtils.getLocation("Spawn");
+        Location l = LocationUtils.getLocation("SpawnSystem.Spawn");
         if (args.length == 1) {
             if (player.hasPermission(Main.permissions.getString("SpawnOthers")) || player.isOp()) {
                 Player target = Bukkit.getPlayer(args[0]);
