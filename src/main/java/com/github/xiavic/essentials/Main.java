@@ -2,13 +2,9 @@ package com.github.xiavic.essentials;
 
 // import com.github.xiavic.essentials.Utils.Misc.Databases;
 
+import co.aikar.commands.BukkitCommandManager;
 import com.github.xiavic.essentials.Commands.player.Essential.*;
-import com.github.xiavic.essentials.Commands.player.Essential.Teleport.BackCommand;
-import com.github.xiavic.essentials.Commands.player.Essential.Teleport.RandomTPCommand;
-import com.github.xiavic.essentials.Commands.player.Essential.Teleport.SpawnCommand;
-import com.github.xiavic.essentials.Commands.player.Essential.Teleport.Tpa.TpaCommand;
-import com.github.xiavic.essentials.Commands.player.Essential.Teleport.Tpa.TpacceptCommand;
-import com.github.xiavic.essentials.Commands.player.Essential.Teleport.Tpa.TpdenyCommand;
+import com.github.xiavic.essentials.Commands.player.Essential.Teleport.TeleportationCommandHandler;
 import com.github.xiavic.essentials.Commands.player.Fun.*;
 import com.github.xiavic.essentials.Commands.player.Fun.Links.*;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatArmor;
@@ -33,14 +29,16 @@ import de.leonhard.storage.internal.settings.ConfigSettings;
 import de.leonhard.storage.internal.settings.DataType;
 import de.leonhard.storage.internal.settings.ReloadSettings;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 
 public final class Main extends JavaPlugin {
@@ -54,6 +52,7 @@ public final class Main extends JavaPlugin {
     public static TeleportHandler teleportHandler;
     public static NMS nmsImpl; //Should never be null after plugin init has completed.
     private static Main instance;
+    private BukkitCommandManager commandManager;
 
     // Handle Instance of plugin in multiple classes.
     public static Main getInstance() {
@@ -62,6 +61,7 @@ public final class Main extends JavaPlugin {
 
     public void onEnable() {
         instance = this;
+        commandManager = new BukkitCommandManager(this);
         if (!registerNMSHandler()) { //If NMS compat failed, exit.
             Bukkit.getPluginManager().disablePlugin(this);
             return;
@@ -81,8 +81,38 @@ public final class Main extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(this, tpaHandler::doChecks, 0, 20);
     }
 
+    @Override
     public void onDisable() {
 
+    }
+
+    private void registerCommandsUtils() {
+        commandManager.getCommandCompletions().registerCompletion("vararg_players", context -> {
+            String[] input = context.getInput().split(" ");
+            final int toPop;
+            try {
+                toPop = Integer.parseInt(context.getConfig("pop", "0"));
+            } catch (final NumberFormatException ex) {
+                ex.printStackTrace();
+                return Collections.emptyList();
+            }
+            if (toPop > input.length) {
+                throw new IllegalArgumentException(
+                    "Config to pop is greater than input length!");
+            }
+            input = Arrays.copyOfRange(input, toPop, input.length - 1);
+            for (int index = 0; index < input.length; index++) {
+                input[index] = input[index].toLowerCase();
+            }
+            final List<String> players = new ArrayList<>(Arrays.asList(input));
+            if (context.getPlayer() != null && !context.getConfig("self", "false")
+                .equalsIgnoreCase("true")) {
+                players.remove(context.getPlayer().getName());
+            }
+            return Bukkit.getOnlinePlayers().stream().map(Player::getName)
+                .filter(player -> !players.contains(player.toLowerCase()))
+                .sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+        });
     }
 
     // TODO: Check if Object is not Null so we can catch exceptions!
@@ -90,7 +120,7 @@ public final class Main extends JavaPlugin {
         //getCommand("fireball").setExecutor(new FireBallCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Argh"))).setExecutor(new ArghCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Afk"))).setExecutor(new AFKCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Back"))).setExecutor(new BackCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Back"))).setExecutor(new BackCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Cartography"))).setExecutor(new CartographyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatArmor"))).setExecutor(new CheatArmor());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatEXP"))).setExecutor(new CheatEXP());
@@ -121,21 +151,21 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("Near"))).setExecutor(new NearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Pony"))).setExecutor(new PonyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("PrivateWarp"))).setExecutor(new PrivateWarpCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("RTP"))).setExecutor(new RandomTPCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("RTP"))).setExecutor(new RandomTPCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Repair"))).setExecutor(new RepairCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("SetFirstSpawn"))).setExecutor(new FirstSpawnSetCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("SetSpawn"))).setExecutor(new SpawnSetCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Signedit"))).setExecutor(new SignEditorCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Spawn"))).setExecutor(new SpawnCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Spawn"))).setExecutor(new SpawnCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("StoneCutter"))).setExecutor(new StonecutterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Sudo"))).setExecutor(new SudoCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Suicide"))).setExecutor(new SuicideCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Top"))).setExecutor(new TopCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Tp"))).setExecutor(new TeleportCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Tpa"))).setExecutor(new TpaCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("TpAccept"))).setExecutor(new TpacceptCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Tpa"))).setExecutor(new TpaCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("TpAccept"))).setExecutor(new TpacceptCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("TpAll"))).setExecutor(new TpallCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("TpDeny"))).setExecutor(new TpdenyCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("TpDeny"))).setExecutor(new TpdenyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("TpHere"))).setExecutor(new TPhereCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Tppos"))).setExecutor(new TPPosCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Twitter"))).setExecutor(new TwitterCommand());
@@ -148,6 +178,9 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("World"))).setExecutor(new WorldCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Workbench"))).setExecutor(new WorkbenchCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Youtube"))).setExecutor(new YoutubeCommand());
+
+        //Modern Commands:
+        new TeleportationCommandHandler(commandManager, teleportHandler, tpaHandler);
     }
 
     private void registerListeners() {
