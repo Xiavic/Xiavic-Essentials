@@ -3,12 +3,14 @@ package com.github.xiavic.essentials.Utils.Listeners;
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
+import io.papermc.lib.PaperLib;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.awt.print.Paper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +41,7 @@ public class TeleportHandler implements Listener, ITeleportHandler {
     @Override
     public void teleport(Player player, Location location) {
         processPlayerTeleport(player);
-        player.teleport(location);
+        PaperLib.teleportAsync(player, location);
     }
 
     // change - if true: teleport player2 to player1 else teleport player1 to player2
@@ -81,9 +83,9 @@ public class TeleportHandler implements Listener, ITeleportHandler {
     }
 
     @Override
-    public Location getLastLocation(Player player) throws Exception {
+    public Location getLastLocation(Player player){
         if (!lastLocations.containsKey(player))
-            throw new Exception();
+            return null;
         return lastLocations.get(player);
     }
 

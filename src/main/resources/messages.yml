@@ -34,9 +34,10 @@ EcoTop:
   6: "&1Fifth: %player5%"
 
 # Common
+Prefix: "[Xiavic]"
 InvalidArgs: "&cInvalid Arguments: %reason%"
 PlayerNotFound: "&cThat Player is not found or is not online!"
-PlayerNotFound2: "&cOne of the players are not online!"
+PlayerNotFound2: "&c%player% is not online!"
 SenderNotPlayer: "&cYou are not a fucking player!"
 SpecifyTarget: "&cYou must specify the target"
 ServerVersionUnsupported: "&cSorry, your server version, %version%, is unsupported."
@@ -47,6 +48,7 @@ Enabled: "Enabled... bitch"
 Disabled: "Disabled... bitch"
 True: "Skeet skeet mudafuka"
 False: "False... usuk"
+# Vanish
 VanishOn: "Vanished"
 VanishOff: "Visible"
 

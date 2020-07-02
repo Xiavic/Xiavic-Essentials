@@ -18,6 +18,17 @@
     </properties>
     <url>A</url>
 
+    <distributionManagement>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <snapshotRepository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <directory>maven/target</directory>
         <defaultGoal>clean package</defaultGoal>
@@ -50,6 +61,20 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.parent.build.directory}</outputDirectory>
+                            <relocations>
+                                <relocation>
+                                    <pattern>co.aikar.commands</pattern>
+                                    <shadedPattern>
+                                        ${project.groupId}.${project.artifactId}.shaded.acf
+                                    </shadedPattern> <!-- Replace this -->
+                                </relocation>
+                                <relocation>
+                                    <pattern>co.aikar.locales</pattern>
+                                    <shadedPattern>
+                                        ${project.groupId}.${project.artifactId}.shaded.locales
+                                    </shadedPattern> <!-- Replace this -->
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
@@ -65,12 +90,16 @@
 
     <repositories>
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
         <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <id>sonatype-releases</id>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
             <id>jitpack.io</id>
@@ -79,6 +108,10 @@
         <repository>
             <id>papermc</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>aikar</id>
+            <url>https://repo.aikar.co/content/groups/aikar/</url>
         </repository>
     </repositories>
 
@@ -93,7 +126,9 @@
             <groupId>com.github.JavaFactoryDev</groupId>
             <artifactId>LightningStorage</artifactId>
             <version>3.1.4</version>
+            <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>com.github.xiavic</groupId>
             <artifactId>XiavicLib</artifactId>
@@ -104,6 +139,18 @@
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
             <version>1.0.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>co.aikar</groupId>
+            <artifactId>acf-paper</artifactId> <!-- Don't forget to replace this -->
+            <version>0.5.0-SNAPSHOT</version> <!-- Replace this as well -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.minidigger</groupId>
+            <artifactId>minimessage-bungee</artifactId>
+            <version>2.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
