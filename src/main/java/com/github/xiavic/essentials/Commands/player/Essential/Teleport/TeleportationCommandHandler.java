@@ -5,7 +5,7 @@ import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.CommandCompletion;
 import co.aikar.commands.annotation.CommandPermission;
-import com.github.xiavic.essentials.Commands.messages.TeleportationMessages;
+import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.LocationUtils;
 import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;

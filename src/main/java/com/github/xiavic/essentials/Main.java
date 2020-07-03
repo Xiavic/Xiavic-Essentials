@@ -2,7 +2,7 @@ package com.github.xiavic.essentials;
 
 // import com.github.xiavic.essentials.Utils.Misc.Databases;
 
-import co.aikar.commands.BukkitCommandManager;
+import co.aikar.commands.*;
 import com.github.xiavic.essentials.Commands.player.Essential.*;
 import com.github.xiavic.essentials.Commands.player.Essential.Teleport.TeleportationCommandHandler;
 import com.github.xiavic.essentials.Commands.player.Fun.*;
@@ -14,21 +14,27 @@ import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TPPosComman
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TPhereCommand;
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TeleportCommand;
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TpallCommand;
+import com.github.xiavic.essentials.Utils.CommandBooleanValue;
 import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
 import com.github.xiavic.essentials.Utils.Listeners.*;
 import com.github.xiavic.essentials.Utils.Tpa.TpaHandler;
 import com.github.xiavic.essentials.Utils.Utils;
+import com.github.xiavic.essentials.Utils.messages.CommandMessages;
+import com.github.xiavic.essentials.Utils.messages.Messages;
+import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.lib.NMSHandler.NMS;
 import com.github.xiavic.lib.inventory.InventorySerializer;
 import com.github.xiavic.lib.signedit.ISignEditor;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
 import com.github.xiavic.lib.teleport.ITeleportRequestHandler;
+import de.leonhard.storage.Config;
 import de.leonhard.storage.LightningBuilder;
 import de.leonhard.storage.Yaml;
 import de.leonhard.storage.internal.settings.ConfigSettings;
 import de.leonhard.storage.internal.settings.DataType;
 import de.leonhard.storage.internal.settings.ReloadSettings;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
@@ -45,6 +51,7 @@ public final class Main extends JavaPlugin {
 
     public static Yaml permissions;
     public static Yaml messages;
+    public static Messages messages_new;
     public static Yaml mainConfig;
     public static Yaml commands;
     public static Yaml database;
@@ -113,6 +120,30 @@ public final class Main extends JavaPlugin {
                 .filter(player -> !players.contains(player.toLowerCase()))
                 .sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         });
+        commandManager.getCommandCompletions().registerCompletion("toggles", context -> {
+            final String type = context.getConfig("type", "null");
+            switch (type.toLowerCase()) {
+                case "true":
+                    return CommandBooleanValue.TRUE_VALUES;
+                case "false":
+                    return CommandBooleanValue.FALSE_VALUES;
+                default:
+                    return CommandBooleanValue.ALL_VALUES;
+            }
+        });
+        commandManager.getCommandContexts().registerContext(CommandBooleanValue.class,
+            context ->
+                CommandBooleanValue.fromString(context.popFirstArg()).orElseThrow(
+                    InvalidCommandArgument::new));  //TODO add message
+        commandManager.setFormat(MessageType.ERROR,
+            new BukkitMessageFormatter(ChatColor.RED, ChatColor.GOLD, ChatColor.WHITE) {
+                @Override public String format(final String message) {
+                    return ChatColor
+                        .translateAlternateColorCodes('&', messages_new.messagePrefix.toString())
+                        + ChatColor.RED + super.format(message);
+                }
+            });
+        commandManager.getLocales().addMessage(Locale.ENGLISH, MinecraftMessageKeys.NO_PLAYER_FOUND, messages_new.messageNoPlayerFound.toString());
     }
 
     // TODO: Check if Object is not Null so we can catch exceptions!
@@ -121,7 +152,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("Argh"))).setExecutor(new ArghCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Afk"))).setExecutor(new AFKCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Back"))).setExecutor(new BackCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Cartography"))).setExecutor(new CartographyCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Cartography"))).setExecutor(new CartographyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatArmor"))).setExecutor(new CheatArmor());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatEXP"))).setExecutor(new CheatEXP());
         Objects.requireNonNull(getCommand(Main.commands.getString("Clear"))).setExecutor(new ClearCommand());
@@ -130,9 +161,9 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("Coreconfigupdate"))).setExecutor(new ConfigReloadCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Coreversion"))).setExecutor(new CoreVersionCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Discord"))).setExecutor(new DiscordCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Dispose"))).setExecutor(new DisposeCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Enderchest"))).setExecutor(new EnderChestCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Extinguish"))).setExecutor(new ExtinguishCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Dispose"))).setExecutor(new DisposeCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Enderchest"))).setExecutor(new EnderChestCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Extinguish"))).setExecutor(new ExtinguishCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Feed"))).setExecutor(new FeedCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Fly"))).setExecutor(new FlyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("FlySpeed"))).setExecutor(new FlySpeedCommand());
@@ -140,26 +171,26 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("Freeze"))).setExecutor(new FreezeCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Gamemode"))).setExecutor(new GamemodeCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("God"))).setExecutor(new GodCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Grindstone"))).setExecutor(new GrindstoneCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Grindstone"))).setExecutor(new GrindstoneCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Hat"))).setExecutor(new HatCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Heal"))).setExecutor(new HealCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Head"))).setExecutor(new HeadCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Info"))).setExecutor(new ItemInfoCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Intantrespawn"))).setExecutor(new InstantRespawnCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Loom"))).setExecutor(new LoomCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Intantrespawn"))).setExecutor(new InstantRespawnCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Loom"))).setExecutor(new LoomCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("More"))).setExecutor(new MoreCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Near"))).setExecutor(new NearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Pony"))).setExecutor(new PonyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("PrivateWarp"))).setExecutor(new PrivateWarpCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("RTP"))).setExecutor(new RandomTPCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Repair"))).setExecutor(new RepairCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Repair"))).setExecutor(new RepairCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("SetFirstSpawn"))).setExecutor(new FirstSpawnSetCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("SetSpawn"))).setExecutor(new SpawnSetCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Signedit"))).setExecutor(new SignEditorCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Signedit"))).setExecutor(new SignEditorCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Spawn"))).setExecutor(new SpawnCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("StoneCutter"))).setExecutor(new StonecutterCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("StoneCutter"))).setExecutor(new StonecutterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Sudo"))).setExecutor(new SudoCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Suicide"))).setExecutor(new SuicideCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Suicide"))).setExecutor(new SuicideCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Top"))).setExecutor(new TopCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Tp"))).setExecutor(new TeleportCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Tpa"))).setExecutor(new TpaCommand());
@@ -176,11 +207,12 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("Website"))).setExecutor(new WebsiteCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Whois"))).setExecutor(new WhoIsCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("World"))).setExecutor(new WorldCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Workbench"))).setExecutor(new WorkbenchCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Workbench"))).setExecutor(new WorkbenchCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Youtube"))).setExecutor(new YoutubeCommand());
 
         //Modern Commands:
         new TeleportationCommandHandler(commandManager, teleportHandler, tpaHandler);
+        new EssentialCommandHandler(commandManager);
     }
 
     private void registerListeners() {
@@ -210,7 +242,7 @@ public final class Main extends JavaPlugin {
                 Main.nmsImpl = nmsImplClass.getDeclaredConstructor().newInstance();
             } catch (final ReflectiveOperationException ex) {
                 ex.printStackTrace();
-                final String message = messages.getString("ServerVersionUnsupported");
+                final String message = messages_new.messageUnsupportedServerVersion.toString();
                 getLogger().log(Level.SEVERE,
                         Utils.chat(message.replace("%version%", Bukkit.getVersion())));
                 return false;
@@ -251,12 +283,16 @@ public final class Main extends JavaPlugin {
         ////////////////
         // messages.yml
         ////////////////
-        messages = LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/messages"))
+        final Config messageFile = (LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/messages"))
                 .addInputStreamFromResource("messages.yml")
                 .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
                 .setReloadSettings(ReloadSettings.AUTOMATICALLY)
                 .setDataType(DataType.SORTED)
-                .createConfig();
+                .createConfig());
+        messages = messageFile;
+        messages_new.load(messageFile);
+        TeleportationMessages.INSTANCE.load(messageFile);
+        CommandMessages.INSTANCE.load(messageFile);
 
         ////////////////
         // config.yml

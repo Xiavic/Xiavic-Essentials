@@ -1,5 +1,6 @@
 package com.github.xiavic.essentials.Utils.messages;
 
+import de.leonhard.storage.Config;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -27,8 +28,8 @@ public abstract class AbstractMessageProvider implements MessageProviderInstance
         return map;
     }
 
-    @Override @NotNull public Message createMessage(@NotNull final String key,
-        @NotNull final String defaultValue) {
+    @Override @NotNull
+    public Message createMessage(@NotNull final String key, @NotNull final String defaultValue) {
         configuredMessages.put(key, defaultValue);
         final Message message =
             new Message(Objects.requireNonNull(key), Objects.requireNonNull(defaultValue));
@@ -40,4 +41,12 @@ public abstract class AbstractMessageProvider implements MessageProviderInstance
         return configuredMessages.getOrDefault(message.getKey(), message.getDefaultValue());
     }
 
+    public void load(Config configuration) {
+        for (String key : configuration.singleLayerKeySet()) {
+            final String defaultValue = configuration.getString(key);
+            if (defaultValue != null) {
+                messages.add(new Message(key, defaultValue));
+            }
+        }
+    }
 }
