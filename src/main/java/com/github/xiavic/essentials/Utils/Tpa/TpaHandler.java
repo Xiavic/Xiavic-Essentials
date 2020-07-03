@@ -1,6 +1,6 @@
 package com.github.xiavic.essentials.Utils.Tpa;
 
-import com.github.xiavic.essentials.Commands.messages.TeleportationMessages;
+import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.essentials.Utils.messages.Messages;

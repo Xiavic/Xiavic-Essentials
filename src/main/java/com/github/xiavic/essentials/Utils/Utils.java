@@ -41,8 +41,10 @@ public class Utils {
     }
 
     // Sends messages to a player directly and makes the 'chat' name make more sense
-    public static void chat(Player player, String string) {
-        player.sendMessage(chat(string));
+    public static void chat(Player player, String... strings) {
+        for (String string : strings) {
+            player.sendMessage(chat(string));
+        }
     }
 
     /**
@@ -66,7 +68,7 @@ public class Utils {
                 final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
                     messages.messagePrefix.toString() + replacedMessage);
                 final String fixedMessage =
-                    MiniMessageSerializer.serialize(TextComponent.fromLegacyText(prefixedMessage));
+                   MiniMessageSerializer.serialize(TextComponent.fromLegacyText(prefixedMessage));
                 recipient.spigot().sendMessage(MiniMessageParser.parseFormat(fixedMessage));
             } else {
                 final String prefixedMessage = messages.messagePrefix.toString() + replacedMessage;
