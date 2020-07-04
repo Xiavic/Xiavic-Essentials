@@ -105,6 +105,10 @@ public final class Messages extends AbstractMessageProvider {
     @NotNull public Message messageDatabaseError = createMessage("database-error",
         "Connection was NOT set-up properly. Please double check your database settings. :(");
 
+    @NotNull public Message messageHeads = createMessage("heads", "Heads");
+
+    @NotNull public Message messageTails = createMessage("tails", "Tails");
+
     @Override public @NotNull Message createMessage(final @NotNull String key,
         final @NotNull String defaultValue) {
         return super.createMessage("messages." + key, defaultValue);

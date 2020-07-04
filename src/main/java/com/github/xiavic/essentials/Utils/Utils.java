@@ -41,10 +41,32 @@ public class Utils {
     }
 
     // Sends messages to a player directly and makes the 'chat' name make more sense
-    public static void chat(Player player, String... strings) {
+    public static void chat(CommandSender player, String... strings) {
         for (String string : strings) {
             player.sendMessage(chat(string));
         }
+    }
+
+    public static String capitalize(@NotNull final String s) {
+        if (s.isEmpty()) {
+            return s;
+        }
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    };
+
+    public static String titleCase(@NotNull final String delimiter, @NotNull final String s) {
+        if (s.isEmpty()) {
+            return s;
+        }
+        final String[] split = s.split(delimiter);
+        if (split.length == 0) {
+            return s;
+        }
+        final StringBuilder builder = new StringBuilder(delimiter);
+        for (String s1 : split) {
+            builder.append(capitalize(s1));
+        }
+        return builder.toString();
     }
 
     /**
