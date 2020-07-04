@@ -6,7 +6,6 @@ import co.aikar.commands.*;
 import com.github.xiavic.essentials.Commands.player.Essential.*;
 import com.github.xiavic.essentials.Commands.player.Essential.Teleport.TeleportationCommandHandler;
 import com.github.xiavic.essentials.Commands.player.Fun.*;
-import com.github.xiavic.essentials.Commands.player.Fun.Links.*;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatArmor;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatEXP;
 import com.github.xiavic.essentials.Commands.staff.noncheat.*;
@@ -23,6 +22,7 @@ import com.github.xiavic.essentials.Utils.messages.CommandMessages;
 import com.github.xiavic.essentials.Utils.messages.Messages;
 import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.lib.NMSHandler.NMS;
+import com.github.xiavic.lib.NMSHandler.NMSVersion;
 import com.github.xiavic.lib.inventory.InventorySerializer;
 import com.github.xiavic.lib.signedit.ISignEditor;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
@@ -149,37 +149,37 @@ public final class Main extends JavaPlugin {
     // TODO: Check if Object is not Null so we can catch exceptions!
     private void registerCommands() {
         //getCommand("fireball").setExecutor(new FireBallCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Argh"))).setExecutor(new ArghCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Afk"))).setExecutor(new AFKCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Argh"))).setExecutor(new ArghCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Afk"))).setExecutor(new AFKCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Back"))).setExecutor(new BackCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Cartography"))).setExecutor(new CartographyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatArmor"))).setExecutor(new CheatArmor());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatEXP"))).setExecutor(new CheatEXP());
         Objects.requireNonNull(getCommand(Main.commands.getString("Clear"))).setExecutor(new ClearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("ClearAll"))).setExecutor(new ClearAllCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Coinflip"))).setExecutor(new CoinFlipCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Coinflip"))).setExecutor(new CoinFlipCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Coreconfigupdate"))).setExecutor(new ConfigReloadCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Coreversion"))).setExecutor(new CoreVersionCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Discord"))).setExecutor(new DiscordCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Discord"))).setExecutor(new DiscordCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Dispose"))).setExecutor(new DisposeCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Enderchest"))).setExecutor(new EnderChestCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Extinguish"))).setExecutor(new ExtinguishCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Feed"))).setExecutor(new FeedCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Fly"))).setExecutor(new FlyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("FlySpeed"))).setExecutor(new FlySpeedCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Forums"))).setExecutor(new ForumsCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Forums"))).setExecutor(new ForumsCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Freeze"))).setExecutor(new FreezeCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Gamemode"))).setExecutor(new GamemodeCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("God"))).setExecutor(new GodCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Grindstone"))).setExecutor(new GrindstoneCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Hat"))).setExecutor(new HatCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Hat"))).setExecutor(new HatCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Heal"))).setExecutor(new HealCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Head"))).setExecutor(new HeadCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Head"))).setExecutor(new HeadCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Info"))).setExecutor(new ItemInfoCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Intantrespawn"))).setExecutor(new InstantRespawnCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Loom"))).setExecutor(new LoomCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("More"))).setExecutor(new MoreCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Near"))).setExecutor(new NearCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Near"))).setExecutor(new NearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Pony"))).setExecutor(new PonyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("PrivateWarp"))).setExecutor(new PrivateWarpCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("RTP"))).setExecutor(new RandomTPCommand());
@@ -199,16 +199,16 @@ public final class Main extends JavaPlugin {
         //Objects.requireNonNull(getCommand(Main.commands.getString("TpDeny"))).setExecutor(new TpdenyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("TpHere"))).setExecutor(new TPhereCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Tppos"))).setExecutor(new TPPosCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Twitter"))).setExecutor(new TwitterCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Twitter"))).setExecutor(new TwitterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Vanish"))).setExecutor(new VanishCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("WalkSpeed"))).setExecutor(new WalkSpeedCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Warp"))).setExecutor(new WarpCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("WarpEdit"))).setExecutor(new WarpEditCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Website"))).setExecutor(new WebsiteCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Website"))).setExecutor(new WebsiteCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Whois"))).setExecutor(new WhoIsCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("World"))).setExecutor(new WorldCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Workbench"))).setExecutor(new WorkbenchCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Youtube"))).setExecutor(new YoutubeCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Youtube"))).setExecutor(new YoutubeCommand());
 
         //Modern Commands:
         new TeleportationCommandHandler(commandManager, teleportHandler, tpaHandler);
@@ -235,6 +235,12 @@ public final class Main extends JavaPlugin {
 
     private boolean registerNMSHandler() {
         if (Main.nmsImpl == null) {
+            if (NMSVersion.getCurrent().isOlderThan(NMSVersion.V1_14_R1)) { //We only support 1.14 and onwards.
+                final String message = messages_new.messageUnsupportedServerVersion.toString();
+                getLogger().log(Level.SEVERE,
+                    Utils.chat(message.replace("%version%", Bukkit.getVersion())));
+                return false;
+            }
             try {
                 final Class<?> clazz = Class
                         .forName("com.github.xiavic.essentials" + Utils.parseNMSVersion() + ".NMSImpl");
@@ -242,9 +248,7 @@ public final class Main extends JavaPlugin {
                 Main.nmsImpl = nmsImplClass.getDeclaredConstructor().newInstance();
             } catch (final ReflectiveOperationException ex) {
                 ex.printStackTrace();
-                final String message = messages_new.messageUnsupportedServerVersion.toString();
-                getLogger().log(Level.SEVERE,
-                        Utils.chat(message.replace("%version%", Bukkit.getVersion())));
+                getLogger().log(Level.SEVERE, Utils.chat("&cFailed to register NMS implementation! See error above."));
                 return false;
             }
         }
