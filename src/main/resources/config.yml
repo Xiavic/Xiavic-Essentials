@@ -34,12 +34,13 @@ PWCooldown: 300
 CanShare: false
 
 #Teleport
-# Time before you can send another request
-TpaCooldown: 5
-# Time before actually teleporting
-TpaDelay: 3
-# Time before the request expires
-TpaTimeout: 60
+TpaHandling:
+  # Time before you can send another request
+  TpaCooldown: 5
+  # Time before actually teleporting
+  TpaDelay: 3
+  # Time before the request expires
+  TpaTimeout: 60
 
 #RTP
 RTPCooldown: 600
@@ -47,9 +48,10 @@ RTPWorld: world
 RTPDistance: 50000
 
 #Life
-HealCooldown: 600
-FeedCooldown: 600
-SuicideCooldown: 60
+Cooldowns:
+  HealCooldown: 600
+  FeedCooldown: 600
+  SuicideCooldown: 60
 
 #Near Max-Distance
 NearRange: 1000
@@ -58,11 +60,12 @@ NearRange: 1000
 ZapDistance: 4
 
 #World
-# Should Iron Golems drop Roses/Iron?
+# Should Iron Golems drop Poppyies/Iron?
 IronGolems:
-  IGRoses: false
+  IGPoppy: false
   IGIron: true
   # IGIron must be disabled to have CustomIron working.
-  CustomIron: false
+  CustomIron:
+    Enable: false
     amountMin: 1
     amountMax: 2

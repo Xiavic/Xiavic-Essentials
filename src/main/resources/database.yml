@@ -1,7 +1,7 @@
 Version: 1
 
-# SQLITE / MYSQL / YML / JSON / MONGODB
-DatabaseType: YML
+# SQLITE / MYSQL / JSON / MONGODB
+DatabaseType: SQLITE
 #Use Database only for MYSQL Connections!
 MYSQL:
   Host: "localhost"

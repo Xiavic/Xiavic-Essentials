@@ -30,9 +30,9 @@ public class TpaHandler implements ITeleportRequestHandler {
     private List<Player> deadCooldowns = new ArrayList<>();
 
     public TpaHandler() {
-        requestTimeout = Main.mainConfig.getInt("TpaTimeout");
-        teleportTime = Main.mainConfig.getInt("TpaDelay");
-        tpaCooldown = Main.mainConfig.getInt("TpaCooldown");
+        requestTimeout = Main.mainConfig.getInt("TpaHandling.TpaTimeout");
+        teleportTime = Main.mainConfig.getInt("TpaHandling.TpaDelay");
+        tpaCooldown = Main.mainConfig.getInt("TpaHandling.TpaCooldown");
     }
 
     /**
@@ -137,6 +137,7 @@ public class TpaHandler implements ITeleportRequestHandler {
     private void checkCooldowns() {
         for (Map.Entry<Player, Long> cooldown : cooldowns.entrySet()) {
             if ((System.currentTimeMillis() - cooldown.getValue()) / 1000 > tpaCooldown) {
+                //DEBUG
                 System.out.println("Cooldown Expired");
                 deadCooldowns.add(cooldown.getKey());
             }
