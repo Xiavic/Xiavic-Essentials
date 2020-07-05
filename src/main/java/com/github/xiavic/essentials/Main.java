@@ -175,13 +175,13 @@ public final class Main extends JavaPlugin {
         //Objects.requireNonNull(getCommand(Main.commands.getString("Hat"))).setExecutor(new HatCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Heal"))).setExecutor(new HealCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Head"))).setExecutor(new HeadCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Info"))).setExecutor(new ItemInfoCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Info"))).setExecutor(new ItemInfoCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Intantrespawn"))).setExecutor(new InstantRespawnCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Loom"))).setExecutor(new LoomCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("More"))).setExecutor(new MoreCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Near"))).setExecutor(new NearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Pony"))).setExecutor(new PonyCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("PrivateWarp"))).setExecutor(new PrivateWarpCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("PrivateWarp"))).setExecutor(new PrivateWarpCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("RTP"))).setExecutor(new RandomTPCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Repair"))).setExecutor(new RepairCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("SetFirstSpawn"))).setExecutor(new FirstSpawnSetCommand());
@@ -202,7 +202,7 @@ public final class Main extends JavaPlugin {
         //Objects.requireNonNull(getCommand(Main.commands.getString("Twitter"))).setExecutor(new TwitterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Vanish"))).setExecutor(new VanishCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("WalkSpeed"))).setExecutor(new WalkSpeedCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Warp"))).setExecutor(new WarpCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Warp"))).setExecutor(new WarpCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("WarpEdit"))).setExecutor(new WarpEditCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Website"))).setExecutor(new WebsiteCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Whois"))).setExecutor(new WhoIsCommand());

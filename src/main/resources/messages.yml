@@ -148,6 +148,12 @@ commands.extinguish: "&cYour inner demon has calmed down"
 commands.extinguish-target: "You have been extinguished by, %sender%"
 
 #Warp
+warp.private-list-header: "Private Warps: "
+warp.private-list-element-header: "  %warp%"
+warp.private-list-element-info: "     Name: %name%, Owner: %owner%, Location: %location%, Enabled: %enabled%"
+warp.list-header: "Warps:"
+warp.list-element-header: "  %warp%"
+warp.list-element-info: "     Name: %name%, Permission: %permission%, Location: %location%, Enabled: %enabled%"
 warp.created: "Warp \"%name%\" has been created."
 warp.deleted: "Warp was deleted."
 warp.toggled: "This warp is now %enabled%"
