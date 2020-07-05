@@ -4,8 +4,8 @@ import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.messages.Message;
 import com.github.xiavic.essentials.Utils.messages.Messages;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
-import me.minidigger.minimessage.bungee.MiniMessageParser;
-import me.minidigger.minimessage.bungee.MiniMessageSerializer;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.bungeecord.BungeeCordComponentSerializer;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -89,12 +89,14 @@ public class Utils {
             if (replacedMessage.contains(ChatColor.COLOR_CHAR + "")) {
                 final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
                     messages.messagePrefix.toString() + replacedMessage);
-                final String fixedMessage =
-                   MiniMessageSerializer.serialize(TextComponent.fromLegacyText(prefixedMessage));
-                recipient.spigot().sendMessage(MiniMessageParser.parseFormat(fixedMessage));
+                final Component fixedMessage = BungeeCordComponentSerializer.legacy().deserialize(TextComponent.fromLegacyText(prefixedMessage));
+                recipient.spigot().sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
             } else {
                 final String prefixedMessage = messages.messagePrefix.toString() + replacedMessage;
-                recipient.spigot().sendMessage(MiniMessageParser.parseFormat(prefixedMessage));
+                final Component component = BungeeCordComponentSerializer.legacy()
+                    .deserialize(TextComponent.fromLegacyText(prefixedMessage));
+                recipient.spigot()
+                    .sendMessage(BungeeCordComponentSerializer.legacy().serialize(component));
             }
         } else {
             final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
@@ -112,11 +114,14 @@ public class Utils {
         }
         if (replacedMessage.contains("<") && replacedMessage.contains(">")) {
             if (replacedMessage.contains(ChatColor.COLOR_CHAR + "")) {
-                final String fixedMessage =
-                    MiniMessageSerializer.serialize(TextComponent.fromLegacyText(replacedMessage));
-                recipient.spigot().sendMessage(MiniMessageParser.parseFormat(fixedMessage));
+                final Component fixedMessage = BungeeCordComponentSerializer.legacy()
+                    .deserialize(TextComponent.fromLegacyText(replacedMessage));
+                recipient.spigot()
+                    .sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
             } else {
-                recipient.spigot().sendMessage(MiniMessageParser.parseFormat(replacedMessage));
+                recipient.spigot().sendMessage(BungeeCordComponentSerializer.legacy().serialize(
+                    BungeeCordComponentSerializer.legacy()
+                        .deserialize(TextComponent.fromLegacyText(replacedMessage))));
             }
         } else {
             final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
