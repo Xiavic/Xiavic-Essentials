@@ -52,7 +52,9 @@ public class Utils {
             return s;
         }
         return s.substring(0, 1).toUpperCase() + s.substring(1);
-    };
+    }
+
+    ;
 
     public static String titleCase(@NotNull final String delimiter, @NotNull final String s) {
         if (s.isEmpty()) {
@@ -89,8 +91,10 @@ public class Utils {
             if (replacedMessage.contains(ChatColor.COLOR_CHAR + "")) {
                 final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
                     messages.messagePrefix.toString() + replacedMessage);
-                final Component fixedMessage = BungeeCordComponentSerializer.legacy().deserialize(TextComponent.fromLegacyText(prefixedMessage));
-                recipient.spigot().sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
+                final Component fixedMessage = BungeeCordComponentSerializer.legacy()
+                    .deserialize(TextComponent.fromLegacyText(prefixedMessage));
+                recipient.spigot()
+                    .sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
             } else {
                 final String prefixedMessage = messages.messagePrefix.toString() + replacedMessage;
                 final Component component = BungeeCordComponentSerializer.legacy()
