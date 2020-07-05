@@ -203,7 +203,7 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("Vanish"))).setExecutor(new VanishCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("WalkSpeed"))).setExecutor(new WalkSpeedCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Warp"))).setExecutor(new WarpCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("WarpEdit"))).setExecutor(new WarpEditCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("WarpEdit"))).setExecutor(new WarpEditCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Website"))).setExecutor(new WebsiteCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Whois"))).setExecutor(new WhoIsCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("World"))).setExecutor(new WorldCommand());

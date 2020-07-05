@@ -11,8 +11,11 @@ import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.essentials.Utils.messages.CommandMessages;
 import com.github.xiavic.essentials.Utils.messages.Message;
 import com.github.xiavic.essentials.Utils.messages.Messages;
+import com.github.xiavic.lib.NMSHandler.NMSVersion;
+import com.github.xiavic.lib.teleport.ITeleportHandler;
 import io.papermc.lib.PaperLib;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.banner.Pattern;
@@ -34,8 +37,12 @@ public class FunCommandHandler extends BaseCommand {
     private static final Messages messages = Messages.INSTANCE;
     private static final CommandMessages commandMessages = CommandMessages.INSTANCE;
 
-    public FunCommandHandler(@NotNull final BukkitCommandManager commandManager) {
+    private final ITeleportHandler teleportHandler;
+
+    public FunCommandHandler(@NotNull final BukkitCommandManager commandManager,
+        @NotNull final ITeleportHandler teleportHandler) {
         commandManager.registerCommand(this);
+        this.teleportHandler = teleportHandler;
     }
 
     @CommandAlias("afk") @CommandPermission("Xiavic.player.afk")
@@ -164,6 +171,17 @@ public class FunCommandHandler extends BaseCommand {
         }
     }
 
+    @CommandAlias("top") @CommandPermission("Xiavic.player.top")
+    public void goTop(@NotNull final Player player) {
+        final Location highestBlock =
+            player.getWorld().getHighestBlockAt(player.getLocation()).getLocation();
+        final Location current = player.getLocation();
+        highestBlock.setPitch(current.getPitch());
+        highestBlock.setYaw(current.getYaw());
+        highestBlock.setDirection(current.getDirection());
+
+    }
+
     private void showSkullInfo(@NotNull final CommandSender sender,
         @NotNull final SkullMeta skullMeta) {
         if (skullMeta.hasOwner()) {
@@ -212,11 +230,12 @@ public class FunCommandHandler extends BaseCommand {
 
     private void showCompassInfo(@NotNull final CommandSender sender,
         @NotNull final CompassMeta compassMeta) {
-        Utils.chat(sender, "&3Loadstone Tracked: &b" + compassMeta.isLodestoneTracked(),
-            "&3Loadstone Location: &b", compassMeta.hasLodestone() ?
-                compassMeta.getLodestone().toString() :
-                "No loadstone found.");
-
+        if (NMSVersion.getCurrent().isNewerThan(NMSVersion.V1_15_R1)) { //So if 1.16+
+            Utils.chat(sender, "&3Loadstone Tracked: &b" + compassMeta.isLodestoneTracked(),
+                "&3Loadstone Location: &b", compassMeta.hasLodestone() ?
+                    compassMeta.getLodestone().toString() :
+                    "No loadstone found.");
+        }
     }
 
     private void showBlockStateInfo(@NotNull final CommandSender sender,
