@@ -191,7 +191,7 @@ public final class Main extends JavaPlugin {
         //Objects.requireNonNull(getCommand(Main.commands.getString("StoneCutter"))).setExecutor(new StonecutterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Sudo"))).setExecutor(new SudoCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Suicide"))).setExecutor(new SuicideCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Top"))).setExecutor(new TopCommand());
+        //Objects.requireNonNull(getCommand(Main.commands.getString("Top"))).setExecutor(new TopCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Tp"))).setExecutor(new TeleportCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("Tpa"))).setExecutor(new TpaCommand());
         //Objects.requireNonNull(getCommand(Main.commands.getString("TpAccept"))).setExecutor(new TpacceptCommand());
