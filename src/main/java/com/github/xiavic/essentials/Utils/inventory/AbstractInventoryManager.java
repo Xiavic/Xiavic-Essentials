@@ -5,7 +5,7 @@ import com.github.xiavic.lib.serialization.DataAccessObject;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 
-public class AbstractInventoryManager {
+public abstract class AbstractInventoryManager {
 
     @NotNull
     private final DataAccessObject database;
@@ -17,7 +17,7 @@ public class AbstractInventoryManager {
         this.serializer = serializer;
     }
 
-    public DataAccessObject getDatabase() {
+    @NotNull public DataAccessObject getDatabase() {
         return database;
     }
 

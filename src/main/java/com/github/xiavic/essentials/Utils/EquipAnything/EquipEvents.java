@@ -21,6 +21,7 @@ public class EquipEvents implements Listener {
         if (onCursor.getType().isAir() || !meta.hasLore()) {
             return;
         }
+        assert meta.getLore() != null;
         for (final String lore : meta.getLore()) {
             final ItemStack temp;
             final int slot;

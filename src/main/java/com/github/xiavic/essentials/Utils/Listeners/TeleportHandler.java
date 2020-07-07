@@ -1,7 +1,8 @@
 package com.github.xiavic.essentials.Utils.Listeners;
 
-import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.Utils;
+import com.github.xiavic.essentials.Utils.messages.Messages;
+import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
 import io.papermc.lib.PaperLib;
 import org.bukkit.Location;
@@ -10,93 +11,86 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import java.awt.print.Paper;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class TeleportHandler implements Listener, ITeleportHandler {
 
-    private List<Player> disabledPlayers = new ArrayList<>();
-    private Map<Player, Location> lastLocations = new HashMap<>();
+    private static final TeleportationMessages teleportationMessages =
+        TeleportationMessages.INSTANCE;
 
-    @Override
-    public void processPlayerTeleport(Player player) {
-        lastLocations.put(player, player.getLocation());
+    private final Collection<UUID> disabledPlayers = new HashSet<>();
+    private final Map<UUID, Location> lastLocations = new HashMap<>();
+
+    @Override public void processPlayerTeleport(Player player) {
+        lastLocations.remove(player.getUniqueId());
+        lastLocations.put(player.getUniqueId(), player.getLocation());
     }
 
-    @Override
-    public void processPlayerToggle(Player player) {
-        if (disabledPlayers.contains(player)) {
-            disabledPlayers.remove(player);
-            Utils.chat(player, Main.messages.getString("TpToggleOff"));
+    @Override public void processPlayerToggle(Player player) {
+        if (disabledPlayers.contains(player.getUniqueId())) {
+            disabledPlayers.remove(player.getUniqueId());
+            Utils.sendMessage(player, teleportationMessages.messageTeleportToggleDisabled);
         } else {
-            disabledPlayers.add(player);
-            Utils.chat(player, Main.messages.getString("TpToggleOn"));
+            disabledPlayers.add(player.getUniqueId());
+            Utils.sendMessage(player, teleportationMessages.messageTeleportToggleEnabled);
         }
     }
 
-    @Override
-    public void teleport(Player player, Location location) {
+    @Override public CompletableFuture<Boolean> teleport(Player player, Location location) {
         processPlayerTeleport(player);
-        PaperLib.teleportAsync(player, location);
+        return PaperLib.teleportAsync(player, location);
     }
 
     // change - if true: teleport player2 to player1 else teleport player1 to player2
-    @Override
-    public boolean teleport(Player p1, Player p2, boolean change) {
+    @Override public CompletableFuture<Boolean> teleport(Player p1, Player p2, boolean change) {
         if (change) {
-            if (!disabledPlayers.contains(p1)) {
-                teleport(p2, p1.getLocation());
-                return true;
+            if (!disabledPlayers.contains(p1.getUniqueId())) {
+                return teleport(p2, p1.getLocation());
             }
         }
-        if (!disabledPlayers.contains(p2)) {
-            teleport(p1, p2.getLocation());
-            return true;
+        if (!disabledPlayers.contains(p2.getUniqueId())) {
+            return teleport(p1, p2.getLocation());
         }
-        return false;
+        return CompletableFuture.completedFuture(false);
     }
 
-    @Override
-    public boolean remoteTp(Player player, Location location) {
-        if (!disabledPlayers.contains(player)) {
-            teleport(player, location);
-            return true;
+    @Override public CompletableFuture<Boolean> remoteTp(Player player, Location location) {
+        if (!disabledPlayers.contains(player.getUniqueId())) {
+            return teleport(player, location).thenApply(result -> {
+                if (!result) {
+                    Utils.sendMessage(player, teleportationMessages.messageTeleportFailed);
+                }
+                return result;
+            });
         }
-        return true;
+        return CompletableFuture.completedFuture(true);
     }
 
     // 0 - teleport successful
     // 1 - player1 disabled
     // 2 - player2 disabled
-    @Override
-    public int remoteTp(Player p1, Player p2) {
-        if (disabledPlayers.contains(p1))
+    @Override public int remoteTp(Player p1, Player p2) {
+        if (disabledPlayers.contains(p1.getUniqueId()))
             return 1;
-        if (disabledPlayers.contains(p2))
+        if (disabledPlayers.contains(p2.getUniqueId()))
             return 2;
         teleport(p1, p2.getLocation());
         return 0;
     }
 
-    @Override
-    public Location getLastLocation(Player player){
-        if (!lastLocations.containsKey(player))
+    @Override public Location getLastLocation(Player player) {
+        if (!lastLocations.containsKey(player.getUniqueId()))
             return null;
-        return lastLocations.get(player);
+        return lastLocations.get(player.getUniqueId());
     }
 
-    @Override
-    public boolean isDisabled(Player player) {
-        return disabledPlayers.contains(player);
+    @Override public boolean isDisabled(Player player) {
+        return disabledPlayers.contains(player.getUniqueId());
     }
 
-    @EventHandler
-    public void onDeath(PlayerDeathEvent e) {
-        lastLocations.put(e.getEntity(), e.getEntity().getLocation());
+    @EventHandler public void onDeath(final PlayerDeathEvent event) {
+        lastLocations.put(event.getEntity().getUniqueId(), event.getEntity().getLocation());
     }
 
 }

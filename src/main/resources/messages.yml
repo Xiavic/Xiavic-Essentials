@@ -78,7 +78,9 @@ messages.heads: "Heads"
 messages.tails: "Tails"
 
 # TP
+teleport.forced-teleport: "You are being teleported!"
 teleport.teleported: "%target1% has been teleported to %target2%"
+teleport.teleported-all: "Teleporting all players to %target%, I'm sure they'll be happy about it"
 teleport.teleported-spawn: "You have been successfully teleported to spawn."
 teleport.teleport-disabled: "%target% has teleportation disabled!"
 teleport.teleport-request-sent: "You have sent a teleport request to %target%"
@@ -126,9 +128,11 @@ commands.dynamic-sign-edit-toggled: "&aDynamic Sign Editing is now %state%"
 commands.sign-edited: "&bThe sign has been edited."
 commands.vanish: "You are now %mode%"
 commands.vanish-target: "%target% is now %mode%"
+commands.whois-basic: "%nickname% is %username%"
 
 # How 2 Use Messages a.k.a. Help Text
 commands.whois-help: "/whois <player>"
+
 
 # Cheat
 commands.cheat-exp: "&8[&cDebug&8] &7Your Exp has been set to 9999 levels."

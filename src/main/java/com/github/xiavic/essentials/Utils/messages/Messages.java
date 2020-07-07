@@ -99,7 +99,7 @@ public final class Messages extends AbstractMessageProvider {
     @NotNull public Message messageConfigUpdated =
         createMessage("config-updated", "&8[&cDebug&8] &7The config files have been updated!");
 
-    @NotNull public Message messageShowConfigVersion = createMessage("config-version",
+    @NotNull public Message messageShowPluginVersion = createMessage("config-version",
         "&8[&cDebug&8] &7The current running version is %version%...");
 
     @NotNull public Message messageDatabaseError = createMessage("database-error",

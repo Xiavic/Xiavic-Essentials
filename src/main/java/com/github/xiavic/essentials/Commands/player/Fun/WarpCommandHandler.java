@@ -11,8 +11,8 @@ import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.essentials.Utils.messages.CommandMessages;
 import com.github.xiavic.essentials.Utils.messages.Messages;
 import com.github.xiavic.essentials.Utils.messages.WarpMessages;
-import com.github.xiavic.essentials.Utils.warp.IPrivateWarpManager;
-import com.github.xiavic.essentials.Utils.warp.IWarpManager;
+import com.github.xiavic.essentials.Utils.warp.PrivateWarpManager;
+import com.github.xiavic.essentials.Utils.warp.WarpManager;
 import com.github.xiavic.essentials.Utils.warp.PrivateWarp;
 import com.github.xiavic.essentials.Utils.warp.Warp;
 import org.bukkit.Bukkit;
@@ -33,12 +33,12 @@ public class WarpCommandHandler extends BaseCommand {
     private static final Messages messages = Messages.INSTANCE;
     private static final WarpMessages warpMessages = WarpMessages.INSTANCE;
 
-    private final IPrivateWarpManager privateWarpManager;
-    private final IWarpManager<Warp> warpManager;
+    private final PrivateWarpManager privateWarpManager;
+    private final WarpManager<Warp> warpManager;
 
     public WarpCommandHandler(@NotNull final BukkitCommandManager commandManager,
-        @NotNull final IPrivateWarpManager pwManager,
-        @NotNull final IWarpManager<Warp> warpManager) {
+        @NotNull final PrivateWarpManager pwManager,
+        @NotNull final WarpManager<Warp> warpManager) {
         commandManager.registerCommand(this);
         this.warpManager = warpManager;
         this.privateWarpManager = pwManager;

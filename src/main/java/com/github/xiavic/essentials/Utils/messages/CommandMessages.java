@@ -29,7 +29,7 @@ public class CommandMessages extends AbstractMessageProvider {
         createMessage("feed-all", "Everyone has been fed...");
 
     @NotNull public Message messagePlayerFedOther =
-        createMessage("feed-other", "Everyone has been fed...");
+        createMessage("feed-other", "%target% has been fed");
 
     @NotNull public Message messagePlayerFly = createMessage("fly", "Flying has been %mode%");
 
@@ -119,9 +119,10 @@ public class CommandMessages extends AbstractMessageProvider {
     @NotNull public Message messagePlayerExtinguishedOther =
         createMessage("extinguish-target", "You have been extinguished by, %sender%");
 
+    @NotNull public Message messageWhoIsPlayer = createMessage("whois-basic", "%nickname% is %username%");
+
 
     @Override @NotNull
-
     public Message createMessage(final @NotNull String key, final @NotNull String defaultValue) {
         return super.createMessage("commands." + key, defaultValue);
     }

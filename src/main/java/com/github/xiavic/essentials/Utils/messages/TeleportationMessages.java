@@ -8,8 +8,12 @@ public class TeleportationMessages extends AbstractMessageProvider {
 
     @NotNull public Message messageTeleported =
         createMessage("teleported", "%target1% has been teleported to %target2%");
+    @NotNull public Message messageForceTeleported =
+        createMessage("forced-teleport", "You are being teleported!");
     @NotNull public Message messageTeleportedSpawn =
         createMessage("teleported-spawn", "You have been successfully teleported to spawn.");
+    @NotNull public Message messageTeleportedAll = createMessage("teleported-all",
+        "Teleporting all players to %target%, I'm sure they'll be happy about it");
     @NotNull public Message messageTeleportationDisabled =
         createMessage("teleport-disabled", "%target% has teleportation disabled!");
     @NotNull public Message messageTeleportRequestSent =

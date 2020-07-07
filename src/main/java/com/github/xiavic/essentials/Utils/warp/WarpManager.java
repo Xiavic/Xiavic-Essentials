@@ -6,72 +6,33 @@ import org.bukkit.permissions.Permissible;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public enum WarpManager implements IWarpManager<Warp> {
+public interface WarpManager<W extends Warp> {
 
-    INSTANCE;
 
-    @NotNull private final Collection<Warp> warps = ConcurrentHashMap.newKeySet();
-
-    @Override
-    public boolean isWarp(@NotNull final Location location, boolean useBlockloc) {
-        for (final Warp warp : warps) {
-            final Location loc = warp.getLocation();
-            if (useBlockloc && IWarpManager.areCoordinatesEquals(loc, location) || loc
-                    .equals(location)) {
-                return true;
-            }
-        }
-        return false;
+    static boolean areCoordinatesEquals(Location primary, Location secondary) {
+        return primary.getWorld() == secondary.getWorld() && primary.getX() == secondary.getX()
+                && primary.getY() == secondary.getY() && primary.getZ() == secondary.getZ();
     }
 
-    @Override
-    @NotNull
-    public Optional<Warp> getWarp(@NotNull final String name) {
-        return getWarps(warp -> warp.getName().equalsIgnoreCase(name)).findAny();
-    }
+    boolean isWarp(@NotNull Location location, boolean useBlockloc);
 
-    @NotNull
-    public Collection<Warp> getWarps() {
-        return new HashSet<>(warps);
-    }
+    Optional<W> getWarp(String name);
 
-    @Override
-    @NotNull
-    public Stream<Warp> getWarps(@NotNull final Predicate<Warp> filter) {
-        return warps.stream().filter(filter);
-    }
+    @NotNull Collection<W> getWarps();
 
-    @Override
-    @NotNull
-    public Collection<Warp> getFilteredWarps(@NotNull final Predicate<Warp> filter) {
-        return getWarps(filter).collect(Collectors.toSet());
-    }
+    @NotNull Stream<W> getWarps(@NotNull Predicate<W> filter);
 
-    @Override
-    @NotNull
-    public Collection<Warp> getWarps(@NotNull final World world) {
-        return getFilteredWarps(warp -> warp.getLocation().getWorld() == world);
-    }
+    @NotNull Collection<W> getFilteredWarps(@NotNull Predicate<W> filter);
 
-    @NotNull
-    public Collection<Warp> getAccessibleToPermissible(@NotNull final Permissible permissible) {
-        return getFilteredWarps(warp -> warp.canBeAccessedBy(permissible));
-    }
+    @NotNull Collection<W> getWarps(World world);
 
-    public void registerWarp(@NotNull final Warp warp) {
-        warps.remove(warp);
-        warps.add(warp);
-    }
+    @NotNull Collection<W> getAccessibleToPermissible(@NotNull Permissible permissible);
 
-    @Override
-    public void unregisterWarp(@NotNull final Warp warp) {
-        warps.remove(warp);
-    }
+    void registerWarp(@NotNull W warp);
+
+    void unregisterWarp(@NotNull W warp);
 }
