@@ -27,10 +27,10 @@ public class TpaHandler implements ITeleportRequestHandler {
     private final int teleportTime;
     private final int tpaCooldown;
     private ITeleportHandler teleportHandler;
-    private List<TpaRequest> requests = new ArrayList<>();
-    private Map<TpaRequest, Long> teleports = new HashMap<>();
-    private Map<Player, Long> cooldowns = new HashMap<>();
-    private List<TpaRequest> deadTeleports = new ArrayList<>();
+    private final List<TpaRequest> requests = new ArrayList<>();
+    private final Map<TpaRequest, Long> teleports = new HashMap<>();
+    private final Map<Player, Long> cooldowns = new HashMap<>();
+    private final List<TpaRequest> deadTeleports = new ArrayList<>();
     private List<TpaRequest> deadRequests = new ArrayList<>();
     private List<Player> deadCooldowns = new ArrayList<>();
 

@@ -9,10 +9,7 @@ import com.github.xiavic.essentials.Commands.player.Fun.*;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatArmor;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatEXP;
 import com.github.xiavic.essentials.Commands.staff.noncheat.*;
-import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TPPosCommand;
-import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TPhereCommand;
-import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TeleportCommand;
-import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.TpallCommand;
+import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.StaffTeleportCommandHandler;
 import com.github.xiavic.essentials.Utils.CommandBooleanValue;
 import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
 import com.github.xiavic.essentials.Utils.Listeners.*;
@@ -146,73 +143,21 @@ public final class Main extends JavaPlugin {
         commandManager.getLocales().addMessage(Locale.ENGLISH, MinecraftMessageKeys.NO_PLAYER_FOUND, messages_new.messageNoPlayerFound.toString());
     }
 
-    // TODO: Check if Object is not Null so we can catch exceptions!
     private void registerCommands() {
-        //getCommand("fireball").setExecutor(new FireBallCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Argh"))).setExecutor(new ArghCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Afk"))).setExecutor(new AFKCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Back"))).setExecutor(new BackCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Cartography"))).setExecutor(new CartographyCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatArmor"))).setExecutor(new CheatArmor());
         Objects.requireNonNull(getCommand(Main.commands.getString("CheatEXP"))).setExecutor(new CheatEXP());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Clear"))).setExecutor(new ClearCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("ClearAll"))).setExecutor(new ClearAllCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Coinflip"))).setExecutor(new CoinFlipCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Coreconfigupdate"))).setExecutor(new ConfigReloadCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Coreversion"))).setExecutor(new CoreVersionCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Discord"))).setExecutor(new DiscordCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Dispose"))).setExecutor(new DisposeCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Enderchest"))).setExecutor(new EnderChestCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Extinguish"))).setExecutor(new ExtinguishCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Feed"))).setExecutor(new FeedCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Fly"))).setExecutor(new FlyCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("FlySpeed"))).setExecutor(new FlySpeedCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Forums"))).setExecutor(new ForumsCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Freeze"))).setExecutor(new FreezeCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Gamemode"))).setExecutor(new GamemodeCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("God"))).setExecutor(new GodCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Grindstone"))).setExecutor(new GrindstoneCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Hat"))).setExecutor(new HatCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Heal"))).setExecutor(new HealCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Head"))).setExecutor(new HeadCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Info"))).setExecutor(new ItemInfoCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Intantrespawn"))).setExecutor(new InstantRespawnCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Loom"))).setExecutor(new LoomCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("More"))).setExecutor(new MoreCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Near"))).setExecutor(new NearCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Pony"))).setExecutor(new PonyCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("PrivateWarp"))).setExecutor(new PrivateWarpCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("RTP"))).setExecutor(new RandomTPCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Repair"))).setExecutor(new RepairCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("SetFirstSpawn"))).setExecutor(new FirstSpawnSetCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("SetSpawn"))).setExecutor(new SpawnSetCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Signedit"))).setExecutor(new SignEditorCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Spawn"))).setExecutor(new SpawnCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("StoneCutter"))).setExecutor(new StonecutterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Sudo"))).setExecutor(new SudoCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Suicide"))).setExecutor(new SuicideCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Top"))).setExecutor(new TopCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Tp"))).setExecutor(new TeleportCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Tpa"))).setExecutor(new TpaCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("TpAccept"))).setExecutor(new TpacceptCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("TpAll"))).setExecutor(new TpallCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("TpDeny"))).setExecutor(new TpdenyCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("TpHere"))).setExecutor(new TPhereCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Tppos"))).setExecutor(new TPPosCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Twitter"))).setExecutor(new TwitterCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("Vanish"))).setExecutor(new VanishCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("WalkSpeed"))).setExecutor(new WalkSpeedCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Warp"))).setExecutor(new WarpCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("WarpEdit"))).setExecutor(new WarpEditCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Website"))).setExecutor(new WebsiteCommand());
-        Objects.requireNonNull(getCommand(Main.commands.getString("Whois"))).setExecutor(new WhoIsCommand());
         Objects.requireNonNull(getCommand(Main.commands.getString("World"))).setExecutor(new WorldCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Workbench"))).setExecutor(new WorkbenchCommand());
-        //Objects.requireNonNull(getCommand(Main.commands.getString("Youtube"))).setExecutor(new YoutubeCommand());
 
         //Modern Commands:
         new TeleportationCommandHandler(commandManager, teleportHandler, tpaHandler);
         new EssentialCommandHandler(commandManager);
+        new FunCommandHandler(commandManager, teleportHandler);
+        new StaffTeleportCommandHandler(commandManager, teleportHandler);
+        new StaffCommandHandler(commandManager);
     }
 
     private void registerListeners() {

@@ -41,6 +41,9 @@ TpaDelay: 3
 # Time before the request expires
 TpaTimeout: 60
 
+# Immunity when mass teleporting ocurrs (Give players time to not die from entity collisions)
+TeleportImmunity: 5
+
 #RTP
 RTPCooldown: 600
 RTPWorld: world

@@ -1,13 +1,15 @@
 package com.github.xiavic.essentials.Utils.Tpa;
 
-import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.Utils;
+import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class TpaRequest {
 
     // private FileConfiguration m = Messages.get();
+
+    private static final TeleportationMessages tpMessages = TeleportationMessages.INSTANCE;
 
     private final Player origin;
     private final Player target;
@@ -21,17 +23,17 @@ public class TpaRequest {
     }
 
     public void sendRequest() {
-        Utils.chat(this.origin, Main.messages.getString("Tpa").replace("%target%", target.getDisplayName()));
-        Utils.chat(this.target, Main.messages.getString("Tpa_Request").replace("%sender%", origin.getDisplayName()));
+        Utils.sendMessage(this.origin, tpMessages.messageTeleportRequestSent, "%target%",
+            this.target.getDisplayName());
+        Utils.sendMessage(this.target, tpMessages.messageTeleportRequestReceived, "%sender%",
+            this.origin.getDisplayName());
     }
 
-    @NotNull
-    public Player getOrigin() {
+    @NotNull public Player getOrigin() {
         return this.origin;
     }
 
-    @NotNull
-    public Player getTarget() {
+    @NotNull public Player getTarget() {
         return this.target;
     }
 
