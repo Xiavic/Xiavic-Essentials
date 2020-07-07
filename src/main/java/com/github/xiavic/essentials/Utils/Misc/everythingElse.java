@@ -2,7 +2,7 @@ package com.github.xiavic.essentials.Utils.Misc;
 
 import com.github.xiavic.essentials.Main;
 import org.bukkit.Material;
-import org.bukkit.entity.IronGolem;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -20,14 +20,14 @@ public enum everythingElse {
 
     public void onIGDeath(EntityDeathEvent de) {
         LivingEntity le = de.getEntity();
-        if (le instanceof IronGolem) {
-            if (!Main.mainConfig.getBoolean("IronGolems.IGRoses")) {
+        if (le.getType() == EntityType.IRON_GOLEM) {
+            if (!Main.mainConfig.getBoolean("IronGolems.IGPoppy")) {
                 de.getDrops().remove(Material.POPPY);
             }
             if (!Main.mainConfig.getBoolean("IronGolems.IGIron")) {
                 de.getDrops().remove(Material.IRON_INGOT);
             }
-            if (Main.mainConfig.getBoolean("IronGolems.CustomIron") && !Main.mainConfig.getBoolean("IronGolems.IGIron")) {
+            if (Main.mainConfig.getBoolean("IronGolems.CustomIron.Enable") && !Main.mainConfig.getBoolean("IronGolems.IGIron")) {
                 Random r = new Random();
                 int min = Main.mainConfig.getInt("IronGolems.CustomIron.amountMin");
                 int max = Main.mainConfig.getInt("IronGolems.CustomIron.amountMax");
