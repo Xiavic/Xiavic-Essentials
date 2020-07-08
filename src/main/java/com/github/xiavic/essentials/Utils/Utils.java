@@ -128,9 +128,8 @@ public class Utils {
                         .deserialize(TextComponent.fromLegacyText(replacedMessage))));
             }
         } else {
-            final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
-                messages.messagePrefix.toString() + replacedMessage);
-            recipient.sendMessage(prefixedMessage);
+            recipient.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                replacedMessage));
         }
     }
 

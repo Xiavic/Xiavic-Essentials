@@ -22,55 +22,68 @@ public class GameModeCommandHandler extends BaseCommand {
         commandManager.registerCommand(this);
     }
 
-    @Default @Subcommand("creative|c|1") public void setGameModeCreative(final Player player) {
+    @Default @Subcommand("creative|c|1") @CommandAlias("gmc")
+    public void setGameModeCreative(final Player player) {
         player.setGameMode(GameMode.CREATIVE);
-        Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "creative");
+        Utils
+            .sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%", "creative");
     }
 
-    @Default @Subcommand("creative|c|1")
+    @Default @Subcommand("creative|c|1") @CommandAlias("gmc")
     public void setGameModeCreative(final CommandSender sender, final Player player) {
         setGameModeCreative(player);
-        Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-            player.getDisplayName(), "%mode%", "creative");
+        if (sender != player) {
+            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
+                player.getDisplayName(), "%mode%", "creative");
+        }
     }
 
-    @Default @Subcommand("survival|s|0") public void setGameModeSurvival(final Player player) {
+    @Default @Subcommand("survival|s|0") @CommandAlias("gms")
+    public void setGameModeSurvival(final Player player) {
         player.setGameMode(GameMode.SURVIVAL);
         Utils
             .sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%", "survival");
     }
 
-    @Default @Subcommand("survival|s|0")
+    @Default @Subcommand("survival|s|0") @CommandAlias("gms")
     public void setGameModeSurvival(final CommandSender sender, final Player player) {
         setGameModeSurvival(player);
-        Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-            player.getDisplayName(), "%mode%", "survival");
+        if (player != sender) {
+            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
+                player.getDisplayName(), "%mode%", "survival");
+        }
     }
 
-    @Default @Subcommand("spectator|sp|3") public void setGameModeSpectator(final Player player) {
+    @Default @Subcommand("spectator|sp|3") @CommandAlias("gmsp")
+    public void setGameModeSpectator(final Player player) {
         player.setGameMode(GameMode.SPECTATOR);
         Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%",
             "spectator");
     }
 
-    @Default @Subcommand("spectator|sp|3")
+    @Default @Subcommand("spectator|sp|3") @CommandAlias("gmsp")
     public void setGameModeSpectator(final CommandSender sender, final Player player) {
         setGameModeSpectator(player);
-        Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-            player.getDisplayName(), "%mode%", "spectator");
+        if (player != sender) {
+            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
+                player.getDisplayName(), "%mode%", "spectator");
+        }
     }
 
-    @Default @Subcommand("adventure|a|2") public void setGameModeAdventure(final Player player) {
+    @Default @Subcommand("adventure|a|2") @CommandAlias("gma")
+    public void setGameModeAdventure(final Player player) {
         player.setGameMode(GameMode.ADVENTURE);
         Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%",
             "adventure");
     }
 
-    @Default @Subcommand("adventure|a|2")
+    @Default @Subcommand("adventure|a|2") @CommandAlias("gma")
     public void setGameModeAdventure(@NotNull final CommandSender sender,
         @NotNull final Player player) {
         setGameModeAdventure(player);
-        Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-            player.getDisplayName(), "%mode%", "adventure");
+        if (player != sender) {
+            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
+                player.getDisplayName(), "%mode%", "adventure");
+        }
     }
 }

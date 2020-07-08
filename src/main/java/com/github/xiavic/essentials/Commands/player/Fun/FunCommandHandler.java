@@ -11,6 +11,7 @@ import com.github.xiavic.essentials.Utils.Utils;
 import com.github.xiavic.essentials.Utils.messages.CommandMessages;
 import com.github.xiavic.essentials.Utils.messages.Message;
 import com.github.xiavic.essentials.Utils.messages.Messages;
+import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.lib.NMSHandler.NMSVersion;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
 import io.papermc.lib.PaperLib;
@@ -32,17 +33,15 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class FunCommandHandler extends BaseCommand {
 
     private static final Messages messages = Messages.INSTANCE;
     private static final CommandMessages commandMessages = CommandMessages.INSTANCE;
+    private static final TeleportationMessages tpMessages = TeleportationMessages.INSTANCE;
 
-    private final ITeleportHandler teleportHandler;
-
-    public FunCommandHandler(@NotNull final BukkitCommandManager commandManager,
-        @NotNull final ITeleportHandler teleportHandler) {
+    public FunCommandHandler(@NotNull final BukkitCommandManager commandManager) {
         commandManager.registerCommand(this);
-        this.teleportHandler = teleportHandler;
     }
 
     @CommandAlias("afk") @CommandPermission("Xiavic.player.afk")
@@ -172,13 +171,18 @@ public class FunCommandHandler extends BaseCommand {
     }
 
     @CommandAlias("top") @CommandPermission("Xiavic.player.top")
-    public void goTop(@NotNull final Player player) {
+    public void goTop(final Player player) {
         final Location highestBlock =
             player.getWorld().getHighestBlockAt(player.getLocation()).getLocation();
         final Location current = player.getLocation();
+        if (highestBlock.getY() < current.getY()) {
+            Utils.chat(player, "&cYou are at or above the highest block!");
+            return;
+        }
         highestBlock.setPitch(current.getPitch());
         highestBlock.setYaw(current.getYaw());
         highestBlock.setDirection(current.getDirection());
+        PaperLib.teleportAsync(player, highestBlock);
 
     }
 
@@ -250,7 +254,7 @@ public class FunCommandHandler extends BaseCommand {
 
     private void showBlockDataInfo(@NotNull final CommandSender sender,
         @NotNull final BlockDataMeta blockDataMeta, @NotNull final Material material) {
-        if (blockDataMeta.hasBlockData()) {
+        if (blockDataMeta.hasBlockData() && material.isBlock()) {
             Utils.chat(sender,
                 "&3Raw Block Data Info: &b" + blockDataMeta.getBlockData(material).toString());
         } else {

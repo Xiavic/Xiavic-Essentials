@@ -148,7 +148,7 @@ import java.util.List;
     }
 
     @Default @CommandAlias("signedit") @CommandPermission("Xiavic.player.signedit")
-    @CommandCompletion("1 2 3 4")
+    @CommandCompletion("1|2|3|4")
     public void editSign(final Player player, final int lineNumber, String... args) {
         List<Block> block = player.getLineOfSight(Collections.emptySet(), 4);
         if (lineNumber < 1 || lineNumber > 4) {

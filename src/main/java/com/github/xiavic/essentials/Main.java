@@ -6,6 +6,7 @@ import co.aikar.commands.*;
 import com.github.xiavic.essentials.Commands.player.Essential.*;
 import com.github.xiavic.essentials.Commands.player.Essential.Teleport.TeleportationCommandHandler;
 import com.github.xiavic.essentials.Commands.player.Fun.*;
+import com.github.xiavic.essentials.Commands.player.Fun.Links.LinksCommandHandler;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatArmor;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatEXP;
 import com.github.xiavic.essentials.Commands.staff.noncheat.*;
@@ -154,9 +155,10 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand(Main.commands.getString("World"))).setExecutor(new WorldCommand());
 
         //Modern Commands:
+        new LinksCommandHandler(commandManager);
         new TeleportationCommandHandler(commandManager, teleportHandler, tpaHandler);
         new EssentialCommandHandler(commandManager);
-        new FunCommandHandler(commandManager, teleportHandler);
+        new FunCommandHandler(commandManager);
         new StaffTeleportCommandHandler(commandManager, teleportHandler);
         new StaffCommandHandler(commandManager);
 
