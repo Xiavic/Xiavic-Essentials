@@ -42,9 +42,10 @@ public abstract class AbstractMessageProvider implements MessageProviderInstance
     }
 
     public void load(Config configuration) {
-        for (String key : configuration.singleLayerKeySet()) {
+        for (String key : new ArrayList<>(configuration.singleLayerKeySet())) {
             final String defaultValue = configuration.getString(key);
             if (defaultValue != null) {
+                messages.removeIf(message -> message.getKey().equalsIgnoreCase(key));
                 messages.add(new Message(key, defaultValue));
             }
         }

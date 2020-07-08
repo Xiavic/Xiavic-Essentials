@@ -230,7 +230,7 @@ public class FunCommandHandler extends BaseCommand {
 
     private void showCompassInfo(@NotNull final CommandSender sender,
         @NotNull final CompassMeta compassMeta) {
-        if (NMSVersion.getCurrent().isNewerThan(NMSVersion.V1_15_R1)) { //So if 1.16+
+        if (NMSVersion.getCurrent().isNewerThan(NMSVersion.v1_15_R1)) { //So if 1.16+
             Utils.chat(sender, "&3Loadstone Tracked: &b" + compassMeta.isLodestoneTracked(),
                 "&3Loadstone Location: &b", compassMeta.hasLodestone() ?
                     compassMeta.getLodestone().toString() :

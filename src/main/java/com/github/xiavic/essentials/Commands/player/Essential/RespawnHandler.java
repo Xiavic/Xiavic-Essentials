@@ -2,9 +2,7 @@ package com.github.xiavic.essentials.Commands.player.Essential;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.BukkitCommandManager;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Optional;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.CommandBooleanValue;
 import com.github.xiavic.essentials.Utils.Utils;
@@ -14,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 public class RespawnHandler extends BaseCommand {
 
     private static final NamespacedKey VALUE_KEY =
@@ -34,7 +33,7 @@ public class RespawnHandler extends BaseCommand {
         player.getPersistentDataContainer().set(VALUE_KEY, PersistentDataType.BYTE, (byte) (respawn ? 1 : 0));
     }
 
-    @Subcommand("instantrespawn") @CommandPermission("Xiavic.player.instantrespawn")
+    @Default @CommandAlias("instantrespawn") @CommandPermission("Xiavic.player.instantrespawn")
     public void doInstantRespawnToggle(final Player player, @Optional CommandBooleanValue toggle) {
         if (toggle == null) {
             setInstantRespawn(player, !shouldInstantRespawn(player));

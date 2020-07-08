@@ -2,10 +2,7 @@ package com.github.xiavic.essentials.Commands.player.Essential;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.BukkitCommandManager;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandCompletion;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Subcommand;
+import co.aikar.commands.annotation.*;
 import com.github.xiavic.essentials.Commands.event.PlayerRepairItemEvent;
 import com.github.xiavic.essentials.Main;
 import com.github.xiavic.essentials.Utils.CommandBooleanValue;
@@ -42,24 +39,24 @@ import java.util.List;
         new RespawnHandler(commandManager);
     }
 
-    @CommandAlias("cartography") @CommandPermission("Xiavic.player.cartography")
+    @Default @CommandAlias("cartography") @CommandPermission("Xiavic.player.cartography")
     public void openCartographyInventory(final Player player) {
         player.openInventory(Bukkit.createInventory(player, InventoryType.CARTOGRAPHY));
     }
 
-    @CommandAlias("dispose") @CommandPermission("Xiavic.player.dispose")
+    @Default @CommandAlias("dispose") @CommandPermission("Xiavic.player.dispose")
     public void openDisposalInventory(final Player player) {
         Inventory inventory = Bukkit.createInventory(null, 54, "Chest");
         player.openInventory(inventory);
     }
 
-    @CommandAlias("enderchest|ec") @CommandPermission("Xiavic.player.ec")
+    @Default @CommandAlias("enderchest|ec") @CommandPermission("Xiavic.player.ec")
     public void openEnderChest(final Player player) {
         player.openInventory(player.getEnderChest());
         Utils.sendMessage(player, commandMessages.messageEnderChestOpened);
     }
 
-    @CommandAlias("enderchest|ec") @CommandPermission("Xiavic.player.ec.others")
+    @Default @CommandAlias("enderchest|ec") @CommandPermission("Xiavic.player.ec.others")
     @CommandCompletion("@players")
     public void openEnderChest(final Player sender, final Player target) {
         sender.openInventory(target.getEnderChest());
@@ -67,13 +64,13 @@ import java.util.List;
             target.getDisplayName());
     }
 
-    @CommandAlias("extinguish|ext") @CommandPermission("Xiavic.player.extinguish")
+    @Default @CommandAlias("extinguish|ext") @CommandPermission("Xiavic.player.extinguish")
     public void doExtinguish(final Player sender) {
         sender.setFireTicks(0);
         Utils.sendMessage(sender, commandMessages.messagePlayerExtinguishedSelf);
     }
 
-    @CommandAlias("extinguish|ext") @CommandPermission("Xiavic.staff.extinguishothers")
+    @Default @CommandAlias("extinguish|ext") @CommandPermission("Xiavic.staff.extinguishothers")
     public void doExtinguish(final CommandSender sender, final String... players) {
         boolean nullPlayer = false;
         for (String rawPlayer : players) {
@@ -94,17 +91,17 @@ import java.util.List;
         }
     }
 
-    @Subcommand("grindstone") @CommandPermission("Xiavic.player.grindstone")
+    @Default @CommandAlias("grindstone") @CommandPermission("Xiavic.player.grindstone")
     public void openGrindstoneInventory(final Player player) {
         player.openInventory(Bukkit.createInventory(player, InventoryType.GRINDSTONE));
     }
 
-    @Subcommand("loom") @CommandPermission("Xiavic.player.loom")
+    @Default @CommandAlias("loom") @CommandPermission("Xiavic.player.loom")
     public void openLoomInventory(final Player player) {
         player.openInventory(Bukkit.createInventory(player, InventoryType.LOOM));
     }
 
-    @Subcommand("repair") @CommandPermission("Xiavic.player.repair")
+    @Default @CommandAlias("repair") @CommandPermission("Xiavic.player.repair")
     public void doItemRepair(final Player player) {
         final ItemStack inHand = player.getInventory().getItemInMainHand();
         if (inHand.getType().isAir()) {
@@ -126,7 +123,7 @@ import java.util.List;
         }
     }
 
-    @Subcommand("signedit") @CommandPermission("Xiavic.player.signedit")
+    @Default @CommandAlias("signedit") @CommandPermission("Xiavic.player.signedit")
     public void openSignEditor(final Player player) {
         List<Block> block = player.getLineOfSight(Collections.emptySet(), 4);
         if (block.isEmpty()) {
@@ -143,14 +140,14 @@ import java.util.List;
         }
     }
 
-    @Subcommand("signedit") @CommandPermission("Xiavic.player.signedit")
+    @Default @CommandAlias("signedit") @CommandPermission("Xiavic.player.signedit")
     @CommandCompletion("@toggles")
     public void toggleDynamicSignEdit(final Player player, final CommandBooleanValue value) {
         nms.getSignEditor().toggleDynamicEditing(player.getUniqueId(), value.value);
         Utils.sendMessage(player , commandMessages.messageDynamicSignEditToggled, "%state%", String.valueOf(value.value));
     }
 
-    @Subcommand("signedit") @CommandPermission("Xiavic.player.signedit")
+    @Default @CommandAlias("signedit") @CommandPermission("Xiavic.player.signedit")
     @CommandCompletion("1 2 3 4")
     public void editSign(final Player player, final int lineNumber, String... args) {
         List<Block> block = player.getLineOfSight(Collections.emptySet(), 4);
@@ -191,17 +188,17 @@ import java.util.List;
         Utils.sendMessage(player, commandMessages.messageSignEdited);
     }
 
-    @CommandAlias("stonecutter") @CommandPermission("Xiavic.player.stonecutter")
+    @Default @CommandAlias("stonecutter") @CommandPermission("Xiavic.player.stonecutter")
     public void openGrindstone(final Player player) {
         player.openInventory(Bukkit.createInventory(player, InventoryType.STONECUTTER));
     }
 
-    @CommandAlias("suicide") @CommandPermission("Xiavic.player.suicide")
+    @Default @CommandAlias("suicide") @CommandPermission("Xiavic.player.suicide")
     public void commitSuicide(final Player player) {
         player.setHealth(0);
     }
 
-    @CommandAlias("workbench|wb") @CommandPermission("Xiavic.player.workbench")
+    @Default @CommandAlias("workbench|wb") @CommandPermission("Xiavic.player.workbench")
     public void openWorkbench(final Player player) {
         player.openWorkbench(player.getLocation(), false);
     }

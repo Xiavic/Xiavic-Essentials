@@ -26,13 +26,13 @@ import org.jetbrains.annotations.NotNull;
         new GameModeCommandHandler(commandManager);
     }
 
-    @CommandAlias("clear|ci") @CommandPermission("Xiavic.staff.clearothers")
+    @Default @CommandAlias("clear|ci") @CommandPermission("Xiavic.staff.clearothers")
     public void clearInventory(final Player player) {
         player.getInventory().clear();
         Utils.sendMessage(player, commandMessages.messageInventoryCleared);
     }
 
-    @CommandAlias("clear|ci") @CommandPermission("Xiavic.staff.clearothers")
+    @Default @CommandAlias("clear|ci") @CommandPermission("Xiavic.staff.clearothers")
     @CommandCompletion("@players")
     public void clearInventory(final CommandSender sender, final Player player) {
         clearInventory(player);
@@ -42,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
         }
     }
 
-    @CommandAlias("coreconfigupdate|ccu") @CommandPermission("Xiavic.staff.config.update")
+    @Default @CommandAlias("coreconfigupdate|ccu") @CommandPermission("Xiavic.staff.config.update")
     public void reloadConfiguration(final CommandSender sender) {
         Main.mainConfig.forceReload();
         Main.messages.forceReload();
@@ -50,20 +50,20 @@ import org.jetbrains.annotations.NotNull;
         Utils.sendMessage(sender, messages.messageConfigUpdated);
     }
 
-    @CommandAlias("coreversion") @CommandPermission("Xiavic.staff.version")
+    @Default @CommandAlias("coreversion") @CommandPermission("Xiavic.staff.version")
     public void showVersion(final CommandSender sender) {
         Utils.sendMessage(sender, messages.messageShowPluginVersion, "%version%",
             Main.getPlugin(Main.class).getDescription().getVersion());
     }
 
-    @CommandAlias("feed") @CommandPermission("Xiavic.staff.feed")
+    @Default @CommandAlias("feed") @CommandPermission("Xiavic.staff.feed")
     public void feed(final Player player) {
         player.setFoodLevel(20);
         player.setSaturation(20);
         Utils.sendMessage(player, commandMessages.messagePlayerFed);
     }
 
-    @CommandAlias("feed") @CommandPermission("Xiavic.staff.feedothers")
+    @Default @CommandAlias("feed") @CommandPermission("Xiavic.staff.feedothers")
     @CommandCompletion("@players") public void feed(final CommandSender sender, Player target) {
         feed(target);
         if (sender != target) {
@@ -72,7 +72,7 @@ import org.jetbrains.annotations.NotNull;
         }
     }
 
-    @CommandAlias("setfirstspawn") @CommandPermission("Xiavic.staff.setfirstspawn")
+    @Default @CommandAlias("setfirstspawn") @CommandPermission("Xiavic.staff.setfirstspawn")
     public void setFirstSpawn(final Player player) {
         final Location loc = player.getLocation();
         final World world = loc.getWorld();
@@ -84,7 +84,7 @@ import org.jetbrains.annotations.NotNull;
         Utils.sendMessage(player, commandMessages.messageSetFirstJoinSpawnPoint);
     }
 
-    @CommandAlias("fly") @CommandPermission("Xiavic.staff.fly")
+    @Default @CommandAlias("fly") @CommandPermission("Xiavic.staff.fly")
     public void toggleFly(final Player player) {
         player.setAllowFlight(!player.getAllowFlight());
         player.setFlying(!player.isFlying());
@@ -92,7 +92,8 @@ import org.jetbrains.annotations.NotNull;
             player.getAllowFlight() ? "&cenabled" : "&cdisabled");
     }
 
-    @CommandAlias("fly") @CommandPermission("Xiavic.staff.flyothers") @CommandCompletion("@players")
+    @Default @CommandAlias("fly") @CommandPermission("Xiavic.staff.flyothers")
+    @CommandCompletion("@players")
     public void toggleFly(final CommandSender sender, final Player target) {
         toggleFly(target);
         Utils.sendMessage(sender, commandMessages.messagePlayerFlyOther, "%target%",
@@ -100,7 +101,7 @@ import org.jetbrains.annotations.NotNull;
             target.getAllowFlight() ? "&cenabled" : "&cdisabled");
     }
 
-    @CommandAlias("flyspeed") @CommandCompletion("1 2 3 4 5 6 7 8 9 10")
+    @Default @CommandAlias("flyspeed") @CommandCompletion("1 2 3 4 5 6 7 8 9 10")
     @CommandPermission("Xiavic.staff.flyspeed")
     public void toggleFlySpeed(final Player player, int speed) {
         player.setFlySpeed(speed / 10f);
@@ -108,7 +109,8 @@ import org.jetbrains.annotations.NotNull;
             String.valueOf(speed));
     }
 
-    @CommandAlias("god") @CommandCompletion("true|false") @CommandPermission("Xiavic.staff.god")
+    @Default @CommandAlias("god") @CommandCompletion("true|false")
+    @CommandPermission("Xiavic.staff.god")
     public void toggleGod(final Player player, @Optional Boolean enabled) {
         enabled = enabled == null ? !player.isInvulnerable() : enabled;
         player.setInvulnerable(enabled);
@@ -116,7 +118,7 @@ import org.jetbrains.annotations.NotNull;
             enabled.toString());
     }
 
-    @CommandAlias("god") @CommandCompletion("@players true|false")
+    @Default @CommandAlias("god") @CommandCompletion("@players true|false")
     @CommandPermission("Xiavic.staff.godothers")
     public void toggleGod(final CommandSender sender, final Player player,
         @Optional final Boolean enabled) {
@@ -125,7 +127,7 @@ import org.jetbrains.annotations.NotNull;
             player.getDisplayName(), "%mode%", String.valueOf(player.isInvulnerable()));
     }
 
-    @CommandAlias("heal") @CommandPermission("Xiavic.staff.heal")
+    @Default @CommandAlias("heal") @CommandPermission("Xiavic.staff.heal")
     public void doHeal(final Player player) {
         player.setHealth(20);
         player.setSaturation(20);
@@ -133,14 +135,14 @@ import org.jetbrains.annotations.NotNull;
         Utils.sendMessage(player, commandMessages.messagePlayerHealed);
     }
 
-    @CommandAlias("heal") @CommandPermission("Xiavic.staff.healothers")
+    @Default @CommandAlias("heal") @CommandPermission("Xiavic.staff.healothers")
     public void doHeal(final CommandSender sender, final Player player) {
         doHeal(player);
         Utils.sendMessage(sender, commandMessages.messagePlayerHealedOther, "%target%",
             player.getDisplayName());
     }
 
-    @CommandAlias("healall") @CommandPermission("Xiavic.staff.healall")
+    @Default @CommandAlias("healall") @CommandPermission("Xiavic.staff.healall")
     public void doMassHeal(final CommandSender sender) {
         for (final Player player : Bukkit.getOnlinePlayers()) {
             doHeal(player);
@@ -148,7 +150,7 @@ import org.jetbrains.annotations.NotNull;
         Utils.sendMessage(sender, commandMessages.messageAllPlayersHealed);
     }
 
-    @CommandAlias("more") @CommandPermission("Xiavic.staff.more")
+    @Default @CommandAlias("more") @CommandPermission("Xiavic.staff.more")
     public void giveMaxStack(final Player player) {
         final ItemStack inHand = player.getInventory().getItemInMainHand();
         final int maxSize = inHand.getMaxStackSize();
@@ -156,7 +158,7 @@ import org.jetbrains.annotations.NotNull;
         player.getInventory().setItemInMainHand(inHand);
     }
 
-    @CommandAlias("walkspeed") @CommandPermission("Xiavic.staff.walkspeed")
+    @Default @CommandAlias("walkspeed") @CommandPermission("Xiavic.staff.walkspeed")
     @CommandCompletion("1 2 3 4 5 6 7 8 9 10")
     public void toggleWalkSpeed(final Player player, final int speed) {
         player.setWalkSpeed(speed / 10f);
@@ -164,7 +166,7 @@ import org.jetbrains.annotations.NotNull;
             String.valueOf(speed));
     }
 
-    @CommandAlias("whois") @CommandPermission("Xiavic.player.realname")
+    @Default @CommandAlias("whois") @CommandPermission("Xiavic.player.realname")
     public void showRealName(final CommandSender sender, final Player player) {
         Utils.sendMessage(sender, commandMessages.messageWhoIsPlayer, "%nickname%",
             player.getDisplayName(), "%username%", player.getName());
@@ -183,66 +185,4 @@ import org.jetbrains.annotations.NotNull;
                     .getLastSeen());
         }
     }
-
-    @CommandAlias("gamemode|gm") @CommandPermission("Xiavic.staff.gamemode")
-    public static class GameModeCommandHandler extends BaseCommand {
-
-        public GameModeCommandHandler(@NotNull final BukkitCommandManager commandManager) {
-            commandManager.registerCommand(this);
-        }
-
-        @Subcommand("creative|c|1") public void setGameModeCreative(final Player player) {
-            player.setGameMode(GameMode.CREATIVE);
-            Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "creative");
-        }
-
-        @Subcommand("creative|c|1")
-        public void setGameModeCreative(final CommandSender sender, @NotNull final Player player) {
-            setGameModeCreative(player);
-            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-                player.getDisplayName(), "%mode%", "creative");
-        }
-
-        @Subcommand("survival|s|0") public void setGameModeSurvival(final Player player) {
-            player.setGameMode(GameMode.SURVIVAL);
-            Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%",
-                "survival");
-        }
-
-        @Subcommand("survival|s|0")
-        public void setGameModeSurvival(final CommandSender sender, @NotNull final Player player) {
-            setGameModeSurvival(player);
-            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-                player.getDisplayName(), "%mode%", "survival");
-        }
-
-        @Subcommand("spectator|sp|3") public void setGameModeSpectator(final Player player) {
-            player.setGameMode(GameMode.SPECTATOR);
-            Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%",
-                "spectator");
-        }
-
-        @Subcommand("spectator|sp|3")
-        public void setGameModeSpectator(final CommandSender sender, @NotNull final Player player) {
-            setGameModeSpectator(player);
-            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-                player.getDisplayName(), "%mode%", "spectator");
-        }
-
-        @Subcommand("adventure|a|2") public void setGameModeAdventure(final Player player) {
-            player.setGameMode(GameMode.ADVENTURE);
-            Utils.sendMessage(player, commandMessages.messagePlayerChangeGamemode, "%mode%",
-                "adventure");
-        }
-
-        @Subcommand("adventure|a|2")
-        public void setGameModeAdventure(@NotNull final CommandSender sender,
-            @NotNull final Player player) {
-            setGameModeAdventure(player);
-            Utils.sendMessage(sender, commandMessages.messagePlayerChangeGamemodeOther, "%target%",
-                player.getDisplayName(), "%mode%", "adventure");
-        }
-
-    }
-
 }

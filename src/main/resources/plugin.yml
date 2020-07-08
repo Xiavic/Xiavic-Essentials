@@ -186,3 +186,6 @@ commands:
   hat:
     usage: /hat
     description: Make the item you are holding in your hand to be your new hat.
+  vanish:
+    usage: /vanish
+    description: Hide yourself from the tab list.

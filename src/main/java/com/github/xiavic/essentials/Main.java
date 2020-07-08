@@ -48,7 +48,7 @@ public final class Main extends JavaPlugin {
 
     public static Yaml permissions;
     public static Yaml messages;
-    public static Messages messages_new;
+    public static Messages messages_new = Messages.INSTANCE;
     public static Yaml mainConfig;
     public static Yaml commands;
     public static Yaml database;
@@ -81,6 +81,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(" ");
         registerShit();
         registerListeners();
+        registerCommandsUtils();
         registerCommands();
         Bukkit.getScheduler().runTaskTimer(this, tpaHandler::doChecks, 0, 20);
     }
@@ -158,6 +159,7 @@ public final class Main extends JavaPlugin {
         new FunCommandHandler(commandManager, teleportHandler);
         new StaffTeleportCommandHandler(commandManager, teleportHandler);
         new StaffCommandHandler(commandManager);
+
     }
 
     private void registerListeners() {
@@ -180,7 +182,7 @@ public final class Main extends JavaPlugin {
 
     private boolean registerNMSHandler() {
         if (Main.nmsImpl == null) {
-            if (NMSVersion.getCurrent().isOlderThan(NMSVersion.V1_14_R1)) { //We only support 1.14 and onwards.
+            if (NMSVersion.getCurrent().isOlderThan(NMSVersion.v1_14_R1)) { //We only support 1.14 and onwards.
                 final String message = messages_new.messageUnsupportedServerVersion.toString();
                 getLogger().log(Level.SEVERE,
                     Utils.chat(message.replace("%version%", Bukkit.getVersion())));
@@ -266,8 +268,8 @@ public final class Main extends JavaPlugin {
         ////////////////
         // database.yml
         ////////////////
-        database = LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/database.yml"))
-                .addInputStreamFromResource("database.yml.yml")
+        database = LightningBuilder.fromFile(new File("plugins/XiavicCore/Resources/database"))
+                .addInputStreamFromResource("database.yml")
                 .setConfigSettings(ConfigSettings.PRESERVE_COMMENTS)
                 .setReloadSettings(ReloadSettings.AUTOMATICALLY)
                 .setDataType(DataType.SORTED)
