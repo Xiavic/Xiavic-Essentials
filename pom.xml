@@ -76,7 +76,8 @@
                                 </relocation>
                                 <relocation>
                                     <pattern>net.kyori.adventure</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.shaded.adventure</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.shaded.adventure
+                                    </shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
@@ -146,7 +147,7 @@
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.16.1-R0.1-SNAPSHOT</version>
+            <version>1.16.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
