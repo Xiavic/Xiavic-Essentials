@@ -40,7 +40,8 @@ public class Warp implements Lockable {
         return this.getClass() == Warp.class;
     }
 
-    @NotNull public String getName() {
+    @NotNull
+    public String getName() {
         lock();
         final String name = this.name;
         unlock();
@@ -54,7 +55,8 @@ public class Warp implements Lockable {
         return this;
     }
 
-    @NotNull public UUID getUniqueID() {
+    @NotNull
+    public UUID getUniqueID() {
         return uniqueID;
     }
 
@@ -109,34 +111,39 @@ public class Warp implements Lockable {
     }
 
     public CompletableFuture<Boolean> teleport(final Entity entity) {
-        if (!canBeAccessedBy(entity )|| !isEnabled()) {
+        if (!canBeAccessedBy(entity) || !isEnabled()) {
             return CompletableFuture.completedFuture(false);
         }
         return PaperLib.teleportAsync(entity, location);
     }
 
-    @Override public boolean isLocked() {
+    @Override
+    public boolean isLocked() {
         return locker == null;
     }
 
-    @Override public Thread getLocker() {
+    @Override
+    public Thread getLocker() {
         return locker;
     }
 
-    @Override public void lock() {
+    @Override
+    public void lock() {
         while (isLocked())
             ;
         this.locker = Thread.currentThread();
     }
 
-    @Override public void unlock() {
+    @Override
+    public void unlock() {
         if (!isLocked() || locker != Thread.currentThread()) {
             return;
         }
         this.locker = null;
     }
 
-    @Override public boolean equals(final Object o) {
+    @Override
+    public boolean equals(final Object o) {
 
         if (this == o)
             return true;
@@ -167,7 +174,8 @@ public class Warp implements Lockable {
         return value;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         lock();
         int result = uniqueID.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);

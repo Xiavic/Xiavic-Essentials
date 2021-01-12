@@ -17,7 +17,8 @@ public enum WarpManagerImpl implements WarpManager<Warp> {
 
     INSTANCE;
 
-    @NotNull private final Collection<Warp> warps = ConcurrentHashMap.newKeySet();
+    @NotNull
+    private final Collection<Warp> warps = ConcurrentHashMap.newKeySet();
 
     @Override
     public boolean isWarp(@NotNull final Location location, boolean useBlockloc) {

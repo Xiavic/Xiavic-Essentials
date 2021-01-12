@@ -18,26 +18,31 @@ public enum PrivateWarpManagerImpl implements PrivateWarpManager {
 
     INSTANCE;
 
-    @NotNull private final Collection<PrivateWarp> warps = ConcurrentHashMap.newKeySet();
+    @NotNull
+    private final Collection<PrivateWarp> warps = ConcurrentHashMap.newKeySet();
 
-    @Override public boolean isWarp(@NotNull final Location location, final boolean useBlockloc) {
+    @Override
+    public boolean isWarp(@NotNull final Location location, final boolean useBlockloc) {
         return warps.stream()
-            .anyMatch(warp -> WarpManager.areCoordinatesEquals(warp.getLocation(), location));
+                .anyMatch(warp -> WarpManager.areCoordinatesEquals(warp.getLocation(), location));
     }
 
-    @Override public Optional<PrivateWarp> getWarp(@NotNull final String name) {
+    @Override
+    public Optional<PrivateWarp> getWarp(@NotNull final String name) {
         return warps.stream().filter((PrivateWarp warp) -> warp.getName().equalsIgnoreCase(name))
-            .findAny();
+                .findAny();
     }
 
     @NotNull
     public Optional<PrivateWarp> getWarp(@NotNull final UUID owner, @NotNull final String name) {
         return warps.stream().filter(
-            (PrivateWarp warp) -> warp.getOwner().equals(owner) && warp.getName()
-                .equalsIgnoreCase(name)).findAny();
+                (PrivateWarp warp) -> warp.getOwner().equals(owner) && warp.getName()
+                        .equalsIgnoreCase(name)).findAny();
     }
 
-    @Override @NotNull public Collection<PrivateWarp> getWarps() {
+    @Override
+    @NotNull
+    public Collection<PrivateWarp> getWarps() {
         return new HashSet<>(warps);
     }
 
@@ -46,26 +51,33 @@ public enum PrivateWarpManagerImpl implements PrivateWarpManager {
         return warps.stream().filter(filter);
     }
 
-    @Override @NotNull
+    @Override
+    @NotNull
     public Collection<PrivateWarp> getFilteredWarps(@NotNull final Predicate<PrivateWarp> filter) {
         return getWarps(filter).collect(Collectors.toSet());
     }
 
-    @Override @NotNull public Collection<PrivateWarp> getWarps(final World world) {
+    @Override
+    @NotNull
+    public Collection<PrivateWarp> getWarps(final World world) {
         return getWarps(warp -> warp.getLocation().getWorld() == world).collect(Collectors.toSet());
     }
 
-    @Override @NotNull public Collection<PrivateWarp> getAccessibleToPermissible(
-        @NotNull final Permissible permissible) {
+    @Override
+    @NotNull
+    public Collection<PrivateWarp> getAccessibleToPermissible(
+            @NotNull final Permissible permissible) {
         return getWarps(warp -> warp.canBeAccessedBy(permissible)).collect(Collectors.toSet());
     }
 
-    @Override public void registerWarp(@NotNull final PrivateWarp warp) {
+    @Override
+    public void registerWarp(@NotNull final PrivateWarp warp) {
         unregisterWarp(warp);
         warps.add(warp);
     }
 
-    @Override public void unregisterWarp(@NotNull final PrivateWarp warp) {
+    @Override
+    public void unregisterWarp(@NotNull final PrivateWarp warp) {
         warps.remove(warp);
     }
 }

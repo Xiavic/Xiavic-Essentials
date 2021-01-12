@@ -17,7 +17,8 @@ public abstract class AbstractInventoryManager {
         this.serializer = serializer;
     }
 
-    @NotNull public DataAccessObject getDatabase() {
+    @NotNull
+    public DataAccessObject getDatabase() {
         return database;
     }
 

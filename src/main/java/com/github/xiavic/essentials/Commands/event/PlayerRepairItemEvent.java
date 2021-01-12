@@ -19,24 +19,30 @@ public class PlayerRepairItemEvent extends PlayerEvent implements Cancellable {
         this.itemStack = itemStack;
     }
 
-    @NotNull public static HandlerList getHandlerList() {
+    @NotNull
+    public static HandlerList getHandlerList() {
         return handlers;
     }
 
-    @NotNull public ItemStack getItemStack() {
+    @NotNull
+    public ItemStack getItemStack() {
         return itemStack;
     }
 
 
-    @NotNull @Override public HandlerList getHandlers() {
+    @NotNull
+    @Override
+    public HandlerList getHandlers() {
         return handlers;
     }
 
-    @Override public boolean isCancelled() {
+    @Override
+    public boolean isCancelled() {
         return cancel;
     }
 
-    @Override public void setCancelled(final boolean cancel) {
+    @Override
+    public void setCancelled(final boolean cancel) {
         this.cancel = cancel;
     }
 }

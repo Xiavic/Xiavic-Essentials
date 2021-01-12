@@ -1,7 +1,6 @@
 package com.github.xiavic.essentials.Utils.Listeners;
 
 import com.github.xiavic.essentials.Utils.Utils;
-import com.github.xiavic.essentials.Utils.messages.Messages;
 import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.lib.teleport.ITeleportHandler;
 import io.papermc.lib.PaperLib;
@@ -17,17 +16,19 @@ import java.util.concurrent.CompletableFuture;
 public class TeleportHandler implements Listener, ITeleportHandler {
 
     private static final TeleportationMessages teleportationMessages =
-        TeleportationMessages.INSTANCE;
+            TeleportationMessages.INSTANCE;
 
     private final Collection<UUID> disabledPlayers = new HashSet<>();
     private final Map<UUID, Location> lastLocations = new HashMap<>();
 
-    @Override public void processPlayerTeleport(Player player) {
+    @Override
+    public void processPlayerTeleport(Player player) {
         lastLocations.remove(player.getUniqueId());
         lastLocations.put(player.getUniqueId(), player.getLocation());
     }
 
-    @Override public void processPlayerToggle(Player player) {
+    @Override
+    public void processPlayerToggle(Player player) {
         if (disabledPlayers.contains(player.getUniqueId())) {
             disabledPlayers.remove(player.getUniqueId());
             Utils.sendMessage(player, teleportationMessages.messageTeleportToggleDisabled);
@@ -37,13 +38,15 @@ public class TeleportHandler implements Listener, ITeleportHandler {
         }
     }
 
-    @Override public CompletableFuture<Boolean> teleport(Player player, Location location) {
+    @Override
+    public CompletableFuture<Boolean> teleport(Player player, Location location) {
         processPlayerTeleport(player);
         return PaperLib.teleportAsync(player, location);
     }
 
     // change - if true: teleport player2 to player1 else teleport player1 to player2
-    @Override public CompletableFuture<Boolean> teleport(Player p1, Player p2, boolean change) {
+    @Override
+    public CompletableFuture<Boolean> teleport(Player p1, Player p2, boolean change) {
         if (change) {
             if (!disabledPlayers.contains(p1.getUniqueId())) {
                 return teleport(p2, p1.getLocation());
@@ -55,7 +58,8 @@ public class TeleportHandler implements Listener, ITeleportHandler {
         return CompletableFuture.completedFuture(false);
     }
 
-    @Override public CompletableFuture<Boolean> remoteTp(Player player, Location location) {
+    @Override
+    public CompletableFuture<Boolean> remoteTp(Player player, Location location) {
         if (!disabledPlayers.contains(player.getUniqueId())) {
             return teleport(player, location).thenApply(result -> {
                 if (!result) {
@@ -70,7 +74,8 @@ public class TeleportHandler implements Listener, ITeleportHandler {
     // 0 - teleport successful
     // 1 - player1 disabled
     // 2 - player2 disabled
-    @Override public int remoteTp(Player p1, Player p2) {
+    @Override
+    public int remoteTp(Player p1, Player p2) {
         if (disabledPlayers.contains(p1.getUniqueId()))
             return 1;
         if (disabledPlayers.contains(p2.getUniqueId()))
@@ -79,17 +84,20 @@ public class TeleportHandler implements Listener, ITeleportHandler {
         return 0;
     }
 
-    @Override public Location getLastLocation(Player player) {
+    @Override
+    public Location getLastLocation(Player player) {
         if (!lastLocations.containsKey(player.getUniqueId()))
             return null;
         return lastLocations.get(player.getUniqueId());
     }
 
-    @Override public boolean isDisabled(Player player) {
+    @Override
+    public boolean isDisabled(Player player) {
         return disabledPlayers.contains(player.getUniqueId());
     }
 
-    @EventHandler public void onDeath(final PlayerDeathEvent event) {
+    @EventHandler
+    public void onDeath(final PlayerDeathEvent event) {
         lastLocations.put(event.getEntity().getUniqueId(), event.getEntity().getLocation());
     }
 

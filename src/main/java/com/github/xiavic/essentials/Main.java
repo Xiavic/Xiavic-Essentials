@@ -3,13 +3,18 @@ package com.github.xiavic.essentials;
 // import com.github.xiavic.essentials.Utils.Misc.Databases;
 
 import co.aikar.commands.*;
-import com.github.xiavic.essentials.Commands.player.Essential.*;
+import com.github.xiavic.essentials.Commands.player.Essential.EssentialCommandHandler;
 import com.github.xiavic.essentials.Commands.player.Essential.Teleport.TeleportationCommandHandler;
-import com.github.xiavic.essentials.Commands.player.Fun.*;
+import com.github.xiavic.essentials.Commands.player.Essential.WorldCommand;
+import com.github.xiavic.essentials.Commands.player.Fun.FunCommandHandler;
 import com.github.xiavic.essentials.Commands.player.Fun.Links.LinksCommandHandler;
+import com.github.xiavic.essentials.Commands.player.Fun.PonyCommand;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatArmor;
 import com.github.xiavic.essentials.Commands.staff.cheats.CheatEXP;
-import com.github.xiavic.essentials.Commands.staff.noncheat.*;
+import com.github.xiavic.essentials.Commands.staff.noncheat.FreezeCommand;
+import com.github.xiavic.essentials.Commands.staff.noncheat.StaffCommandHandler;
+import com.github.xiavic.essentials.Commands.staff.noncheat.SudoCommand;
+import com.github.xiavic.essentials.Commands.staff.noncheat.VanishCommand;
 import com.github.xiavic.essentials.Commands.staff.noncheat.teleport.StaffTeleportCommandHandler;
 import com.github.xiavic.essentials.Utils.CommandBooleanValue;
 import com.github.xiavic.essentials.Utils.EquipAnything.EquipEvents;
@@ -104,7 +109,7 @@ public final class Main extends JavaPlugin {
             }
             if (toPop > input.length) {
                 throw new IllegalArgumentException(
-                    "Config to pop is greater than input length!");
+                        "Config to pop is greater than input length!");
             }
             input = Arrays.copyOfRange(input, toPop, input.length - 1);
             for (int index = 0; index < input.length; index++) {
@@ -112,12 +117,12 @@ public final class Main extends JavaPlugin {
             }
             final List<String> players = new ArrayList<>(Arrays.asList(input));
             if (context.getPlayer() != null && !context.getConfig("self", "false")
-                .equalsIgnoreCase("true")) {
+                    .equalsIgnoreCase("true")) {
                 players.remove(context.getPlayer().getName());
             }
             return Bukkit.getOnlinePlayers().stream().map(Player::getName)
-                .filter(player -> !players.contains(player.toLowerCase()))
-                .sorted(Comparator.naturalOrder()).collect(Collectors.toList());
+                    .filter(player -> !players.contains(player.toLowerCase()))
+                    .sorted(Comparator.naturalOrder()).collect(Collectors.toList());
         });
         commandManager.getCommandCompletions().registerCompletion("toggles", context -> {
             final String type = context.getConfig("type", "null");
@@ -131,17 +136,18 @@ public final class Main extends JavaPlugin {
             }
         });
         commandManager.getCommandContexts().registerContext(CommandBooleanValue.class,
-            context ->
-                CommandBooleanValue.fromString(context.popFirstArg()).orElseThrow(
-                    InvalidCommandArgument::new));  //TODO add message
+                context ->
+                        CommandBooleanValue.fromString(context.popFirstArg()).orElseThrow(
+                                InvalidCommandArgument::new));  //TODO add message
         commandManager.setFormat(MessageType.ERROR,
-            new BukkitMessageFormatter(ChatColor.RED, ChatColor.GOLD, ChatColor.WHITE) {
-                @Override public String format(final String message) {
-                    return ChatColor
-                        .translateAlternateColorCodes('&', messages_new.messagePrefix.toString())
-                        + ChatColor.RED + super.format(message);
-                }
-            });
+                new BukkitMessageFormatter(ChatColor.RED, ChatColor.GOLD, ChatColor.WHITE) {
+                    @Override
+                    public String format(final String message) {
+                        return ChatColor
+                                .translateAlternateColorCodes('&', messages_new.messagePrefix.toString())
+                                + ChatColor.RED + super.format(message);
+                    }
+                });
         commandManager.getLocales().addMessage(Locale.ENGLISH, MinecraftMessageKeys.NO_PLAYER_FOUND, messages_new.messageNoPlayerFound.toString());
     }
 
@@ -184,10 +190,10 @@ public final class Main extends JavaPlugin {
 
     private boolean registerNMSHandler() {
         if (Main.nmsImpl == null) {
-            if (NMSVersion.getCurrent().isOlderThan(NMSVersion.v1_14_R1)) { //We only support 1.14 and onwards.
+            if (NMSVersion.getCurrent().isOlderThan(NMSVersion.V1_14_R1)) { //We only support 1.14 and onwards.
                 final String message = messages_new.messageUnsupportedServerVersion.toString();
                 getLogger().log(Level.SEVERE,
-                    Utils.chat(message.replace("%version%", Bukkit.getVersion())));
+                        Utils.chat(message.replace("%version%", Bukkit.getVersion())));
                 return false;
             }
             try {

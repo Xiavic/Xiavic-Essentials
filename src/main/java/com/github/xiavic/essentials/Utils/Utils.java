@@ -29,7 +29,7 @@ public class Utils {
 
     public static void loadTeleportHandler() {
         RegisteredServiceProvider<ITeleportHandler> rsp =
-            Bukkit.getServicesManager().getRegistration(ITeleportHandler.class);
+                Bukkit.getServicesManager().getRegistration(ITeleportHandler.class);
         if (rsp != null) {
             teleportHandler = rsp.getProvider();
         }
@@ -53,8 +53,6 @@ public class Utils {
         }
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
-
-    ;
 
     public static String titleCase(@NotNull final String delimiter, @NotNull final String s) {
         if (s.isEmpty()) {
@@ -81,7 +79,7 @@ public class Utils {
      * @see #format(String, String...) for information about string replacements
      */
     public static void sendPrefixedMessage(@NotNull final CommandSender recipient,
-        @NotNull final Message message, @NotNull final String... replacements) {
+                                           @NotNull final Message message, @NotNull final String... replacements) {
         Objects.requireNonNull(recipient);
         final String replacedMessage = format(message.toString(), replacements);
         if (replacedMessage.isEmpty()) {
@@ -90,27 +88,27 @@ public class Utils {
         if (replacedMessage.contains("<") && replacedMessage.contains(">")) {
             if (replacedMessage.contains(ChatColor.COLOR_CHAR + "")) {
                 final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
-                    messages.messagePrefix.toString() + replacedMessage);
+                        messages.messagePrefix.toString() + replacedMessage);
                 final Component fixedMessage = BungeeCordComponentSerializer.legacy()
-                    .deserialize(TextComponent.fromLegacyText(prefixedMessage));
+                        .deserialize(TextComponent.fromLegacyText(prefixedMessage));
                 recipient.spigot()
-                    .sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
+                        .sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
             } else {
                 final String prefixedMessage = messages.messagePrefix.toString() + replacedMessage;
                 final Component component = BungeeCordComponentSerializer.legacy()
-                    .deserialize(TextComponent.fromLegacyText(prefixedMessage));
+                        .deserialize(TextComponent.fromLegacyText(prefixedMessage));
                 recipient.spigot()
-                    .sendMessage(BungeeCordComponentSerializer.legacy().serialize(component));
+                        .sendMessage(BungeeCordComponentSerializer.legacy().serialize(component));
             }
         } else {
             final String prefixedMessage = ChatColor.translateAlternateColorCodes('&',
-                messages.messagePrefix.toString() + replacedMessage);
+                    messages.messagePrefix.toString() + replacedMessage);
             recipient.sendMessage(prefixedMessage);
         }
     }
 
     public static void sendMessage(@NotNull final CommandSender recipient,
-        @NotNull final Message message, @NotNull final String... replacements) {
+                                   @NotNull final Message message, @NotNull final String... replacements) {
         Objects.requireNonNull(recipient);
         final String replacedMessage = format(message.toString(), replacements);
         if (replacedMessage.isEmpty()) {
@@ -119,17 +117,17 @@ public class Utils {
         if (replacedMessage.contains("<") && replacedMessage.contains(">")) {
             if (replacedMessage.contains(ChatColor.COLOR_CHAR + "")) {
                 final Component fixedMessage = BungeeCordComponentSerializer.legacy()
-                    .deserialize(TextComponent.fromLegacyText(replacedMessage));
+                        .deserialize(TextComponent.fromLegacyText(replacedMessage));
                 recipient.spigot()
-                    .sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
+                        .sendMessage(BungeeCordComponentSerializer.legacy().serialize(fixedMessage));
             } else {
                 recipient.spigot().sendMessage(BungeeCordComponentSerializer.legacy().serialize(
-                    BungeeCordComponentSerializer.legacy()
-                        .deserialize(TextComponent.fromLegacyText(replacedMessage))));
+                        BungeeCordComponentSerializer.legacy()
+                                .deserialize(TextComponent.fromLegacyText(replacedMessage))));
             }
         } else {
             recipient.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                replacedMessage));
+                    replacedMessage));
         }
     }
 
@@ -144,8 +142,9 @@ public class Utils {
      * @param replacements Replacements, needs to be a multiple of 2
      * @return The formatted string
      */
-    @NotNull public static String format(@NotNull final String message,
-        @NotNull final String... replacements) {
+    @NotNull
+    public static String format(@NotNull final String message,
+                                @NotNull final String... replacements) {
         if (replacements.length % 2 != 0) {
             throw new IllegalArgumentException("Replacement length must be a multiple of two");
         }
@@ -171,7 +170,7 @@ public class Utils {
      * @return Returns whether or not the swap was successful.
      */
     public static boolean placeInCursorSlot(@NotNull final Player player,
-        @Nullable final ItemStack itemStack) {
+                                            @Nullable final ItemStack itemStack) {
         final PlayerInventory inventory = player.getInventory();
         final int firstEmpty = inventory.firstEmpty();
         if (firstEmpty == -1) {
@@ -196,14 +195,16 @@ public class Utils {
         return server.getClass().getPackage().getName().replace("org.bukkit.craftbukkit", "");
     }
 
-    @Deprecated public static void teleport(Player player, Location location) {
+    @Deprecated
+    public static void teleport(Player player, Location location) {
         teleportHandler.processPlayerTeleport(player);
         player.teleport(location);
     }
 
     // This teleport method lets you send a message to the player here instead of
     // having to do it where ever you called this method
-    @Deprecated public static void teleport(Player player, Location location, String messagePath) {
+    @Deprecated
+    public static void teleport(Player player, Location location, String messagePath) {
         teleportHandler.processPlayerTeleport(player);
         player.teleport(location);
         chat(player, Main.messages.getString(messagePath));

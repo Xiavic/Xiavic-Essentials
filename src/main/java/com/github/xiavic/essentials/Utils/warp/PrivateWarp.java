@@ -35,7 +35,7 @@ public class PrivateWarp extends Warp implements Lockable {
         }
     }
 
-    public PrivateWarp (@NotNull final PrivateWarp privateWarp) {
+    public PrivateWarp(@NotNull final PrivateWarp privateWarp) {
         super(privateWarp);
         this.whitelisted = new HashSet<>(privateWarp.whitelisted);
         this.blacklisted = privateWarp.blacklisted;

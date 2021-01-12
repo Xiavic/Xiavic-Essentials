@@ -4,12 +4,14 @@ public interface Lockable {
 
     /**
      * Check whether this object is locked.
+     *
      * @return Returns whether this object is locked.
      */
     boolean isLocked();
 
     /**
      * Get the thread object which is locking this thread.
+     *
      * @return Returns the thread which has locked this object.
      */
     Thread getLocker();

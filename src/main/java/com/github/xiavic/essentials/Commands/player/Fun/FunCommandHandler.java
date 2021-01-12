@@ -13,7 +13,6 @@ import com.github.xiavic.essentials.Utils.messages.Message;
 import com.github.xiavic.essentials.Utils.messages.Messages;
 import com.github.xiavic.essentials.Utils.messages.TeleportationMessages;
 import com.github.xiavic.lib.NMSHandler.NMSVersion;
-import com.github.xiavic.lib.teleport.ITeleportHandler;
 import io.papermc.lib.PaperLib;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -44,25 +43,29 @@ public class FunCommandHandler extends BaseCommand {
         commandManager.registerCommand(this);
     }
 
-    @CommandAlias("afk") @CommandPermission("Xiavic.player.afk")
+    @CommandAlias("afk")
+    @CommandPermission("Xiavic.player.afk")
     public void toggleAFK(@NotNull final Player player) {
         final AFKHandler handler = AFKHandler.INSTANCE;
         handler.setAFK(player.getUniqueId(), !handler.isAFK(player.getUniqueId()));
     }
 
-    @CommandAlias("argh") @CommandPermission("Xiavic.player.argh")
+    @CommandAlias("argh")
+    @CommandPermission("Xiavic.player.argh")
     public void sendArgh(@NotNull final Player player) {
         Utils.sendMessage(player, commandMessages.messagePlayerArgh);
     }
 
-    @CommandAlias("coinflip|cf") @CommandPermission("Xiavic.player.coinflip")
+    @CommandAlias("coinflip|cf")
+    @CommandPermission("Xiavic.player.coinflip")
     public void doCoinflip(@NotNull final Player player) {
         final int random = ThreadLocalRandom.current().nextInt(0, 1);
         final Message message = random == 0 ? messages.messageHeads : messages.messageTails;
         Utils.sendMessage(player, message);
     }
 
-    @CommandAlias("hat") @CommandPermission("Xiavic.player.hat")
+    @CommandAlias("hat")
+    @CommandPermission("Xiavic.player.hat")
     public void doHat(@NotNull final Player player) {
         final PlayerInventory playerInventory = player.getInventory();
         final ItemStack inHand = playerInventory.getItemInMainHand().clone();
@@ -71,13 +74,15 @@ public class FunCommandHandler extends BaseCommand {
             return;
         }
         final ItemStack onHead = playerInventory.getHelmet() == null ?
-            new ItemStack(Material.AIR) :
-            playerInventory.getHelmet();
+                new ItemStack(Material.AIR) :
+                playerInventory.getHelmet();
         playerInventory.setItemInMainHand(onHead);
         playerInventory.setHelmet(inHand);
     }
 
-    @CommandAlias("head") @CommandPermission("Xiavic.player.head") @SuppressWarnings("deprecation")
+    @CommandAlias("head")
+    @CommandPermission("Xiavic.player.head")
+    @SuppressWarnings("deprecation")
     public void giveHead(@NotNull final Player sender, @NotNull final String offlinePlayer) {
         Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(Main.class), () -> {
             OfflinePlayer player = Bukkit.getOfflinePlayer(offlinePlayer);
@@ -93,7 +98,8 @@ public class FunCommandHandler extends BaseCommand {
         });
     }
 
-    @CommandAlias("iteminfo|ii") @CommandPermission("Xiavic.player.iteminfo")
+    @CommandAlias("iteminfo|ii")
+    @CommandPermission("Xiavic.player.iteminfo")
     public void showItemInfo(@NotNull final Player player) {
         Utils.chat(player, " ");
         final PlayerInventory inventory = player.getInventory();
@@ -113,7 +119,7 @@ public class FunCommandHandler extends BaseCommand {
         if (!inHand.getEnchantments().isEmpty()) {
             Utils.chat(player, "&eItem Enchantments: &c ====================================");
             final Map<Enchantment, Integer> ench =
-                player.getInventory().getItemInMainHand().getEnchantments();
+                    player.getInventory().getItemInMainHand().getEnchantments();
             for (Map.Entry<Enchantment, Integer> entry : ench.entrySet()) {
                 String str = entry.getKey().getKey().getKey().replace("_", " ");
                 String name = Utils.titleCase(" ", str);
@@ -150,18 +156,19 @@ public class FunCommandHandler extends BaseCommand {
 
         if (meta instanceof BlockDataMeta) {
             showBlockDataInfo(player, (BlockDataMeta) meta, inHand.getType().createBlockData()
-                .getMaterial()); //Get the material of a "wood be" block data.
+                    .getMaterial()); //Get the material of a "wood be" block data.
         }
     }
 
-    @CommandAlias("nearby") @CommandPermission("Xiavic.player.nearby")
+    @CommandAlias("nearby")
+    @CommandPermission("Xiavic.player.nearby")
     public void showNearbyPlayers(@NotNull final Player player) {
         final double radius = Main.mainConfig.getDouble("NearRadius");
         List<String> nearbyPlayers = Bukkit.getOnlinePlayers().stream().filter(target -> {
             double distance = player.getLocation().distance(target.getLocation());
             return distance <= radius;
         }).map(target -> "    " + target.getName() + ": " + player.getLocation()
-            .distance(target.getLocation()) + "m").collect(Collectors.toList());
+                .distance(target.getLocation()) + "m").collect(Collectors.toList());
         if (!nearbyPlayers.isEmpty()) {
             Utils.chat(player, "List of nearby players:");
             for (String s : nearbyPlayers) {
@@ -170,10 +177,11 @@ public class FunCommandHandler extends BaseCommand {
         }
     }
 
-    @CommandAlias("top") @CommandPermission("Xiavic.player.top")
+    @CommandAlias("top")
+    @CommandPermission("Xiavic.player.top")
     public void goTop(final Player player) {
         final Location highestBlock =
-            player.getWorld().getHighestBlockAt(player.getLocation()).getLocation();
+                player.getWorld().getHighestBlockAt(player.getLocation()).getLocation();
         final Location current = player.getLocation();
         if (highestBlock.getY() < current.getY()) {
             Utils.chat(player, "&cYou are at or above the highest block!");
@@ -187,14 +195,14 @@ public class FunCommandHandler extends BaseCommand {
     }
 
     private void showSkullInfo(@NotNull final CommandSender sender,
-        @NotNull final SkullMeta skullMeta) {
+                               @NotNull final SkullMeta skullMeta) {
         if (skullMeta.hasOwner()) {
             Utils.chat(sender, "Owner " + skullMeta.getOwningPlayer().getName());
         }
     }
 
     private void showBookInfo(@NotNull final CommandSender sender,
-        @NotNull final BookMeta bookMeta) {
+                              @NotNull final BookMeta bookMeta) {
         final BookMeta.Generation generation = bookMeta.getGeneration();
         if (bookMeta.hasTitle()) {
             Utils.chat(sender, "&3Title: &b" + bookMeta.getTitle());
@@ -205,58 +213,58 @@ public class FunCommandHandler extends BaseCommand {
         Utils.chat(sender, "&4Page Count: &b" + bookMeta.getPageCount());
         if (generation != null) {
             Utils.chat(sender, "&3Book Generation: &b" + Utils
-                .titleCase(" ", generation.name().toLowerCase().replaceAll("_", " ")));
+                    .titleCase(" ", generation.name().toLowerCase().replaceAll("_", " ")));
         }
     }
 
     private void showBannerInfo(@NotNull final CommandSender sender,
-        @NotNull final BannerMeta bannerMeta) {
+                                @NotNull final BannerMeta bannerMeta) {
         List<Pattern> patterns = bannerMeta.getPatterns();
         Utils.chat(sender, "&3Patterns: ");
         for (final Pattern pattern : patterns) {
             String display = "&3Pattern Name: &b";
             display = display
-                .concat(Utils.titleCase(" ", pattern.getPattern().name().replaceAll("_", " ")));
+                    .concat(Utils.titleCase(" ", pattern.getPattern().name().replaceAll("_", " ")));
             display = display.concat(" " + "&3Color: &b" + Utils
-                .titleCase(" ", pattern.getColor().name().replaceAll("_", " ")));
+                    .titleCase(" ", pattern.getColor().name().replaceAll("_", " ")));
             Utils.chat(sender, display);
         }
     }
 
     private void showArmorStandInfo(@NotNull final CommandSender sender,
-        @NotNull final ArmorStandMeta armorStandMeta) {
+                                    @NotNull final ArmorStandMeta armorStandMeta) {
         Utils.chat(sender, "&3Has base plate: &b" + !armorStandMeta.hasNoBasePlate(),
-            "&3Small: &b" + armorStandMeta.isSmall(),
-            "&3Invisible: &b" + armorStandMeta.isInvisible(),
-            "&3Marker: &b" + armorStandMeta.isMarker(),
-            "&3Show arms: &b" + armorStandMeta.shouldShowArms());
+                "&3Small: &b" + armorStandMeta.isSmall(),
+                "&3Invisible: &b" + armorStandMeta.isInvisible(),
+                "&3Marker: &b" + armorStandMeta.isMarker(),
+                "&3Show arms: &b" + armorStandMeta.shouldShowArms());
     }
 
     private void showCompassInfo(@NotNull final CommandSender sender,
-        @NotNull final CompassMeta compassMeta) {
+                                 @NotNull final CompassMeta compassMeta) {
         if (NMSVersion.getCurrent().isNewerThan(NMSVersion.v1_15_R1)) { //So if 1.16+
             Utils.chat(sender, "&3Loadstone Tracked: &b" + compassMeta.isLodestoneTracked(),
-                "&3Loadstone Location: &b", compassMeta.hasLodestone() ?
-                    compassMeta.getLodestone().toString() :
-                    "No loadstone found.");
+                    "&3Loadstone Location: &b", compassMeta.hasLodestone() ?
+                            compassMeta.getLodestone().toString() :
+                            "No loadstone found.");
         }
     }
 
     private void showBlockStateInfo(@NotNull final CommandSender sender,
-        @NotNull final BlockStateMeta blockStateMeta) {
+                                    @NotNull final BlockStateMeta blockStateMeta) {
         if (blockStateMeta.hasBlockState()) {
             Utils.chat(sender,
-                "&3Raw Block State Info: &b" + blockStateMeta.getBlockState().toString());
+                    "&3Raw Block State Info: &b" + blockStateMeta.getBlockState().toString());
         } else {
             Utils.chat(sender, "&3BRaw Block State Info: &bNo Block State Found.");
         }
     }
 
     private void showBlockDataInfo(@NotNull final CommandSender sender,
-        @NotNull final BlockDataMeta blockDataMeta, @NotNull final Material material) {
+                                   @NotNull final BlockDataMeta blockDataMeta, @NotNull final Material material) {
         if (blockDataMeta.hasBlockData() && material.isBlock()) {
             Utils.chat(sender,
-                "&3Raw Block Data Info: &b" + blockDataMeta.getBlockData(material).toString());
+                    "&3Raw Block Data Info: &b" + blockDataMeta.getBlockData(material).toString());
         } else {
             Utils.chat(sender, "&3Raw Block Data Info: &bNo Block Data Found.");
         }

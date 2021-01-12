@@ -17,6 +17,7 @@ public class CheatArmor implements CommandExecutor {
             Player player = (Player) sender;
             if (player.hasPermission(Main.permissions.getString("CheatArmor")) || player.isOp()) {
                 if (command.getName().equalsIgnoreCase("cheatarmor")) {
+
                     ItemStack helmet = new ItemStack(Material.DIAMOND_HELMET);
                     helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4); // Default - 4
                     helmet.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4); // Default - 4
@@ -25,6 +26,7 @@ public class CheatArmor implements CommandExecutor {
                     helmet.addEnchantment(Enchantment.WATER_WORKER, 1);  // Default - 1
                     helmet.addEnchantment(Enchantment.OXYGEN, 3);  // Default - 3
                     helmet.addEnchantment(Enchantment.DURABILITY, 3);  // Default - 3
+
                     ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
                     chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4); // Default - 4
                     chestplate.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4); // Default - 4
@@ -32,6 +34,7 @@ public class CheatArmor implements CommandExecutor {
                     chestplate.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4); // Default - 4
                     chestplate.addEnchantment(Enchantment.THORNS, 3);  // Default - 3
                     chestplate.addEnchantment(Enchantment.DURABILITY, 3);  // Default - 3
+
                     ItemStack legs = new ItemStack(Material.DIAMOND_LEGGINGS);
                     legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4); // Default - 4
                     legs.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4); // Default - 4
@@ -39,6 +42,7 @@ public class CheatArmor implements CommandExecutor {
                     legs.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 4); // Default - 4
                     legs.addEnchantment(Enchantment.THORNS, 3);  // Default - 3
                     legs.addEnchantment(Enchantment.DURABILITY, 3);  // Default - 3
+
                     ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
                     boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4); // Default - 4
                     boots.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 4); // Default - 4

@@ -49,7 +49,8 @@ public final class Message implements MessageKeyProvider {
      *
      * @return Configuration key
      */
-    @NotNull public String getKey() {
+    @NotNull
+    public String getKey() {
         return this.key;
     }
 
@@ -58,11 +59,13 @@ public final class Message implements MessageKeyProvider {
      *
      * @return Default message
      */
-    @NotNull public String getDefaultValue() {
+    @NotNull
+    public String getDefaultValue() {
         return this.defaultValue;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return defaultValue;
     }
 
@@ -70,7 +73,8 @@ public final class Message implements MessageKeyProvider {
         return this.toString().replaceAll("&[A-Za-z0-9]", "");
     }
 
-    @Override public MessageKey getMessageKey() {
+    @Override
+    public MessageKey getMessageKey() {
         return this.messageKey;
     }
 

@@ -24,16 +24,18 @@ public class TpaRequest {
 
     public void sendRequest() {
         Utils.sendMessage(this.origin, tpMessages.messageTeleportRequestSent, "%target%",
-            this.target.getDisplayName());
+                this.target.getDisplayName());
         Utils.sendMessage(this.target, tpMessages.messageTeleportRequestReceived, "%sender%",
-            this.origin.getDisplayName());
+                this.origin.getDisplayName());
     }
 
-    @NotNull public Player getOrigin() {
+    @NotNull
+    public Player getOrigin() {
         return this.origin;
     }
 
-    @NotNull public Player getTarget() {
+    @NotNull
+    public Player getTarget() {
         return this.target;
     }
 

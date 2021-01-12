@@ -16,11 +16,15 @@ public abstract class AbstractMessageProvider implements MessageProviderInstance
     public AbstractMessageProvider() {
     }
 
-    @Override @NotNull public Map<String, String> getConfiguredMessages() {
+    @Override
+    @NotNull
+    public Map<String, String> getConfiguredMessages() {
         return configuredMessages;
     }
 
-    @Override @NotNull public Map<Message, String> getMessages() {
+    @Override
+    @NotNull
+    public Map<Message, String> getMessages() {
         final Map<Message, String> map = new HashMap<>(messages.size());
         for (final Message message : messages) {
             map.put(message, message.toString());
@@ -28,16 +32,19 @@ public abstract class AbstractMessageProvider implements MessageProviderInstance
         return map;
     }
 
-    @Override @NotNull
+    @Override
+    @NotNull
     public Message createMessage(@NotNull final String key, @NotNull final String defaultValue) {
         configuredMessages.put(key, defaultValue);
         final Message message =
-            new Message(Objects.requireNonNull(key), Objects.requireNonNull(defaultValue));
+                new Message(Objects.requireNonNull(key), Objects.requireNonNull(defaultValue));
         messages.add(message);
         return message;
     }
 
-    @Override @NotNull public String getConfigured(@NotNull final Message message) {
+    @Override
+    @NotNull
+    public String getConfigured(@NotNull final Message message) {
         return configuredMessages.getOrDefault(message.getKey(), message.getDefaultValue());
     }
 

@@ -20,48 +20,52 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
-@SuppressWarnings("unused") public class StaffTeleportCommandHandler extends BaseCommand {
+@SuppressWarnings("unused")
+public class StaffTeleportCommandHandler extends BaseCommand {
 
     private static final TeleportationMessages teleportationMessages =
-        TeleportationMessages.INSTANCE;
+            TeleportationMessages.INSTANCE;
 
     private static final CommandMessages commandMessages = CommandMessages.INSTANCE;
 
     private final ITeleportHandler teleportHandler;
 
     public StaffTeleportCommandHandler(@NotNull final BukkitCommandManager commandManager,
-        @NotNull final ITeleportHandler teleportHandler) {
+                                       @NotNull final ITeleportHandler teleportHandler) {
         commandManager.registerCommand(this);
         this.teleportHandler = teleportHandler;
     }
 
-    @CommandAlias("teleport|tp") @CommandPermission("Xiavic.staff.tp")
+    @CommandAlias("teleport|tp")
+    @CommandPermission("Xiavic.staff.tp")
     @CommandCompletion("@players")
     public void doTeleport(final Player sender, final Player target) {
         teleportHandler.teleport(sender, target, false);
         Utils.sendMessage(sender, teleportationMessages.messageTeleported, "has", "have",
-            "%target1%", "You", "%target2%", target.getDisplayName());
+                "%target1%", "You", "%target2%", target.getDisplayName());
     }
 
-    @CommandAlias("teleport|tp") @CommandPermission("Xiavic.staff.tp.other")
+    @CommandAlias("teleport|tp")
+    @CommandPermission("Xiavic.staff.tp.other")
     public void doTeleport(final CommandSender sender, final Player toTeleport,
-        final Player target) {
+                           final Player target) {
         switch (teleportHandler.remoteTp(toTeleport, target)) {
             case 0:
                 Utils.sendMessage(sender, teleportationMessages.messageTeleported, "%target1%",
-                    toTeleport.getDisplayName(), "%target2%", target.getDisplayName());
+                        toTeleport.getDisplayName(), "%target2%", target.getDisplayName());
                 break;
             case 1:
                 Utils.sendMessage(sender, teleportationMessages.messageTeleportationDisabled,
-                    "%target%", toTeleport.getDisplayName());
+                        "%target%", toTeleport.getDisplayName());
                 break;
             case 2:
                 Utils.sendMessage(sender, teleportationMessages.messageTeleportationDisabled,
-                    "%target%", target.getDisplayName());
+                        "%target%", target.getDisplayName());
         }
     }
 
-    @CommandAlias("teleportall|tpall") @CommandPermission("Xiavic.staff.tpall")
+    @CommandAlias("teleportall|tpall")
+    @CommandPermission("Xiavic.staff.tpall")
     public void doMassTeleport(final Player sender) {
         // TODO send mesage
         long immunity = Main.mainConfig.getLong("TeleportAll.Immunity");
@@ -79,30 +83,33 @@ import java.util.concurrent.TimeUnit;
             }
             Utils.sendMessage(p, teleportationMessages.messageForceTeleported);
             teleportHandler.teleport(sender, p, false).thenAccept((unused) -> Bukkit.getScheduler()
-                .runTaskLater(Main.getPlugin(Main.class), () -> p.setInvulnerable(invulnerable),
-                    Utils.toTicks(immunity, TimeUnit.SECONDS)));
+                    .runTaskLater(Main.getPlugin(Main.class), () -> p.setInvulnerable(invulnerable),
+                            Utils.toTicks(immunity, TimeUnit.SECONDS)));
         }
         Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class),
-            () -> sender.setInvulnerable(senderInvulnerable),
-            Utils.toTicks(immunity, TimeUnit.SECONDS)); //Revert invulnerability
+                () -> sender.setInvulnerable(senderInvulnerable),
+                Utils.toTicks(immunity, TimeUnit.SECONDS)); //Revert invulnerability
     }
 
-    @CommandAlias("teleporthere|tphere") @CommandPermission("Xiavic.staff.tphere")
+    @CommandAlias("teleporthere|tphere")
+    @CommandPermission("Xiavic.staff.tphere")
     public void doTeleportHere(final Player sender, final Player toTeleport) {
         Utils.sendMessage(toTeleport, teleportationMessages.messageForceTeleported);
         teleportHandler.teleport(toTeleport, sender, false);
     }
 
-    @Subcommand("teleportposition|tppos") @CommandPermission("Xiavic.staff.tppos")
+    @Subcommand("teleportposition|tppos")
+    @CommandPermission("Xiavic.staff.tppos")
     public void doTeleportPosition(final Player sender, final double x, final double y,
-        final double z) {
+                                   final double z) {
         doTeleportPosition(sender, sender.getWorld(), x, y, z);
     }
 
-    @Subcommand("teleportposition|tppos") @CommandPermission("Xiavic.staff.tppos")
+    @Subcommand("teleportposition|tppos")
+    @CommandPermission("Xiavic.staff.tppos")
     @CommandCompletion("@worlds")
     public void doTeleportPosition(final Player sender, final World world, final double x,
-        final double y, final double z) {
+                                   final double y, final double z) {
         teleportHandler.teleport(sender, new Location(world, x, y, z));
     }
 }
